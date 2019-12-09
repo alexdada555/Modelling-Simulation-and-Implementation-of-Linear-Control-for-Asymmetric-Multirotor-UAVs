@@ -54,11 +54,12 @@ Dzz = 0.0648;
 
 %% Equilibrium Input 
 
-U_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
+%U_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
+U_e = ((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
 
 %% Define Linear Continuous-Time Multirotor Dynamics: x_dot = Ax + Bu, y = Cx + Du         
 
-% A =  14x14 matrix
+% A =  8x8 matrix
 A = [0, 1, 0, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0, 0, 0;
      0, 0, 0, 1, 0, 0, 0, 0;
@@ -68,7 +69,7 @@ A = [0, 1, 0, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0, 0, 1;
      0, 0, 0, 0, 0, 0, 0, 0];
  
-% B = 14x6 matrix
+% B = 8x6 matrix
 B = [0, 0, 0, 0, 0, 0;
      Kthrust/M, Kthrust/M, Kthrust/M, Kthrust/M, Kthrust/M, Kthrust/M;
      0, 0, 0, 0, 0, 0;
@@ -78,7 +79,7 @@ B = [0, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0;
      -Ktau/Izz, Ktau/Izz, Ktau/Izz, -Ktau/Izz, -Ktau/Izz, Ktau/Izz];
 
-% C = 4x14 matrix
+% C = 4x8 matrix
 C = [1, 0, 0, 0, 0, 0, 0, 0;
      0, 0, 1, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 1, 0, 0, 0;

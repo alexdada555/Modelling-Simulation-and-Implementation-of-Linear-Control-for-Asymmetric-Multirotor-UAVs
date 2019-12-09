@@ -1,6 +1,7 @@
-close all;      % close all figures
-clear;      % clear workspace variables
- 
+close all; % close all figures
+clear;     % clear workspace variables
+clc;       % clear command window
+
 %% Mass of the Multirotor in Kilograms as taken from the CAD
 
 M = 2100/1000; 
@@ -53,7 +54,8 @@ Dzz = 0.0648;
 
 %% Equilibrium Input 
 
-U_e = 71.925;%sqrt(((M*g)/(6*Kthrust)));
+%U_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
+U_e = ((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
 
 %% Define Linear Continuous-Time Multirotor Dynamics: x_dot = Ax + Bu, y = Cx + Du         
 
@@ -101,8 +103,10 @@ D = zeros(4,6);
 %%
 poles = eig(A);
 
+Jpoles = jordan(A);
+
 cntr = rank(ctrb(A,B));
-% full controllable 
+% patially controllable 
 
 obs = rank(obsv(A,C));
 % partially observable but fully detectable
@@ -160,7 +164,7 @@ Kdt = Kdtaug(:,1:n);
 
 Kidt = -Kdtaug(:,n+1:end);
 
-Kr = eye(6,4);
+Kr = -1*((Cr*inv(A - B*Kdt)*B).^-1);%eye(6,4);
 
 %% Discrete-Time Kalman Filter Design x_dot = A*x + B*u + G*w, y = C*x + D*u + H*w + v
 

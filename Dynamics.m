@@ -3,9 +3,8 @@ clc;
 
 %% Mass of the Multirotor in Kilograms as taken from the CAD
 
-M = 2.012; 
+M = 2100/1000; 
 g = 9.81;
-U_e = 71.925;
 
 %% Dimensions of Multirotor
 
@@ -46,6 +45,10 @@ Kthrust2 = -1.0327*(10^-4);
 Mtau = 0.038; %0.09;
 Ku = 82.3;%0.0667;%0.014;
 
+%% Equilibrium Input 
+
+%U_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
+U_e = ((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
 
 %% Air resistance damping coeeficients
 
