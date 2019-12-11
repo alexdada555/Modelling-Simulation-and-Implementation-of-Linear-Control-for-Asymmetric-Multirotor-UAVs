@@ -44,7 +44,7 @@ Ktau =  3.46*(10^-8);
 Kthrust =  1.0155*(10^-7) ;
 Kthrust2 = -1.0327*(10^-4);
 Mtau = 0.038; %0.09;
-Ku = 82.3;%0.0667;%0.014;
+Ku = 15.67;%82.3;%0.0667;%0.014;
 
 %% Air resistance damping coeeficients
 
@@ -54,8 +54,8 @@ Dzz = 0.0648;
 
 %% Equilibrium Input 
 
-%U_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
-U_e = ((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
+U_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
+%U_e = ((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
 
 %% Define Linear Continuous-Time Multirotor Dynamics: x_dot = Ax + Bu, y = Cx + Du         
 
@@ -135,10 +135,10 @@ Aaug = [A zeros(n,r);
       
 Baug = [B; -Dr];
   
-Qx = [100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 
-      0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+Qx = [1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 0.65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 
+      0, 0, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
@@ -156,7 +156,7 @@ Qx = [100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
     
 %eye(18,18);  % State penalty
 
-Qu = eye(6,6);    % Control penalty
+Qu = 7*eye(6,6);    % Control penalty
 
 Kdtaug = lqrd(Aaug,Baug,Qx,Qu,T);  % DT State-Feedback Controller Gains
 
