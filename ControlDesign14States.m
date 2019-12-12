@@ -40,11 +40,11 @@ Izz = Idiag(3);
 %% Motor Thrust and Torque Constants (To be determined experimentally)
 
 Kw = 0.85;
-Ktau =  3.46*(10^-8);
-Kthrust =  1.0155*(10^-7) ;
-Kthrust2 = -1.0327*(10^-4);
+Ktau =  2.46*(10^-9);
+Kthrust =  0.7155*(10^-8);
+Kthrust2 = -0.7327*(10^-5);
 Mtau = 0.038; %0.09;
-Ku = 15.67;%82.3;%0.0667;%0.014;
+Ku = 45.3;%0.014;%82.3;%
 
 %% Air resistance damping coeeficients
 
@@ -54,20 +54,20 @@ Dzz = 0.0648;
 
 %% Equilibrium Input 
 
-U_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
-%U_e = ((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
+%U_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
+U_e = ((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
 
 %% Define Linear Continuous-Time Multirotor Dynamics: x_dot = Ax + Bu, y = Cx + Du         
 
 % A =  14x14 matrix
 A = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-     0, 0, 0, 0, 0, 0, 0, 0, 2*Kthrust/M, 2*Kthrust/M, 2*Kthrust/M, 2*Kthrust/M, 2*Kthrust/M, 2*Kthrust/M;
+     0, 0, 0, 0, 0, 0, 0, 0, 2*Kthrust*U_e/M, 2*Kthrust*U_e/M, 2*Kthrust*U_e/M, 2*Kthrust*U_e/M, 2*Kthrust*U_e/M, 2*Kthrust*U_e/M;
      0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-     0, 0, 0, 0, 0, 0, 0, 0, L1*2*Kthrust/Ixx, L1*2*Kthrust/Ixx, -L1*2*Kthrust/Ixx, -L1*2*Kthrust/Ixx, 0, 0;
+     0, 0, 0, 0, 0, 0, 0, 0, L1*2*Kthrust*U_e/Ixx, L1*2*Kthrust*U_e/Ixx, -L1*2*Kthrust*U_e/Ixx, -L1*2*Kthrust*U_e/Ixx, 0, 0;
      0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0;
-     0, 0, 0, 0, 0, 0, 0, 0, -L2*2*Kthrust/Iyy, -L2*2*Kthrust/Iyy, -L2*2*Kthrust/Iyy, -L2*2*Kthrust/Iyy, L3*2*Kthrust/Iyy,L3*2*Kthrust/Iyy;
+     0, 0, 0, 0, 0, 0, 0, 0, -L2*2*Kthrust*U_e/Iyy, -L2*2*Kthrust*U_e/Iyy, -L2*2*Kthrust*U_e/Iyy, -L2*2*Kthrust*U_e/Iyy, L3*2*Kthrust*U_e/Iyy,L3*2*Kthrust*U_e/Iyy;
      0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0;
-     0, 0, 0, 0, 0, 0, 0, 0, -2*Ktau/Izz, 2*Ktau/Izz, 2*Ktau/Izz, -2*Ktau/Izz, -2*Ktau/Izz, 2*Ktau/Izz;
+     0, 0, 0, 0, 0, 0, 0, 0, -2*Ktau*U_e/Izz, 2*Ktau*U_e/Izz, 2*Ktau*U_e/Izz, -2*Ktau*U_e/Izz, -2*Ktau*U_e/Izz, 2*Ktau*U_e/Izz;
      0, 0, 0, 0, 0, 0, 0, 0, -1/Mtau, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0, 0, 0, 0, -1/Mtau, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1/Mtau, 0, 0, 0;
@@ -136,27 +136,27 @@ Aaug = [A zeros(n,r);
 Baug = [B; -Dr];
   
 Qx = [1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 0.65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 
-      0, 0, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 0, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 0, 0, 0, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 
+      0, 0, 600, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 0, 0, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 0, 0, 0, 0, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 5000, 0, 0, 0, 0, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 0, 5000, 0, 0, 0, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5000, 0, 0, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5000, 0, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5000, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5000, 0, 0, 0, 0;
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0;
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5];
     
 %eye(18,18);  % State penalty
 
-Qu = 7*eye(6,6);    % Control penalty
+Qu = eye(6,6);    % Control penalty
 
 Kdtaug = lqrd(Aaug,Baug,Qx,Qu,T);  % DT State-Feedback Controller Gains
 
@@ -188,3 +188,25 @@ N = zeros(size(Rw,2),size(Rv,2));
 sys4kf = ss(Adt,[Bdt Gdt],Cdt,[Ddt Hdt],T);
 
 [kdfilt,Ldt] = kalman(sys4kf,Rw,Rv); 
+
+%% Close-Loop analysis
+
+OpenLoopAugSS  = ss(Aaug,Baug,eye(18),zeros(18,6)); % augmented open loop system assuming  kf full state output
+
+LQRAugSS  = feedback(OpenLoopAugSS,Kdtaug); % closed loop augmented system 
+
+Acl = LQRAugSS.a;
+Bcl = [zeros(14,4); eye(4)]; 
+Ccl = LQRAugSS.c;
+Dcl = zeros(18,4);
+
+ClosedLoopAugSS = ss(Acl,Bcl,Ccl,Dcl); % closed loop augmented system
+
+Cpoles = eig(ClosedLoopAugSS);
+
+%% step outputs
+tvec = (0:0.1:20);
+rvec = [100*ones(length(tvec),1),zeros(length(tvec),1),zeros(length(tvec),1),zeros(length(tvec),1)];
+
+Y = lsim(ClosedLoopAugSS,rvec,tvec);
+%plot(tvec,Y(:,1))

@@ -40,11 +40,11 @@ Izz = Idiag(3);
 %% Motor Thrust and Torque Constants (To be determined experimentally)
 
 Kw = 0.85;
-Ktau =  3.46*(10^-8);
-Kthrust =  1.0155*(10^-7) ;
+Ktau =  3.46*(10^-9);
+Kthrust =  1.0155*(10^-8);
 Kthrust2 = -1.0327*(10^-4);
 Mtau = 0.038; %0.09;
-Ku = 6.67;%82.3;%0.0667;%0.014;
+Ku = 83.3;%0.014;%82.3;%
 
 %% Air resistance damping coeeficients
 
@@ -138,7 +138,7 @@ Qx = [10000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
     
 %eye(18,18);  % State penalty
 
-Qu = 2000000*eye(6,6);    % Control penalty
+Qu = eye(6,6);    % Control penalty
 
 Kdtaug = lqrd(Aaug,Baug,Qx,Qu,T);  % DT State-Feedback Controller Gains
 
