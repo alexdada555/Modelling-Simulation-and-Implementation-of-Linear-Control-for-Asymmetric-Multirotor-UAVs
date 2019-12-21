@@ -1,0 +1,35 @@
+Y6 Hexarotor v9
+Area	4836.735 cm^2
+Density	2.197 g / cm^3
+Mass	2012.674 g
+Volume	916.059 cm^3
+Physical Material	(Various)
+
+Bounding Box
+	Length 	 43.588 cm
+	Width 	 19.893 cm
+	Height 	 53.93 cm
+World X,Y,Z	0 cm, 0 cm, 0 cm
+Center of Mass	5.50227 cm, -0.0352725 cm, 9.46469 cm
+
+Moment of Inertia at Center of Mass   (g cm^2)
+	Ixx = 3.100E+05
+	Ixy = 45.153
+	Ixz = 2.234
+	Iyx = 45.153
+	Iyy = 4.216E+05
+	Iyz = 882.131
+	Izx = 2.234
+	Izy = 882.131
+	Izz = 1.471E+05
+
+Moment of Inertia at Origin   (g cm^2)
+	Ixx = 4.903E+05
+	Ixy = 435.771
+	Ixz = -1.048E+05
+	Iyx = 435.771
+	Iyy = 6.628E+05
+	Iyz = 1554.049
+	Izx = -1.048E+05
+	Izy = 1554.049
+	Izz = 2.080E+05
