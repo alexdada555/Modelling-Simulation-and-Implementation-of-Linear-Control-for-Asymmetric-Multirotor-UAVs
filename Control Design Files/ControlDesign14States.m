@@ -40,7 +40,7 @@ Izz = Idiag(3);
 %% Motor Thrust and Torque Constants (To be determined experimentally)
 
 Kw = 0.85;
-Ktau =  4.46*(10^-8);
+Ktau =  2.46*(10^-12);
 Kthrust =  3.7155*(10^-7);
 Kthrust2 = -3.7327*(10^-4);
 Mtau = (1/44.22);
