@@ -40,22 +40,23 @@ Izz = Idiag(3);
 %% Motor Thrust and Torque Constants (To be determined experimentally)
 
 Kw = 0.85;
-Ktau =  4.46*(10^-8);
-Kthrust =  3.7155*(10^-7);
-Kthrust2 = -3.7327*(10^-4);
+Ktau =  1.812e-08;%2.46*(10^-8);
+Kthrust =  1.812e-07;%3.7155*(10^-7);
+Kthrust2 = 0.0007326; %-3.7327*(10^-4);
 Mtau = (1/44.22);
 Ku = 515.5;
 
 %% Air resistance damping coeeficients
 
-Dxx = 0.01212;
-Dyy = 0.01212;
-Dzz = 0.0648;                          
+Dxx = 0.02;
+Dyy = 0.02;
+Dzz = 0.1;                  
 
 %% Equilibrium Input 
 
-%U_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
-U_e = 5900;%((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
+%W_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
+W_e = ((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
+U_e = (W_e/Ku)/Mtau;
 
 %% Define Linear Continuous-Time Multirotor Dynamics: x_dot = Ax + Bu, y = Cx + Du         
 
@@ -71,13 +72,13 @@ A = [0, 1, 0, 0, 0, 0, 0, 0;
  
 % B = 8x6 matrix
 B = [0, 0, 0, 0, 0, 0;
-     Kthrust/M, Kthrust/M, Kthrust/M, Kthrust/M, Kthrust/M, Kthrust/M;
+     2*Kthrust*((Ku*Mtau)^2)/M, 2*Kthrust*((Ku*Mtau)^2)/M, 2*Kthrust*((Ku*Mtau)^2)/M, 2*Kthrust*((Ku*Mtau)^2)/M, 2*Kthrust*((Ku*Mtau)^2)/M, 2*Kthrust*((Ku*Mtau)^2)/M;
      0, 0, 0, 0, 0, 0;
-     L1*Kthrust/Ixx, L1*Kthrust/Ixx, -L1*Kthrust/Ixx, -L1*Kthrust/Ixx, 0, 0;
+     2*L1*Kthrust*((Ku*Mtau)^2)/Ixx, 2*L1*Kthrust*((Ku*Mtau)^2)/Ixx, -2*L1*Kthrust*((Ku*Mtau)^2)/Ixx, -2*L1*Kthrust*((Ku*Mtau)^2)/Ixx, 0, 0;
      0, 0, 0, 0, 0, 0;
-     -L2*Kthrust/Iyy, -L2*Kthrust/Iyy, -L2*Kthrust/Iyy, -L2*Kthrust/Iyy, L3*Kthrust/Iyy,L3*Kthrust/Iyy;
+     -2*L2*Kthrust*((Ku*Mtau)^2)/Iyy, -2*L2*Kthrust*((Ku*Mtau)^2)/Iyy, -2*L2*Kthrust*((Ku*Mtau)^2)/Iyy, -2*L2*Kthrust*((Ku*Mtau)^2)/Iyy, 2*L3*Kthrust*((Ku*Mtau)^2)/Iyy,2*L3*Kthrust*((Ku*Mtau)^2)/Iyy;
      0, 0, 0, 0, 0, 0;
-     -Ktau/Izz, Ktau/Izz, Ktau/Izz, -Ktau/Izz, -Ktau/Izz, Ktau/Izz];
+     -2*Ktau/Izz*((Ku*Mtau)^2), 2*Ktau*((Ku*Mtau)^2)/Izz, 2*Ktau*((Ku*Mtau)^2)/Izz, -2*Ktau*((Ku*Mtau)^2)/Izz, -2*Ktau*((Ku*Mtau)^2)/Izz, 2*Ktau*((Ku*Mtau)^2)/Izz];
 
 % C = 4x8 matrix
 C = [1, 0, 0, 0, 0, 0, 0, 0;
@@ -123,20 +124,20 @@ Aaug = [A zeros(n,r);
       
 Baug = [B; -Dr];
   
-Qx = [10000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 100000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 
-      0, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0;
-      0, 0, 0, 0, 1000, 0, 0, 0, 0, 0, 0, 0;
-      0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0;
-      0, 0, 0, 0, 0, 0, 1000, 0, 0, 0, 0, 0;
-      0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0;
-      0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0;
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0;
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0;
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5];
+Qx = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 10000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 
+      0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0;
+      0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0;
+      0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0;
+      0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0;
+      0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0;
+      0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0;
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0;
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0;
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
     
-%eye(18,18);  % State penalty
+                  % State penalty
 
 Qu = eye(6,6);    % Control penalty
 
