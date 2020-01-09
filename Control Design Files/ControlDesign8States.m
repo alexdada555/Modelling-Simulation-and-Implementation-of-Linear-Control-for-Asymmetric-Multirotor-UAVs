@@ -4,7 +4,7 @@ clc;       % clear command window
 
 %% Mass of the Multirotor in Kilograms as taken from the CAD
 
-M = 2100/1000; 
+M = 1.455882; 
 g = 9.81;
 
 %% Dimensions of Multirotor
@@ -15,21 +15,21 @@ L3 = 30/100; % along Y-axis Distance from motor pair to center of mass
 
 %%  Mass Moment of Inertia as Taken from the CAD
 
-Ixx = 3.094E+05;
-Ixy = 45.147;
-Ixz = 2.309;
-Iyx = 45.147;
-Iyy = 4.204E+05;
-Iyz = 832.833;
-Izx = 2.309;
-Izy = 832.833;
-Izz = 1.464E+05;
+Ixx = 2.820E+05;
+Ixy = 19.798;
+Ixz = 211.315;
+Iyx = 19.798;
+Iyy = 3.858E+05;
+Iyz = -294.238;
+Izx = 211.315;
+Izy = -294.238;
+Izz = 1.375E+05;
 
 %% Inertia Matrix and Diagolalisation CAD model coordinate system rotated 90 degrees about X
 
-I = [Izx Izy Izz;
-     Ixx Ixy Ixz;
-     Iyx Iyy Iyz];
+I = [Izz Izy Izx;
+     Ixy Ixx Ixz;
+     Iyx Iyz Iyy];
  
 Idiag = diag(I)/10000;
  
@@ -40,17 +40,17 @@ Izz = Idiag(3);
 %% Motor Thrust and Torque Constants (To be determined experimentally)
 
 Kw = 0.85;
-Ktau =  1.812e-08;%2.46*(10^-8);
+Ktau =  4.46*(10^-8);
 Kthrust =  1.812e-07;%3.7155*(10^-7);
-Kthrust2 = 0.0007326; %-3.7327*(10^-4);
+Kthrust2 = 0.0007326;%-3.7327*(10^-4);
 Mtau = (1/44.22);
 Ku = 515.5;
 
 %% Air resistance damping coeeficients
 
-Dxx = 0.02;
-Dyy = 0.02;
-Dzz = 0.1;                  
+Dxx = 0.01212;
+Dyy = 0.01212;
+Dzz = 0.0648;                          
 
 %% Equilibrium Input 
 
