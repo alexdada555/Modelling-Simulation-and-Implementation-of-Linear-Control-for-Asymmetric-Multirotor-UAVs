@@ -17,6 +17,7 @@ volatile int interruptCount;
 
 float rpm = 0;
 double force;
+double Torque;
 
 float numpoles = 14;   //14 poles for A2212/13T
 double timein;
@@ -39,9 +40,12 @@ void setup()
   
   Motor1.attach(5);
   Motor2.attach(6);
+  Motor1.writeMicroseconds(1000);
+  Motor2.writeMicroseconds(1000);
   
   pinMode(8, INPUT);
   pinMode(9, INPUT);
+  pinMode(10, INPUT);
   
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
   setScales();
@@ -78,10 +82,14 @@ void loop()
       state = 1;
       delay(1000);
     }
-    Serial.println("Idle State");
+    //if(digitalRead(8) == 1)
+    //{
+      //state = 2;
+      //delay(1000);
+    //}
     if(digitalRead(9) == 1)
     {
-      state = 2;
+      state = 3;
       delay(1000);
     }
   }
@@ -124,6 +132,7 @@ void loop()
       
       if(digitalRead(8) == 1 || digitalRead(9) == 1)
       {
+        Motor1.writeMicroseconds(1000);
         state = 0;
         delay(1000);
         break;
@@ -161,13 +170,59 @@ void loop()
         state = 0;
         RPMdataFile.close();
         timer = 0;
-        Motor1.writeMicroseconds(1300);
+        Motor1.writeMicroseconds(1000);
         delay(1000);
         break;
       }
       
       if(digitalRead(8) == 1 || digitalRead(9) == 1)
       {
+        Motor1.writeMicroseconds(1000);
+        state = 0;
+        delay(1000);
+        break;
+      }
+      
+      timeout = millis() - timein;
+      timer++;
+    }
+  }
+
+  if(state == 3)
+  {
+    Serial.println("Torque State");
+    RPMdataFile = SD.open("RPMdata.txt", FILE_WRITE);
+    ForcedataFile = SD.open("forcedata.txt", FILE_WRITE);
+    
+    delay(5000);
+    Motor1.writeMicroseconds(1200);
+    delay(5000);
+    
+    while(1)
+    {
+      timein = millis();
+      Motor1.writeMicroseconds(1200+((timer*timeout)/100));
+      checkTorque();
+      checkRPM();
+      Serial.print("Time: ");
+      Serial.print((timer*timeout)/1000);
+      Serial.print("\t");
+      Serial.print("sampletime in ms: ");
+      Serial.println(timeout);
+      
+      if(((timer*timeout)/1000) > 50)
+      {
+        state = 0;
+        RPMdataFile.close();
+        timer = 0;
+        Motor1.writeMicroseconds(1000);
+        delay(1000);
+        break;
+      }
+      
+      if(digitalRead(8) == 1 || digitalRead(9) == 1)
+      {
+        Motor1.writeMicroseconds(1000);
         state = 0;
         delay(1000);
         break;
@@ -198,21 +253,6 @@ void checkRPM()
   Serial.print("Motor RPM: ");
   Serial.print(rpm);
   Serial.print("\t");
-  /*
-  if (RPMdataFile)
-  {
-     RPMdataFile.print((timer*timeout)/1000);
-     RPMdataFile.print(",");
-     RPMdataFile.print(200);
-     RPMdataFile.print(",");
-     RPMdataFile.println(rpm);
-  } 
-  else
-  {
-     // if the file didn't open, print an error:
-     Serial.println("error opening RPMdata.txt");
-  }
-  */
 }
 
 // Check Force Function
@@ -232,6 +272,30 @@ void checkForce()
      RPMdataFile.print(rpm);
      RPMdataFile.print(",");
      RPMdataFile.println(force);
+  } 
+  else
+  {
+     // if the file didn't open, print an error:
+     Serial.println("error opening forcedata.txt");
+  }
+}
+
+void checkTorque() 
+{
+  Torque = (scale.get_units(1)*9.81)*0.1945;
+  Serial.print("Motor Torque: ");
+  Serial.print(Torque);
+  Serial.print("\t");
+  Serial.print((timer*timeout)/100);
+  Serial.print("\t");
+  
+  if (RPMdataFile)
+  {
+     RPMdataFile.print((timer*timeout)/1000);
+     RPMdataFile.print(",");
+     RPMdataFile.print(rpm);
+     RPMdataFile.print(",");
+     RPMdataFile.println(Torque);
   } 
   else
   {

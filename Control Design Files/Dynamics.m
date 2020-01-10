@@ -1,7 +1,3 @@
-close all; % close all figures
-clear;     % clear workspace variables
-clc;       % clear command window
-
 %% Mass of the Multirotor in Kilograms as taken from the CAD
 
 M = 1.455882; 
@@ -40,9 +36,9 @@ Izz = Idiag(3);
 %% Motor Thrust and Torque Constants (To be determined experimentally)
 
 Kw = 0.85;
-Ktau =  4.46*(10^-8);
-Kthrust =  3.7155*(10^-7);
-Kthrust2 = -3.7327*(10^-4);
+Ktau =  7.708e-10;
+Kthrust =  1.812e-07;%3.7155*(10^-7);
+Kthrust2 = 0.0007326;%-3.7327*(10^-4);
 Mtau = (1/44.22);
 Ku = 515.5;
 
@@ -54,6 +50,6 @@ Dzz = 0.0648;
 
 %% Equilibrium Input 
 
-%U_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
-U_e = ((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
-
+%W_e = sqrt(((M*g)/(3*(Kthrust+(Kw*Kthrust)))));
+W_e = ((-6*Kthrust2) + sqrt((6*Kthrust2)^2 - (4*(-M*g)*(3*Kw*Kthrust + 3*Kthrust))))/(2*(3*Kw*Kthrust + 3*Kthrust));
+U_e = (W_e/Ku)/Mtau;
