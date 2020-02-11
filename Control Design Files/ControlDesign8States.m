@@ -39,7 +39,7 @@ Izz = Idiag(3);
 
 %% Motor Thrust and Torque Constants (To be determined experimentally)
 
-Kw = 0.85;
+Kw = 1;
 Ktau =  7.708e-10;
 Kthrust =  1.812e-07;%3.7155*(10^-7);
 Kthrust2 = 0.0007326;%-3.7327*(10^-4);
@@ -72,13 +72,13 @@ A = [0, 1, 0, 0, 0, 0, 0, 0;
  
 % B = 8x6 matrix
 B = [0, 0, 0, 0, 0, 0;
-     2*Kthrust*((Ku*Mtau)^2)/M, 2*Kthrust*((Ku*Mtau)^2)/M, 2*Kthrust*((Ku*Mtau)^2)/M, 2*Kthrust*((Ku*Mtau)^2)/M, 2*Kthrust*((Ku*Mtau)^2)/M, 2*Kthrust*((Ku*Mtau)^2)/M;
+     2*Kthrust*W_e*((Ku*Mtau))/M, 2*Kthrust*W_e*((Ku*Mtau))/M, 2*Kthrust*W_e*((Ku*Mtau))/M, 2*Kthrust*W_e*((Ku*Mtau))/M, 2*Kthrust*W_e*((Ku*Mtau))/M, 2*Kthrust*W_e*((Ku*Mtau))/M;
      0, 0, 0, 0, 0, 0;
-     2*L1*Kthrust*((Ku*Mtau)^2)/Ixx, 2*L1*Kthrust*((Ku*Mtau)^2)/Ixx, -2*L1*Kthrust*((Ku*Mtau)^2)/Ixx, -2*L1*Kthrust*((Ku*Mtau)^2)/Ixx, 0, 0;
+     2*L1*Kthrust*W_e*((Ku*Mtau))/Ixx, 2*L1*Kthrust*W_e*((Ku*Mtau))/Ixx, -2*L1*Kthrust*W_e*((Ku*Mtau))/Ixx, -2*L1*Kthrust*W_e*((Ku*Mtau))/Ixx, 0, 0;
      0, 0, 0, 0, 0, 0;
-     -2*L2*Kthrust*((Ku*Mtau)^2)/Iyy, -2*L2*Kthrust*((Ku*Mtau)^2)/Iyy, -2*L2*Kthrust*((Ku*Mtau)^2)/Iyy, -2*L2*Kthrust*((Ku*Mtau)^2)/Iyy, 2*L3*Kthrust*((Ku*Mtau)^2)/Iyy,2*L3*Kthrust*((Ku*Mtau)^2)/Iyy;
+     -2*L2*Kthrust*W_e*((Ku*Mtau))/Iyy, -2*L2*Kthrust*W_e*((Ku*Mtau))/Iyy, -2*L2*Kthrust*W_e*((Ku*Mtau))/Iyy, -2*L2*Kthrust*W_e*((Ku*Mtau))/Iyy, 2*L3*Kthrust*W_e*((Ku*Mtau))/Iyy,2*L3*Kthrust*W_e*((Ku*Mtau))/Iyy;
      0, 0, 0, 0, 0, 0;
-     -2*Ktau/Izz*((Ku*Mtau)^2), 2*Ktau*((Ku*Mtau)^2)/Izz, 2*Ktau*((Ku*Mtau)^2)/Izz, -2*Ktau*((Ku*Mtau)^2)/Izz, -2*Ktau*((Ku*Mtau)^2)/Izz, 2*Ktau*((Ku*Mtau)^2)/Izz];
+     -2*Ktau/Izz*W_e*((Ku*Mtau)), 2*Ktau*W_e*((Ku*Mtau))/Izz, 2*Ktau*W_e*((Ku*Mtau))/Izz, -2*Ktau*W_e*((Ku*Mtau))/Izz, -2*Ktau*W_e*((Ku*Mtau))/Izz, 2*Ktau*W_e*((Ku*Mtau))/Izz];
 
 % C = 4x8 matrix
 C = [1, 0, 0, 0, 0, 0, 0, 0;
@@ -124,9 +124,9 @@ Aaug = [A zeros(n,r);
       
 Baug = [B; -Dr];
   
-Qx = diag([1,10000,10,1,1,1,1,1,1,100,1,1]); % State penalty
+Qx = diag([1,1,10,0,15,0,2,50,0.05,0.001,0.001,0.001]); % State penalty
+Qu = (1*10^-10)*eye(6,6);  % Control penalty
 
-Qu = eye(6,6);    % Control penalty
 
 Kdtaug = lqrd(Aaug,Baug,Qx,Qu,T);  % DT State-Feedback Controller Gains
 
@@ -134,7 +134,12 @@ Kdt = Kdtaug(:,1:n);
 
 Kidt = -Kdtaug(:,n+1:end);
 
-Kr = -1*((Cr*inv(A - B*Kdt)*B).^-1);%eye(6,4);
+Kr = -1*((Cr*((A - B*Kdt)\B)).^-1)/6;%eye(6,4);
+Kxr = zeros(8,4);
+Kxr(1,1) = 1;
+Kxr(3,2) = 1;
+Kxr(5,3) = 1;
+Kxr(7,4) = 1;
 
 %% Discrete-Time Kalman Filter Design x_dot = A*x + B*u + G*w, y = C*x + D*u + H*w + v
 
@@ -149,9 +154,8 @@ Gdt = 1e-1*eye(n);
 
 Hdt = zeros(size(C,1),size(Gdt,2)); % No process noise on measurements
 
-Rw = eye(8,8);   % Process noise covariance matrix
-
-Rv = eye(4)*1e-5;     % Measurement noise covariance matrix Note: use low gausian noice for Rv
+Rw =diag([0,1,0,1,0,1,0,1]);   % Process noise covariance matrix
+Rv = diag([0.0001,0.001,0.001,0.05]);     % Measurement noise covariance matrix Note: use low gausian noice for Rv
 
 N = zeros(size(Rw,2),size(Rv,2));
 

@@ -101,9 +101,84 @@ C = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
 % D = 4x6 matrix
 D = zeros(4,6);
 
-%% Converstion form State Space to Laplace Domain Transfer Functions
+%% Define Discrete-Time BeagleBone Dynamics
 
-Gss = ss2tf(A,B,C,D,6);
+T = 0.010; % Sample period (s)- 100Hz
 
+%% Discrete-Time Full State-Feedback Control
+% State feedback control design (integral control via state augmentation)
+% Define augmented system matrices Z pitch roll and yaw are controlled outputs
+% Define LQR weighting matrices
 
-G = tf(Gss);
+Cr  = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+       0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+       0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+       0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0];    
+
+r = 4;                                % number of reference inputs
+n = size(A,2);                        % number of states
+q = size(Cr,1);                       % number of controlled outputs
+
+Dr = zeros(q,6);
+
+Aaug = [A zeros(n,r); 
+       -Cr zeros(q,r)];
+Baug = [B; -Dr];
+Caug = [C zeros(r,r)];
+
+sys = ss(A,B,C,0);
+sysd = c2d(sys,T);
+
+Ad = sysd.A;
+Bd = sysd.B;
+Cd = sysd.C;
+
+%Qx = diag([1,1,0.001,5,1,1,1,1,0,0,0,0,0,0]);
+%Qu = (1*10^-7)*eye(6);
+
+Qx = diag([1,10^-3,10,100,10,100,10,100,0,0,0,0,0,0,0.1,10^-10,10^-10,10^-10]); % State penalty
+Qu = 1*10^-7*eye(6,6);  % Control penalty
+
+Kdtaug = lqrd(Aaug,Baug,Qx,Qu,T); % DT State-Feedback Controller Gains
+
+Kdt = Kdtaug(:,1:n); 
+
+Kpdt = [Kdt(:,1) Kdt(:,3) Kdt(:,5) Kdt(:,7)];
+Kddt = [Kdt(:,2) Kdt(:,5) Kdt(:,6) Kdt(:,8)];
+Kidt = -Kdtaug(:,n+1:end);
+
+Kr = -1*((Cr*((A - B*Kdt)\B)).^-1)/6;%eye(6,4);
+
+%% Output and Motor Mix Matrix
+
+K = [1, 1, -1, 1;
+     1, 1, -1, -1;
+     1, -1, -1, -1; % Motor Mixer
+     1, -1, -1, 1;
+     1, 0, 1, 1;
+     1, 0, 1, -1];
+
+ %% Discrete-Time Kalman Filter Design x_dot = A*x + B*u + G*w, y = C*x + D*u + H*w + v
+
+sysdt = c2d(ss(A,B,C,D),T,'zoh');  % Generate Discrete-Time System
+
+Adt = sysdt.a; 
+Bdt = sysdt.b; 
+Cdt = sysdt.c; 
+Ddt = sysdt.d;
+
+n = size(A,2); 
+Gdt = 1e-1*eye(n);
+
+Hdt = zeros(size(C,1),size(Gdt,2)); % No process noise on measurements
+
+Rw = eye(14,14);   % Process noise covariance matrix
+
+Rv = eye(4)*1e-5;     % Measurement noise covariance matrix Note: use low gausian noice for Rv
+
+N = zeros(size(Rw,2),size(Rv,2));
+
+sys4kf = ss(Adt,[Bdt Gdt],Cdt,[Ddt Hdt],T);
+
+[kdfilt,Ldt] = kalman(sys4kf,Rw,Rv); 
+ 

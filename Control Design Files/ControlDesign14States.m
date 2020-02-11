@@ -118,7 +118,7 @@ T = 0.010; % Sample period (s)- 100Hz
 
 %% Discrete-Time Full State-Feedback Control
 % State feedback control design (integral control via state augmentation)
-% Define augmented system matrices pitch roll and yaw are controlled outputs
+% Define augmented system matrices Z pitch roll and yaw are controlled outputs
 % Define LQR weighting matrices
 
 Cr  = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
@@ -129,24 +129,27 @@ Cr  = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
 r = 4;                                % number of reference inputs
 n = size(A,2);                        % number of states
 q = size(Cr,1);                       % number of controlled outputs
+
 Dr = zeros(q,6);
 
 Aaug = [A zeros(n,r); 
        -Cr zeros(q,r)];
-      
 Baug = [B; -Dr];
-Qx = diag([500000,0.00001,50000,0.1,50000,0.1,10000000000,10000000000,1,1,1,1,1,1,800000000000,1000000000000000,10000000000000,20000]); 
-                  % State penalty
+Caug = [C zeros(r,r)];
 
-Qu = 1000000*eye(6,6);    % Control penalty
+Qx = diag([0.000001,0.1,3,0,3,0.5,4,200,0,0,0,0,0,0,2.5,0.005,0.0005,0.000005]); % State penalty
+Qu = 0.5*10^-9*eye(6,6);  % Control penalty
 
-Kdtaug = lqrd(Aaug,Baug,Qx,Qu,T);  % DT State-Feedback Controller Gains
-
+Kdtaug = lqrd(Aaug,Baug,Qx,Qu,T); % DT State-Feedback Controller Gains
 Kdt = Kdtaug(:,1:n); 
-
 Kidt = -Kdtaug(:,n+1:end);
 
-Kr = -1*((Cr*inv(A - B*Kdt)*B).^-1);%eye(6,4);
+Kr = -1*((Cr*((A - B*Kdt)\B)).^-1)/6;%eye(6,4);
+Kxr = zeros(14,4);
+Kxr(1,1) = 1;
+Kxr(3,2) = 1;
+Kxr(5,3) = 1;
+Kxr(7,4) = 1;
 
 %% Discrete-Time Kalman Filter Design x_dot = A*x + B*u + G*w, y = C*x + D*u + H*w + v
 
@@ -161,34 +164,39 @@ Gdt = 1e-1*eye(n);
 
 Hdt = zeros(size(C,1),size(Gdt,2)); % No process noise on measurements
 
-Rw = eye(14,14);   % Process noise covariance matrix
-
-Rv = eye(4)*1e-5;     % Measurement noise covariance matrix Note: use low gausian noice for Rv
-
+Rw =diag([0,1,0,1,0,1,0,1,1,1,1,1,1,1]);   % Process noise covariance matrix
+Rv = diag([0.0001,0.001,0.001,0.05]);     % Measurement noise covariance matrix Note: use low gausian noice for Rv
 N = zeros(size(Rw,2),size(Rv,2));
 
 sys4kf = ss(Adt,[Bdt Gdt],Cdt,[Ddt Hdt],T);
 
 [kdfilt,Ldt] = kalman(sys4kf,Rw,Rv); 
 
-%% Close-Loop analysis
+%% Close-Loop Augmented system analysis
+% 
+% OpenLoopAugSS  = ss(Aaug,Baug,eye(18),zeros(18,6));% augmented open loop system assuming  kf full state output
+% LQRAugSS  = feedback(OpenLoopAugSS,Kdtaug); % closed loop augmented system 
+% 
+% Acl = LQRAugSS.a;
+% Bcl = [zeros(14,4); eye(4)]; 
+% Ccl = LQRAugSS.c;
+% Dcl = zeros(18,4);
+% 
+% ClosedLoopAugSS = ss(Acl,Bcl,Ccl,Dcl); % closed loop augmented system
+% CAugpoles = eig(ClosedLoopAugSS);
+% 
+% tvec = (0:0.1:20);
+% rvec = [1*ones(length(tvec),1),(10*pi/180)*ones(length(tvec),1),(10*pi/180)*ones(length(tvec),1),(10*pi/180)*ones(length(tvec),1)];
+% 
+% Y = lsim(ClosedLoopAugSS,rvec,tvec);
+% 
+% figure(1);
+% subplot(4,1,1);
+% plot(tvec,Y(:,1));
+% subplot(4,1,2);
+% plot(tvec,Y(:,3)*(180/pi));
+% subplot(4,1,3);
+% plot(tvec,Y(:,5)*(180/pi));
+% subplot(4,1,4);
+% plot(tvec,Y(:,7)*(180/pi));
 
-OpenLoopAugSS  = ss(Aaug,Baug,eye(18),zeros(18,6)); % augmented open loop system assuming  kf full state output
-
-LQRAugSS  = feedback(OpenLoopAugSS,Kdtaug); % closed loop augmented system 
-
-Acl = LQRAugSS.a;
-Bcl = [zeros(14,4); eye(4)]; 
-Ccl = LQRAugSS.c;
-Dcl = zeros(18,4);
-
-ClosedLoopAugSS = ss(Acl,Bcl,Ccl,Dcl); % closed loop augmented system
-
-Cpoles = eig(ClosedLoopAugSS);
-
-%% step outputs
-tvec = (0:0.1:20);
-rvec = [100*ones(length(tvec),1),zeros(length(tvec),1),zeros(length(tvec),1),zeros(length(tvec),1)];
-
-Y = lsim(ClosedLoopAugSS,rvec,tvec);
-%plot(tvec,Y(:,1))
