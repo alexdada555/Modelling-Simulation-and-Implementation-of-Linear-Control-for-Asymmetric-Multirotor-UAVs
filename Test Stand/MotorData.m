@@ -8,7 +8,7 @@ load("TorqueData.TXT");
 
 NoLoadtime = DATA(1:102,1);
 NoLoadinput = DATA(1:102,2) + 300;
-NoloadRPM = DATA(1:102,3);
+NoLoadRPM = DATA(1:102,3);
 
 Loadtime = LoadData(1:102,1);
 Loadinput = LoadData(1:102,2) + 300;
@@ -20,18 +20,18 @@ Force = ForceRPMdata(1:end,3);
 RPM2 =  TorqueData(1:end,2);
 Torque = TorqueData(1:end,3)/1000;
 
-%figure(1)
-%plot(time,NoLoadinput);
-%hold on;
-%plot(time,NoLoadRPM,'*');
+figure(1)
+plot(NoLoadtime,NoLoadinput);
+hold on;
+plot(NoLoadtime,NoLoadRPM,'*');
 
-%figure(2)
-%plot(time,Loadinput);
-%hold on;
-%plot(time,LoadRPM,'*');
+figure(2)
+plot(Loadtime,Loadinput);
+hold on;
+plot(Loadtime,LoadRPM,'*');
 
-%figure(3)
-%plot(RPM,Force,'*');
+figure(3)
+plot(RPM,Force,'*');
 
 figure(4)
 plot(RPM2,Torque,'*');
@@ -64,9 +64,9 @@ plot(RPM2,Torque,'*');
 %   RMSE: 0.001043
 
   
-%NoLoadtf = tf(1506.1,[1 56.55]);
-%Loadtf = tf(515.5,[1 44.22]);
+NoLoadtf = tf(1506.1,[1 56.55]);
+Loadtf = tf(515.5,[1 44.22]);
 
-%figure(5)
-%opt = stepDataOptions('InputOffset',300,'StepAmplitude',200);
-%step(Loadtf,opt);
+figure(5)
+opt = stepDataOptions('InputOffset',300,'StepAmplitude',200);
+step(Loadtf,opt);
