@@ -6,8 +6,8 @@ Bd = sysd.B;
 Cd = sysd.C;
 
 %LQR Design
-Q = diag([100,100,10000,0,10000,0,5000,0,0,0,0,0,0,0]);
-R = (1*10^-4)*eye(6);
+Q = diag([0.01,2000,100,0,100,0,1,0,0,0,0,0,0,0]); % State penalty
+R = (1*10^-3)*eye(6,6);  % Control penalty
 
 Kx = dlqr(Ad,Bd,Q,R,0);
 

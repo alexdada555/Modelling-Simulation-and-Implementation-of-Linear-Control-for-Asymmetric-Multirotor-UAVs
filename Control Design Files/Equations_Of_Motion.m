@@ -5,8 +5,8 @@ g = 9.81;
 
 %% Dimensions of Multirotor
 
-L1 = 22/100; % along X-axis Distance from left and right motor pair to center of mass
-L2 = 15/100; % along Y-axis Vertical Distance from left and right motor pair to center of mass
+L1 = 19/100; % along X-axis Distance from left and right motor pair to center of mass
+L2 = 18/100; % along Y-axis Vertical Distance from left and right motor pair to center of mass
 L3 = 30/100; % along Y-axis Distance from motor pair to center of mass
 
 %%  Mass Moment of Inertia as Taken from the CAD
@@ -20,8 +20,8 @@ Izz = 0.038;
 
 Kw = 0.85;
 Ktau =  7.708e-10;
-Kthrust =  1.812e-07;%3.7155*(10^-7);
-Kthrust2 = 0.0007326;%-3.7327*(10^-4);
+Kthrust =  1.812e-07;
+Kthrust2 = 0.0007326;
 Mtau = (1/44.22);
 Ku = 515.5*Mtau;
 
@@ -60,7 +60,7 @@ w6 = X(18);
 dX = zeros(18,1);
 Y = zeros(4,1);
 
-%% Motor Dynamics: dX = [w1dot w2dot w3dot w4dot w5dot w6dot], U = Duty Cycle of the pwm signal 0-100%
+%% Motor Dynamics: dX = [w1dot w2dot w3dot w4dot w5dot w6dot], U = Pulse Width of the pwm signal 0-1000%
 
 dX(13) = -(1/Mtau)*w1 + Ku/Mtau*U(1);
 dX(14) = -(1/Mtau)*w2 + Ku/Mtau*U(2);

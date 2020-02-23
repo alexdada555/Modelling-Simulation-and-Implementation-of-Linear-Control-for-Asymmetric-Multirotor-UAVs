@@ -10,8 +10,8 @@ g = 9.81;
 
 %% Dimensions of Multirotor
 
-L1 = 22/100; % along X-axis Distance from left and right motor pair to center of mass
-L2 = 15/100; % along Y-axis Vertical Distance from left and right motor pair to center of mass
+L1 = 19/100; % along X-axis Distance from left and right motor pair to center of mass
+L2 = 18/100; % along Y-axis Vertical Distance from left and right motor pair to center of mass
 L3 = 30/100; % along Y-axis Distance from motor pair to center of mass
 
 %%  Mass Moment of Inertia as Taken from the CAD
@@ -25,8 +25,8 @@ Izz = 0.038;
 
 Kw = 0.85;
 Ktau =  7.708e-10;
-Kthrust =  1.812e-07;%3.7155*(10^-7);
-Kthrust2 = 0.0007326;%-3.7327*(10^-4);
+Kthrust =  1.812e-07;
+Kthrust2 = 0.0007326;
 Mtau = (1/44.22);
 Ku = 515.5*Mtau;
 
@@ -44,7 +44,9 @@ U_e = (W_e/Ku);
 
 %% Define Discrete-Time BeagleBone Dynamics
 
-T = 0.010; % Sample period (s)- 100Hz
+T = 0.01; % Sample period (s)- 100Hz
+ADC = 3.3/((2^12)-1); % 12-bit ADC Quantization
+DAC =  3.3/((2^12)-1); % 12-bit DAC Quantization
 
 %% Define Linear Continuous-Time Multirotor Dynamics: x_dot = Ax + Bu, y = Cx + Du         
 
@@ -89,6 +91,7 @@ C = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
 % D = 4x6 matrix
 D = zeros(4,6);
 
+%% Discrete-Time System
 
 sysdt = c2d(ss(A,B,C,D),T,'zoh');  % Generate Discrete-Time System
 
@@ -97,16 +100,17 @@ Bdt = sysdt.b;
 Cdt = sysdt.c; 
 Ddt = sysdt.d;
 
-%%
-poles = eig(A);
+%% System Characteristics
 
-Jpoles = jordan(A);
+poles = eig(Adt);
+Jpoles = jordan(Adt);
+% System Unstable
 
-cntr = rank(ctrb(A,B));
-% patially controllable 
+cntr = rank(ctrb(Adt,Bdt));
+% Fully Stabilisable
 
-obs = rank(obsv(A,C));
-% partially observable but fully detectable
+obs = rank(obsv(Adt,Cdt));
+% Fully Detectable
 
 %% Discrete-Time Full State-Feedback Control
 % State feedback control design (integral control via state augmentation)
@@ -131,10 +135,10 @@ Bdtaug = [Bdt; -Cr*Bdt];
 
 Cdtaug = [C zeros(r,r)];
 
-Qx = diag([0.01,2000,100,0,100,0,1,10000,0,0,0,0,0,0,0.5,5,5,0.5]); % State penalty
-Qu = (1*10^-3)*eye(6,6);  % Control penalty
+Q = diag([0.01,2000,100,0,100,0,1,10000,0,0,0,0,0,0,0.5,5,5,0.5]); % State penalty
+R = (1*10^-3)*eye(6,6);  % Control penalty
 
-Kdtaug = dlqr(Adtaug,Bdtaug,Qx,Qu,0); % DT State-Feedback Controller Gains
+Kdtaug = dlqr(Adtaug,Bdtaug,Q,R,0); % DT State-Feedback Controller Gains
 Kdt = Kdtaug(:,1:n); 
 Kidt = -Kdtaug(:,n+1:end);
 
@@ -150,8 +154,8 @@ Kxr(7,4) = 1;
 Gdt = 1e-1*eye(n);
 Hdt = zeros(size(C,1),size(Gdt,2)); % No process noise on measurements
 
-Rw =diag([0,1,0,1,0,1,0,1,1,1,1,1,1,1]);   % Process noise covariance matrix
-Rv = diag([0.0001,0.001,0.001,0.05]);     % Measurement noise covariance matrix Note: use low gausian noice for Rv
+Rw =diag([0.001,1,0.00001,1,0.00001,1,0.00001,1,10^-10,10^-10,10^-10,10^-10,10^-10,10^-10]);   % Process noise covariance matrix
+Rv = diag([1,1,1,1])*10^-5;     % Measurement noise covariance matrix Note: use low gausian noice for Rv
 N = zeros(size(Rw,2),size(Rv,2));
 
 sys4kf = ss(Adt,[Bdt Gdt],Cdt,[Ddt Hdt],T);

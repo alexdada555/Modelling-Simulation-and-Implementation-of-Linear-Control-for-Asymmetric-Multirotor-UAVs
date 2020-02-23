@@ -79,6 +79,7 @@ C = [1, 0, 0, 0, 0, 0, 0, 0;
 % D = 4x6 matrix
 D = zeros(4,6);
 
+%% Discrete-Time System
 
 sysdt = c2d(ss(A,B,C,D),T,'zoh');  % Generate Discrete-Time System
 
@@ -99,19 +100,10 @@ cntr = rank(ctrb(Adt,Bdt));
 obs = rank(obsv(Adt,Cdt));
 % Fully Observable
 
-%% Output and Motor Mix Matrix
+%%  Toeplitz and Non-Linear Parameters Matrices
 
-Cr  = [1, 0, 0, 0, 0, 0, 0, 0;
-       0, 0, 1, 0, 0, 0, 0, 0;
-       0, 0, 0, 0, 1, 0, 0, 0;
-       0, 0, 0, 0, 0, 0, 1, 0];  
-   
-K = [1, 1, -1, 1;
-     1, 1, -1, -1;
-     1, -1, -1, -1; % Motor Mixer
-     1, -1, -1, 1;
-     1, 0, 1, 1;
-     1, 0, 1, -1];
+N = 5;
+[F,G] = predict_mats(Adt,Bdt,N);
 
 %% Discrete-Time Kalman Filter Design x_dot = A*x + B*u + G*w, y = C*x + D*u + H*w + v
 
@@ -119,8 +111,8 @@ n = size(A,2);
 Gdt = 1e-1*eye(n);
 Hdt = zeros(size(C,1),size(Gdt,2)); % No process noise on measurements
 
-Rw =diag([0,1,0,1,0,1,0,1]);   % Process noise covariance matrix
-Rv = diag([0.0001,0.001,0.001,0.05]);     % Measurement noise covariance matrix Note: use low gausian noice for Rv
+Rw = diag([1,1,1,1,1,1,1,1]);   % Process noise covariance matrix
+Rv = diag([1,10^-5,10^-5,10^-3]);     % Measurement noise covariance matrix Note: use low gausian noice for Rv
 N = zeros(size(Rw,2),size(Rv,2));
 
 sys4kf = ss(Adt,[Bdt Gdt],Cdt,[Ddt Hdt],T);
