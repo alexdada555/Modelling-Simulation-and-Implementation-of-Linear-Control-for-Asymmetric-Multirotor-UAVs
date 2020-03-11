@@ -1,3 +1,4 @@
+function [dX]=Hex_Dynamics(t,X,U)
 %% Mass of the Multirotor in Kilograms as taken from the CAD
 
 M = 1.455882; 
@@ -5,9 +6,9 @@ g = 9.81;
 
 %% Dimensions of Multirotor
 
-L1 = 19/100; % along X-axis Distance from left and right motor pair to center of mass
-L2 = 18/100; % along Y-axis Vertical Distance from left and right motor pair to center of mass
-L3 = 30/100; % along Y-axis Distance from motor pair to center of mass
+L1 = 0.19; % along X-axis Distance from left and right motor pair to center of mass
+L2 = 0.18; % along Y-axis Vertical Distance from left and right motor pair to center of mass
+L3 = 0.30; % along Y-axis Distance from motor pair to center of mass
 
 %%  Mass Moment of Inertia as Taken from the CAD
 % Inertia Matrix and Diagolalisation CAD model coordinate system rotated 90 degrees about X
@@ -31,7 +32,7 @@ Dxx = 0.01212;
 Dyy = 0.01212;
 Dzz = 0.0648;                          
 
-%% X = [x xdot y ydot z zdot phi phidot theta thetadot psi psidot w1 w2 w3 w4 w5 w6]
+%% X = [x xdot y ydot z zdot phi p theta q psi r w1 w2 w3 w4 w5 w6]
 
 x = X(1);
 xdot = X(2);
@@ -40,12 +41,11 @@ ydot = X(4);
 z = X(5);
 zdot = X(6);
 
-phi = X(7); 
-theta = X(8);
-psi = X(9);
-
-p = X(10);
-q = X(11);
+phi = X(7);
+p = X(8);
+theta = X(9);
+q = X(10);
+psi = X(11);
 r = X(12);
 
 w1 = X(13);
@@ -97,8 +97,8 @@ dX(1) = X(2);
 dX(3) = X(4);
 dX(5) = X(6);
 dX(7) = p + q*(sin(phi)*tan(theta)) + r*(cos(phi)*tan(theta));
-dX(8) = q*cos(phi) - r*sin(phi);
-dX(9) = q*(sin(phi)/cos(theta)) + r*(cos(phi)/cos(theta));
+dX(9) = q*cos(phi) - r*sin(phi);
+dX(11) = q*(sin(phi)/cos(theta)) + r*(cos(phi)/cos(theta));
 
 %% Second Order Direvatives: dX = [xddot yddot zddot pdot qdot rdot]
 
@@ -106,8 +106,8 @@ dX(2) = Fn/M*(cos(phi)*sin(theta)*cos(psi)) + Fn/M*(sin(phi)*sin(psi)) - (Dxx/M)
 dX(4) = Fn/M*(cos(phi)*sin(theta)*sin(psi)) - Fn/M*(sin(phi)*cos(psi)) - (Dyy/M)*ydot;
 dX(6) = Fn/M*(cos(phi)*cos(theta)) - g - (Dzz/M)*zdot;
 
-dX(10) = (L1/Ixx)*((F(1)+F(2)) - (F(3)+F(4))) - ((Izz-Iyy)/Ixx)*(r*q); 
-dX(11) = (L3/Iyy)*(F(5)+F(6)) - (L2/Iyy)*(F(1)+F(2)+F(3)+F(4)) - ((Izz-Ixx)/Iyy)*(p*r);
+dX(8) = (L1/Ixx)*((F(1)+F(2)) - (F(3)+F(4))) - ((Izz-Iyy)/Ixx)*(r*q); 
+dX(10) = (L3/Iyy)*(F(5)+F(6)) - (L2/Iyy)*(F(1)+F(2)+F(3)+F(4)) - ((Izz-Ixx)/Iyy)*(p*r);
 dX(12) = Tn/Izz - ((Iyy-Ixx)/Izz)*(p*q);
 
 %% Measured States
@@ -117,18 +117,4 @@ Y(2) = phi;
 Y(3) = theta;
 Y(4) = psi;
 
-% % % % % %Form Mass Matrix
-% % % % % Mm=[m,0,0,0,m*dz,-m*dy;
-% % % % %     0,m,0,-m*dz,0,m*dx;
-% % % % %     0,0,m,m*dy,-m*dx,0;
-% % % % %     0,-m*dz,m*dy,Ixx,-Ixy,-Ixz;
-% % % % %     m*dz,0,-m*dx,-Ixy,Iyy,-Iyz;
-% % % % %     -m*dy,m*dx,0,-Ixz,-Iyz,Izz];
-% % % % % 
-% % % % % %Form Ma Matrix
-% % % % % Ma=[X+m*R*V-m*Q*W+m*dx*(Q^2+R^2)-m*dy*P*Q-m*dz*P*R;
-% % % % %     Y-m*R*U+m*P*W-m*dx*P*Q+m*dy*(P^2+R^2)-m*dz*Q*R;
-% % % % %     Z+m*Q*U-m*P*V-m*dx*P*R-m*dy*Q*R+m*dz*(P^2+Q^2);
-% % % % %     L-Q*R*(Izz-Iyy)-P*R*Ixy+P*Q*Ixz-(R^2-Q^2)*Iyz+(Q*U-P*V)*m*dy+(R*U-P*W)*m*dz;
-% % % % %     M-P*R*(Ixx-Izz)-P*Q*Iyz+Q*R*Ixy-(P^2-R^2)*Ixz+(R*V-Q*W)*m*dz-(Q*U-P*V)*m*dx;
-% % % % %     N-P*Q*(Iyy-Ixx)-Q*R*Ixz+P*R*Iyz-(Q^2-P^2)*Ixy-(R*U-P*W)*m*dx+(-R*V+Q*W)*m*dy];
+end

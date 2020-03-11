@@ -10,9 +10,9 @@ g = 9.81;
 
 %% Dimensions of Multirotor
 
-L1 = 19/100; % along X-axis Distance from left and right motor pair to center of mass
-L2 = 18/100; % along Y-axis Vertical Distance from left and right motor pair to center of mass
-L3 = 30/100; % along Y-axis Distance from motor pair to center of mass
+L1 = 0.19; % along X-axis Distance from left and right motor pair to center of mass
+L2 = 0.18; % along Y-axis Vertical Distance from left and right motor pair to center of mass
+L3 = 0.30; % along Y-axis Distance from motor pair to center of mass
 
 %%  Mass Moment of Inertia as Taken from the CAD
 % Inertia Matrix and Diagolalisation CAD model coordinate system rotated 90 degrees about X

@@ -10,12 +10,11 @@ g = 9.81;
 
 %% Dimensions of Multirotor
 
-L1 = 19/100; % along X-axis Distance from left and right motor pair to center of mass
-L2 = 18/100; % along Y-axis Vertical Distance from left and right motor pair to center of mass
-L3 = 30/100; % along Y-axis Distance from motor pair to center of mass
+L1 = 0.19; % along X-axis Distance from left and right motor pair to center of mass
+L2 = 0.18; % along Y-axis Vertical Distance from left and right motor pair to center of mass
+L3 = 0.30; % along Y-axis Distance from motor pair to center of mass
 
 %%  Mass Moment of Inertia as Taken from the CAD
-% Inertia Matrix and Diagolalisation CAD model coordinate system rotated 90 degrees about X
 
 Ixx = 0.014;
 Iyy = 0.028;
@@ -23,7 +22,7 @@ Izz = 0.038;
 
 %% Motor Thrust and Torque Constants (To be determined experimentally)
 
-Kw = 1;
+Kw = 0.85;
 Ktau =  7.708e-10;
 Kthrust =  1.812e-07;
 Kthrust2 = 0.0007326;
@@ -62,11 +61,11 @@ A = [0, 1, 0, 0, 0, 0, 0, 0;
  
 % B = 8x6 matrix
 B = [0, 0, 0, 0, 0, 0;
-     2*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M;
+     2*Kthrust*W_e*((Ku))/M, 2*Kw*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kw*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kw*Kthrust*W_e*((Ku))/M;
      0, 0, 0, 0, 0, 0;
-     2*L1*Kthrust*W_e*((Ku))/Ixx, 2*L1*Kthrust*W_e*((Ku))/Ixx, -2*L1*Kthrust*W_e*((Ku))/Ixx, -2*L1*Kthrust*W_e*((Ku))/Ixx, 0, 0;
+     2*L1*Kthrust*W_e*((Ku))/Ixx, 2*L1*Kw*Kthrust*W_e*((Ku))/Ixx, -2*L1*Kthrust*W_e*((Ku))/Ixx, -2*L1*Kw*Kthrust*W_e*((Ku))/Ixx, 0, 0;
      0, 0, 0, 0, 0, 0;
-     -2*L2*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kthrust*W_e*((Ku))/Iyy, 2*L3*Kthrust*W_e*((Ku))/Iyy,2*L3*Kthrust*W_e*((Ku))/Iyy;
+     -2*L2*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kw*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kw*Kthrust*W_e*((Ku))/Iyy, 2*L3*Kthrust*W_e*((Ku))/Iyy,2*L3*Kw*Kthrust*W_e*((Ku))/Iyy;
      0, 0, 0, 0, 0, 0;
      -2*Ktau/Izz*W_e*((Ku)), 2*Ktau*W_e*((Ku))/Izz, 2*Ktau*W_e*((Ku))/Izz, -2*Ktau*W_e*((Ku))/Izz, -2*Ktau*W_e*((Ku))/Izz, 2*Ktau*W_e*((Ku))/Izz];
 
@@ -77,7 +76,7 @@ C = [1, 0, 0, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0, 1, 0];
      
 % D = 4x6 matrix
-D = zeros(4,6);
+D = 0;
 
 %% Discrete-Time System
 
@@ -100,10 +99,7 @@ cntr = rank(ctrb(Adt,Bdt));
 obs = rank(obsv(Adt,Cdt));
 % Fully Observable
 
-%% Discrete-Time Full State-Feedback Control
-% State feedback control design (integral control via state augmentation)
-% Define augmented system matrices pitch roll and yaw are controlled outputs
-% Define LQR weighting matrices
+%% Discrete-Time Full Integral Augmaneted System 
 
 Cr  = [1, 0, 0, 0, 0, 0, 0, 0;
        0, 0, 1, 0, 0, 0, 0, 0;
@@ -111,25 +107,28 @@ Cr  = [1, 0, 0, 0, 0, 0, 0, 0;
        0, 0, 0, 0, 0, 0, 1, 0];    
 
 r = 4;                                % number of reference inputs
-n = size(A,2);                        % number of states
+n = size(Adt,2);                        % number of states
 q = size(Cr,1);                       % number of controlled outputs
 
 Dr = zeros(q,6);
 
 Adtaug = [Adt zeros(n,r); 
           -Cr*Adt eye(q,r)];
+      
 Bdtaug = [Bdt; -Cr*Bdt];
 
 Cdtaug = [C zeros(r,r)];
 
-Q = diag([0.001,1000,150,1,150,1,1,20000,0.1,20,20,2]); % State penalty
+%% Discrete-Time Full State-Feedback Control
+% State feedback control design with integral control via state augmentation
+% Z Phi Theta Psi are controlled outputs
+
+Q = diag([50,200,250,500,250,500,1,1000,1,30,30,0.1]); % State penalty
 R = (1*10^-3)*eye(6,6);  % Control penalty
 
 Kdtaug = dlqr(Adtaug,Bdtaug,Q,R,0); % DT State-Feedback Controller Gains
 Kdt = Kdtaug(:,1:n); 
 Kidt = -Kdtaug(:,n+1:end);
-
-%Kr = -1*((Cr*((A - B*Kdt)\B)).^-1)/6;%eye(6,4);
 
 Kxr = zeros(8,4);
 Kxr(1,1) = 1;
@@ -142,8 +141,8 @@ Kxr(7,4) = 1;
 Gdt = 1e-1*eye(n);
 Hdt = zeros(size(C,1),size(Gdt,2)); % No process noise on measurements
 
-Rw = diag([1,1,1,1,1,1,1,1]);   % Process noise covariance matrix
-Rv = diag([1,10^-5,10^-5,10^-3]);     % Measurement noise covariance matrix Note: use low gausian noice for Rv
+Rw = diag([0.000000001,1,0.000000001,1,0.000000001,1,0.000000001,1]);   % Process noise covariance matrix
+Rv = diag([1,1,1,1])*10^-5;     % Measurement noise covariance matrix Note: use low gausian noice for Rv
 N = zeros(size(Rw,2),size(Rv,2));
 
 sys4kf = ss(Adt,[Bdt Gdt],Cdt,[Ddt Hdt],T);

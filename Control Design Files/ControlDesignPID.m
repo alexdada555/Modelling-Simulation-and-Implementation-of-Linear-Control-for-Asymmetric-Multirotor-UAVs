@@ -10,12 +10,11 @@ g = 9.81;
 
 %% Dimensions of Multirotor
 
-L1 = 19/100; % along X-axis Distance from left and right motor pair to center of mass
-L2 = 18/100; % along Y-axis Vertical Distance from left and right motor pair to center of mass
-L3 = 30/100; % along Y-axis Distance from motor pair to center of mass
+L1 = 0.19; % along X-axis Distance from left and right motor pair to center of mass
+L2 = 0.18; % along Y-axis Vertical Distance from left and right motor pair to center of mass
+L3 = 0.30; % along Y-axis Distance from motor pair to center of mass
 
 %%  Mass Moment of Inertia as Taken from the CAD
-% Inertia Matrix and Diagolalisation CAD model coordinate system rotated 90 degrees about X
 
 Ixx = 0.014;
 Iyy = 0.028;
@@ -62,11 +61,11 @@ A = [0, 1, 0, 0, 0, 0, 0, 0;
  
 % B = 8x6 matrix
 B = [0, 0, 0, 0, 0, 0;
-     2*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M;
+     2*Kthrust*W_e*((Ku))/M, 2*Kw*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kw*Kthrust*W_e*((Ku))/M, 2*Kthrust*W_e*((Ku))/M, 2*Kw*Kthrust*W_e*((Ku))/M;
      0, 0, 0, 0, 0, 0;
-     2*L1*Kthrust*W_e*((Ku))/Ixx, 2*L1*Kthrust*W_e*((Ku))/Ixx, -2*L1*Kthrust*W_e*((Ku))/Ixx, -2*L1*Kthrust*W_e*((Ku))/Ixx, 0, 0;
+     2*L1*Kthrust*W_e*((Ku))/Ixx, 2*L1*Kw*Kthrust*W_e*((Ku))/Ixx, -2*L1*Kthrust*W_e*((Ku))/Ixx, -2*L1*Kw*Kthrust*W_e*((Ku))/Ixx, 0, 0;
      0, 0, 0, 0, 0, 0;
-     -2*L2*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kthrust*W_e*((Ku))/Iyy, 2*L3*Kthrust*W_e*((Ku))/Iyy,2*L3*Kthrust*W_e*((Ku))/Iyy;
+     -2*L2*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kw*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kthrust*W_e*((Ku))/Iyy, -2*L2*Kw*Kthrust*W_e*((Ku))/Iyy, 2*L3*Kthrust*W_e*((Ku))/Iyy,2*L3*Kw*Kthrust*W_e*((Ku))/Iyy;
      0, 0, 0, 0, 0, 0;
      -2*Ktau/Izz*W_e*((Ku)), 2*Ktau*W_e*((Ku))/Izz, 2*Ktau*W_e*((Ku))/Izz, -2*Ktau*W_e*((Ku))/Izz, -2*Ktau*W_e*((Ku))/Izz, 2*Ktau*W_e*((Ku))/Izz];
 
@@ -77,8 +76,45 @@ C = [1, 0, 0, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0, 1, 0];
      
 % D = 4x6 matrix
-D = zeros(4,6);
+D = 0;
 
+%% System Characteristics
+
+poles = eig(A);
+Jpoles = jordan(A);
+% System Unstable
+
+cntr = rank(ctrb(A,B));
+% Fully Reachable 
+
+obs = rank(obsv(A,C));
+% Fully Observable
+
+%% Output and Motor Mix Matrix
+
+K = [1,  1,  -1,  1;
+     1,  1,  -1, -1;
+     1, -1,  -1, -1; % Motor Mixer
+     1, -1,  -1,  1;
+     1,  0,   1,  1;
+     1,  0,   1, -1];
+
+Bp = B*K;
+Dp = zeros(4,4);
+
+%% SISO System Outputs
+
+s = tf('s');
+I = eye(8);
+ 
+G =  (C * inv(s*I - A) * Bp) + Dp;
+ 
+Gz = c2d(G(1,1),T);
+Gphi = c2d(G(2,2),T);
+Gtheta = c2d(G(3,3),T);
+Gpsi = c2d(G(4,4),T);
+
+%% Discrete-Time Kalman Filter Design x_dot = A*x + B*u + G*w, y = C*x + D*u + H*w + v
 
 sysdt = c2d(ss(A,B,C,D),T,'zoh');  % Generate Discrete-Time System
 
@@ -87,39 +123,11 @@ Bdt = sysdt.b;
 Cdt = sysdt.c; 
 Ddt = sysdt.d;
 
-%% System Characteristics
-
-poles = eig(Adt);
-Jpoles = jordan(Adt);
-% System Unstable
-
-cntr = rank(ctrb(Adt,Bdt));
-% Fully Reachable 
-
-obs = rank(obsv(Adt,Cdt));
-% Fully Observable
-
-%% Output and Motor Mix Matrix
-
-Cr  = [1, 0, 0, 0, 0, 0, 0, 0;
-       0, 0, 1, 0, 0, 0, 0, 0;
-       0, 0, 0, 0, 1, 0, 0, 0;
-       0, 0, 0, 0, 0, 0, 1, 0];  
-   
-K = [1, 1, -1, 1;
-     1, 1, -1, -1;
-     1, -1, -1, -1; % Motor Mixer
-     1, -1, -1, 1;
-     1, 0, 1, 1;
-     1, 0, 1, -1];
-
-%% Discrete-Time Kalman Filter Design x_dot = A*x + B*u + G*w, y = C*x + D*u + H*w + v
-
-n = size(A,2); 
+n = size(Adt,2); 
 Gdt = 1e-1*eye(n);
 Hdt = zeros(size(C,1),size(Gdt,2)); % No process noise on measurements
 
-Rw =diag([0,1,0,1,0,1,0,1]);   % Process noise covariance matrix
+Rw = diag([0,1,0,1,0,1,0,1]);   % Process noise covariance matrix
 Rv = diag([0.0001,0.001,0.001,0.05]);     % Measurement noise covariance matrix Note: use low gausian noice for Rv
 N = zeros(size(Rw,2),size(Rv,2));
 
