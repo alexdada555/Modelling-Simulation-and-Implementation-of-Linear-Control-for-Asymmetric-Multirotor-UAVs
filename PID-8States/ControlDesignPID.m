@@ -22,7 +22,7 @@ Izz = 0.038;
 
 %% Motor Thrust and Torque Constants (To be determined experimentally)
 
-Kw = 1;
+Kw = 0.85;
 Ktau =  7.708e-10;
 Kthrust =  1.812e-07;
 Kthrust2 = 0.0007326;
@@ -127,8 +127,8 @@ n = size(Adt,2);
 Gdt = 1e-1*eye(n);
 Hdt = zeros(size(C,1),size(Gdt,2)); % No process noise on measurements
 
-Rw = diag([0,1,0,1,0,1,0,1]);   % Process noise covariance matrix
-Rv = diag([0.0001,0.001,0.001,0.05]);     % Measurement noise covariance matrix Note: use low gausian noice for Rv
+Rw = diag([0.000000001,1,0.000000001,1,0.000000001,1,0.000000001,1]);   % Process noise covariance matrix
+Rv = diag([1,1,1,1])*10^-5;     % Measurement noise covariance matrix Note: use low gausian noice for Rv
 N = zeros(size(Rw,2),size(Rv,2));
 
 sys4kf = ss(Adt,[Bdt Gdt],Cdt,[Ddt Hdt],T);
