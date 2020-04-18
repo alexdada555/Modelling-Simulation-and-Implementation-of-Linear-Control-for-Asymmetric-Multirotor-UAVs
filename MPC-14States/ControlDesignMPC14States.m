@@ -101,68 +101,97 @@ Bdt = sysdt.b;
 Cdt = sysdt.c; 
 Ddt = sysdt.d;
 
-%% System Characteristics
+%% Discrete-Time Increment Augmaneted System 
+% xinc = Ainc*xinc + Binc*uinc, xinc = [x;u]
+% y = Cinc*xinc + d
 
-poles = eig(Adt);
-Jpoles = jordan(Adt);
-% System Unstable
+r = 4;                               % number of reference inputs
+n = size(Adt,2);                     % number of states
+q = size(C,1);                       % number of controlled outputs
 
-cntr = rank(ctrb(Adt,Bdt));
-% Fully Reachable
-
-obs = rank(obsv(Adt,Cdt));
-% Partially Observable but Detectable
-
-%% Discrete-Time Full Integral Augmaneted System 
-
-Cr  = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-       0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-       0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-       0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0];    
-
-r = 4;                                % number of reference inputs
-n = size(A,2);                        % number of states
-q = size(Cr,1);                       % number of controlled outputs
-Dr = zeros(q,6);
+% Ainc = [Adt Bdt; 
+%         zeros(6,6) eye(6,6)];
+%    
+% Binc = [Bdt; eye(6,6)];
+% 
+% Cinc = [Cdt zeros(6,6)];
 
 %% Discrete-Time Full State-Feedback Control
-% State feedback control
-% Z Phi Theta Psi are controlled outputs
+% State feedback control, Z Phi Theta Psi are controlled outputs
 
-Q = diag([200,500,1000,100,1000,150,1000,100,0,0,0,0,0,0]); % State penalty
+Q = diag([200,0,1000,100,1000,150,1000,100,0,0,0,0,0,0]); % State penalty
 R = (1*10^-3)*eye(6,6);  % Control penalty
 
 Kdt = dlqr(Adt,Bdt,Q,R,0); % DT State-Feedback Controller Gains
+
+%% LQR Dynamic Simulation
+
+Time = 100;
+kT = round(Time/T);
+
+X = zeros(14,kT);
+U = zeros(6,kT);
+
+X(:,1) = [0;0;0;0;0;0;0;0;0;0;0;0;0;0];
+
+for k = 1:kT-1
+
+    %Control    
+    U(:,k) = -Kdt*X(:,k); %+ U_e;
+    
+    %Simulation
+    X(:,k+1) = Adt*X(:,k) + Bdt*U(:,k);
+end
+
+%% Plots
+
+t = (0:kT-1)*T;
+Red2Deg = [180/pi,180/pi,180/pi]';
+
+figure(1);
+subplot(2,1,1);
+plot(t,X(1,:));
+legend('Alt');
+title('LQR Real Output Altitude');
+ylabel('Meters(m)')
+
+subplot(2,1,2);
+plot(t,X([3,5,6],:).*Red2Deg);
+legend('\phi','\theta','\psi');
+title('LQR Real Output Attitude');
+ylabel('Radians(r)')
+
+figure(3);
+plot(t,U);
+legend('U1','U2','U3','U4','U5','U6');
+title('LQR Inputs PWM Pulse Width');
+ylabel('Micro Seconds(ms)')
+
 
 %%   Terminal State Penalty
 
 Phi = (Adt - Bdt*Kdt);  % Closed Loopp System
 S = (Q + Kdt' * R * Kdt);
-
 P = dlyap(Phi',S);  % Terminal State Penalty from Lyapunov Function
 
-%%  Definition of MPC Prediction, Cost and Constaints
+%%  Definition of MPC Prediction, Cost and Constaint Matrices
 
-N = 25;  % Prediction Horizon
+N = 5;  % Prediction Horizon
 
-[F,G] = predict_mats(Adt,Bdt,N); % Parameter and Toeplitz Matrices
+[Fxcl,Gxcl,Fycl,Gycl,Fucl,Gucl] = predict_mats_cl(Phi,Bdt,Cdt,Kdt,N); % Parameter Matrices
+[Sc1,Scx] = cost_mats_cl(Fxcl,Gxcl,Fycl,Gycl,Fucl,Gucl,Q,R,P); % Cost Function Matricies
 
-[H,L,M] = cost_mats(F,G,Q,R,P);  % Cost Function Matricies
-
-% State Constraints
-Px = [eye(14); -1*eye(14)];
-qx = [3;inf;60*pi/180;inf;60*pi/180;inf;inf;inf;inf;inf;inf;inf;inf;inf;
-      0.5;inf;60*pi/180;inf;60*pi/180;inf;inf;inf;0;0;0;0;0;0];
-
-% Terminal State Constraints
-Pxf = Px;
-qxf = qx;
-
-% Input Constraints
-Pu = [eye(6); -1*eye(6)];
-qu = [800*ones(6,1); zeros(6,1)];
-
-[Pc, qc, Sc] = constraint_mats(F,G,Pu,qu,Px,qx,Pxf,qxf); % Linear Inequality Constraints
+% Px = [eye(14); -1*eye(14)];
+% qx = [inf;inf;inf;inf;inf;inf;inf;inf;inf;inf;inf;inf;inf;inf;
+%       inf;inf;inf;inf;inf;inf;inf;inf;inf;inf;inf;inf;inf;inf]; % State Constraints
+% 
+% Pxf = Px;
+% qxf = qx; % Terminal State Constraints
+% 
+% Pu = [eye(6); -1*eye(6)];
+% qu = [800*ones(6,1); zeros(6,1)]; % Input Constraints
+% 
+% [Pc, qc, Sc] = constraint_mats(F,G,Pu,qu,Px,qx,Pxf,qxf); % Constraints As Linear Inequality 
 
 %% Discrete-Time Kalman Filter Design x_dot = A*x + B*u + G*w, y = C*x + D*u + H*w + v
 
@@ -185,74 +214,105 @@ sys4kf = ss(Adt,[Bdt Gdt],Cy,[Dy Hdt],T);
 
 [kdfilt,Ldt] = kalman(sys4kf,Rw,Rv); 
 
-%%  Dynamic Simulation
+%% LQ-MPC Dynamic Simulation
 
 Time = 10;
 kT = round(Time/T);
 
-X = zeros(14,kT);
 Xreal = zeros(18,kT);
+Xmodel = zeros(14,kT);
+X = zeros(14,kT);
 
-U = ones(6,kT);
-
+U = zeros(6,kT);
+c = zeros(30,kT);
+Cost = zeros(1,kT);
 Y = zeros(4,kT);
 Xe = zeros(4,kT);
+Ref = [0;0;0;0];
 
-x_ini = [0;0;0;0;0;0;0;0;0;0;0;0;0;0];
-
-X(:,2) = x_ini;
+X(:,1) = [0;0;0;0;0;0;0;0;0;0;0;0;0;0];
+X(:,2) = [0;0;0;0;0;0;0;0;0;0;0;0;0;0];
+Xreal(:,1) = [0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0];
 Xest = X;
-Xest(:,1) = x_ini + 0.001*randn(14,1);
-Xreal(5:end,2) = x_ini;
-U(:,1) = 0;
 
 for k = 2:kT-1
     
     %Estimation
-%     Xest(:,k) = Xreal([5,6,7,8,9,10,11,12,13:18],k);       %No Kalman Filter
-%     Xest(:,k) = Adt*Xest(:,k-1)+Bdt*(U(:,k-1)-U_e);       %Linear Prediction Phase    
-     t_span = [0,T];
-     xkf = [0;0;0;0;Xest(:,k-1)];             %Remapping    
-     xode = ode45(@(t,X) Hex_Dynamics(t,X,U(:,k-1)),t_span,xkf); %Nonlinear Prediction
-     Xest(:,k) = xode.y(5:18,end);            %Remappping back
-     Y(:,k) = Xreal([5,7,9,11],k);
-     Pred_Error = [Y(:,k) - Xest([1,3,5,7],k); 0; 0];
-     Xest(:,k) = Xest(:,k) + Ldt*Pred_Error;
+    %Xest(:,k) = Adt*Xest(:,k-1) + Bdt*(U(:,k-1)-U_e);   % No KF Linear Prediction   
+    Xest(:,k) = Xreal([5,6,7,8,9,10,11,12,13:18],k);   % No KF Non Linear Prediction
+    Y(:,k) = Xreal([5,7,9,11],k);
+%    t_span = [0,T];
+%    xkf = [0;0;0;0;Xest(:,k-1)];  
+%    xode = ode45(@(t,X) Hex_Dynamics(t,X,U(:,k-1)),t_span,xkf); % Nonlinear Prediction
+%    Xest(:,k) = xode.y(5:18,end);
+%    Y(:,k) = Xreal([5,7,9,11],k);
+%    Pred_Error = [Y(:,k) - Xest([1,3,5,7],k); 0; 0];
+%    Xest(:,k) = Xest(:,k) + Ldt*Pred_Error;
 
     %Control    
-    
-    [Useq,Cost] = quadprog(H,L*Xest(:,k),Pc,qc + Sc*Xest(:,k));
-    U(:,k) =  Useq(1:6) + U_e; 
+    [c(:,k),Cst] = quadprog(Sc1,Scx*X(:,k)); % Pc,qc + Sc*X(:,k) Solve Quadratic program
+    U(:,k) =  -Kdt*Xest(:,k) + c(1:6,k);
+    Cost(:,k) = Cst;
     
     %Simulation    
     t_span = [0,T];
-    xode = ode45(@(t,X) Hex_Dynamics(t,X,U(:,k)),t_span,Xreal(:,k));
+    xode = ode45(@(t,X) Hex_Dynamics(t,X,U(:,k)),t_span,Xreal(:,k)); % Nonlinear Dynamics
+    Xmodel(:,k+1) = Adt*Xmodel(:,k) + Bdt*(U(:,k));   % Model Prediction
     Xreal(:,k+1) = xode.y(:,end);
-    
-    %%%%% Forward Euler Nonlinear Dynamics %%%%%%%
-%   [dX] = Hex_Dynamics(t,Xreal(:,k),U(:,k));
-%   Xreal(:,k+1) = Xreal(:,k)+T*dX;
-
-    %%%%% Fully Linear Dynamics %%%%%%
-%   X(:,k+1) = Adt*X(:,k)+Bdt*U(:,k);
+%    [dX] = Hex_Dynamics(t,Xreal(:,k),U(:,k)); % Forward Euler Nonlinear Dynamics 
+%    Xreal(:,k+1) = Xreal(:,k) + T*dX;
+%    X(:,k+1) = Adt*Xest(:,k) + Bdt*U(:,k);     % Linear Dynamics
 end
 
-Reg2Deg = [1,180/pi,180/pi,180/pi]';
+%% Plots
 
-%Plots
 t = (0:kT-1)*T;
-figure(1);
+Red2Deg = [180/pi,180/pi,180/pi]';
+
+figure(4);
 subplot(2,1,1);
-plot(t,Xreal([5,7,9,11],:).*Reg2Deg);
-legend('Alt','\phi','\theta','\psi');
-title('Real Outputs');
+plot(t,Xreal(5,:));
+legend('Alt');
+title('LQ-MPC Real Output Altitude');
+ylabel('Meters(m)')
 
 subplot(2,1,2);
-plot(t,Xest([1,3,5,7],:).*Reg2Deg);
-legend('Alt_e','\phi_e','\theta_e','\psi_e');
-title('Estimated Outputs');
+plot(t,Xreal([7,9,11],:).*Red2Deg);
+legend('\phi','\theta','\psi');
+title('LQ-MPC Real Output Attitude');
+ylabel('Radians(r)')
 
-figure(2);
+% subplot(2,1,1);
+% plot(t,X(1,:));
+% legend('Alt');
+% title('LQ-MPC Real Output Altitude');
+% ylabel('Meters(m)')
+% 
+% subplot(2,1,2);
+% plot(t,X([3,5,7],:).*Red2Deg);
+% legend('\phi','\theta','\psi');
+% title('LQ-MPC Real Output Attitude');
+% ylabel('Radians(r)')
+
+figure(5);
+subplot(2,1,1);
+plot(t,Xest(1,:));
+legend('Alt_e');
+title('LQ-MPC Estimated Output Altitude');
+ylabel('Meters(m)')
+
+subplot(2,1,2);
+plot(t,Xest([3,5,7],:).*Red2Deg);
+legend('\phi_e','\theta_e','\psi_e');
+title('LQ-MPC Estimated Output Attitude');
+ylabel('Radians(r)')
+
+figure(6);
 plot(t,U);
 legend('U1','U2','U3','U4','U5','U6');
-title('Inputs');
+title('LQ-MPC Inputs PWM Pulse Width');
+ylabel('Micro Seconds(ms)')
+
+figure(7);
+plot(t,Cost);
+title('LQ-MPC Cost');

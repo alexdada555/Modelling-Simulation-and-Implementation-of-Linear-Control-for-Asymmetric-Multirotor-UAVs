@@ -198,18 +198,18 @@ U(:,1) = 0;
 for k = 2:kT-1
     
     %Estimation
-    %Xest(:,k) = Adt*Xest(:,k-1)+Bdt*(U(:,k-1)-U_e);       %Linear Prediction Phase    
+    %Xest(:,k) = Xreal([5,6,7,8,9,10,11,12,13:18],k);  %No Kalman Filter
+    %Xest(:,k) = Adt*Xest(:,k-1)+Bdt*(U(:,k-1)-U_e);   %Linear Prediction Phase    
     t_span = [0,T];
-    xkf = [0;0;0;0;Xest(:,k-1)];              %Remapping    
+    xkf = [0;0;0;0;Xest(:,k-1)];             %Remapping    
     xode = ode45(@(t,X) Hex_Dynamics(t,X,U(:,k-1)),t_span,xkf);    %Nonlinear Prediction
     Xest(:,k) = xode.y(5:18,end);            %Remappping back
     Y(:,k) = Xreal([5,7,9,11],k);
     Pred_Error = [Y(:,k) - Xest([1,3,5,7],k); 0; 0];
     Xest(:,k) = Xest(:,k) + Ldt*Pred_Error;
     
-    %Control    
-    %Xest(:,k) = Xreal([5,6,7,8,9,10,11,12,13:18],k);          %No Kalman Filter
-    Xe(:,k) = Xe(:,k-1) + (Ref - Xest([1,3,5,7],k));
+    %Control
+    Xe(:,k) = Xe(:,k-1) + (Ref - Xest([1,3,5,7],k));   % Integrator         
     U(:,k) = min(1000, max(0, U_e - [Kdt,Kidt]*[Xest(:,k) - [Ref(1);0;Ref(2);0;Ref(3);0;Ref(4);0;W_e]; Xe(:,k)]));
     
     %Simulation    
@@ -244,18 +244,22 @@ for k = 2:kT-1
     end
 end
 
-Reg2Deg = [1,180/pi,180/pi,180/pi]';
+Red2Deg = [1,180/pi,180/pi,180/pi]';
 
 %Plots
 t = (0:kT-1)*T;
 figure(1);
 subplot(2,1,1);
-plot(t,Xreal([5,7,9,11],:).*Reg2Deg);
+plot(t,Xreal([5,7,9,11],:).*Red2Deg);
 legend('Alt','\phi','\theta','\psi');
+title('Real Outputs');
+
 subplot(2,1,2);
-plot(t,Xest([1,3,5,7],:).*Reg2Deg);
+plot(t,Xest([1,3,5,7],:).*Red2Deg);
 legend('Alt_e','\phi_e','\theta_e','\psi_e');
+title('Estimated Outputs');
 
 figure(2);
 plot(t,U);
 legend('U1','U2','U3','U4','U5','U6');
+title('Inputs');
