@@ -179,12 +179,12 @@ kT = round(Time/T);
 
 X = zeros(14,kT);
 Xreal = zeros(18,kT);
+Xe = zeros(4,kT);
+Y = zeros(4,kT);
+e = zeros(6,kT);
 
 U = ones(6,kT);
 U(:,1) = U_e;
-
-Y = zeros(4,kT);
-Xe = zeros(4,kT);
 
 Ref = [0;0;0;0];
 x_ini = [0;0;0;0;0;0;0;0;0;0;0;0;0;0];
@@ -193,37 +193,12 @@ X(:,2) = x_ini;
 Xest = X;
 Xest(:,1) = x_ini+0.001*randn(14,1);
 Xreal(5:end,2) = x_ini;
-U(:,1) = 0;
+
+%U(:,1) = 0;
 
 for k = 2:kT-1
     
-    %Estimation
-    %Xest(:,k) = Xreal([5,6,7,8,9,10,11,12,13:18],k);  %No Kalman Filter
-    %Xest(:,k) = Adt*Xest(:,k-1)+Bdt*(U(:,k-1)-U_e);   %Linear Prediction Phase    
-    t_span = [0,T];
-    xkf = [0;0;0;0;Xest(:,k-1)];             %Remapping    
-    xode = ode45(@(t,X) Hex_Dynamics(t,X,U(:,k-1)),t_span,xkf);    %Nonlinear Prediction
-    Xest(:,k) = xode.y(5:18,end);            %Remappping back
-    Y(:,k) = Xreal([5,7,9,11],k);
-    Pred_Error = [Y(:,k) - Xest([1,3,5,7],k); 0; 0];
-    Xest(:,k) = Xest(:,k) + Ldt*Pred_Error;
-    
-    %Control
-    Xe(:,k) = Xe(:,k-1) + (Ref - Xest([1,3,5,7],k));   % Integrator         
-    U(:,k) = min(1000, max(0, U_e - [Kdt,Kidt]*[Xest(:,k) - [Ref(1);0;Ref(2);0;Ref(3);0;Ref(4);0;W_e]; Xe(:,k)]));
-    
-    %Simulation    
-    t_span = [0,T];
-    xode = ode45(@(t,X) Hex_Dynamics(t,X,U(:,k)),t_span,Xreal(:,k));
-    Xreal(:,k+1) = xode.y(:,end);
-    
-    %%%%% Forward Euler Nonlinear Dynamics %%%%%%%
-%     [dX]=Hex_Dynamics(t,Xreal(:,k),U(:,k));
-%     Xreal(:,k+1)=Xreal(:,k)+T*dX;
-
-    %%%%% Fully Linear Dynamics %%%%%%
-%     X(:,k+1)=Adt*X(:,k)+Bdt*U(:,k);
-
+    %%Reference Setting
     if k == 10/T
         Ref(1) = 1;
     end
@@ -242,24 +217,86 @@ for k = 2:kT-1
     if k == 40/T
         Ref(4) = 45*pi/180;
     end
+    
+    %%Estimation
+%    Xest(:,k) = Adt*Xest(:,k-1) + Bdt*(U(:,k-1)-U_e); % No KF Linear Prediction   
+     
+%    Xest(:,k) = Xreal([5,6,7,8,9,10,11,12,13:18],k);  % No KF Non Linear Prediction
+
+   t_span = [0,T];
+   xkf = [0;0;0;0;Xest(:,k-1)];  
+   xode = ode45(@(t,X) Hex_Dynamics(t,X,U(:,k-1)),t_span,xkf); % Nonlinear Prediction
+   Xest(:,k) = xode.y(5:18,end);
+   Y(:,k) = Xreal([5,7,9,11],k);
+   e(:,k) = [Y(:,k) - Xest([1,3,5,7],k); 0; 0];
+   Xest(:,k) = Xest(:,k) + Ldt*e(:,k);
+    
+%     Y(:,k) = Xreal([5,7,9,11],k);
+%     Xest(:,k) = Adt*Xest(:,k-1) + Bdt*(U(:,k-1)-U_e);   % Linear Prediction
+%     e(:,k) = [Y(:,k) - Xest([1,3,5,7],k); 0; 0];
+%     Xest(:,k) = Xest(:,k) + Ldt*e(:,k);
+    
+    
+    %%Control
+    Xe(:,k) = Xe(:,k-1) + (Ref - Xest([1,3,5,7],k));   % Integrator         
+    U(:,k) = min(800, max(0, U_e - [Kdt,Kidt]*[Xest(:,k) - [Ref(1);0;Ref(2);0;Ref(3);0;Ref(4);0;W_e]; Xe(:,k)]));
+    
+    %Simulation    
+    t_span = [0,T];
+    xode = ode45(@(t,X) Hex_Dynamics(t,X,U(:,k)),t_span,Xreal(:,k));
+    Xreal(:,k+1) = xode.y(:,end);
+    
+%    [dX] = Hex_Dynamics(t,Xreal(:,k),U(:,k)); % Forward Euler Integration Nonlinear Dynamics
+%    Xreal(:,k+1) = Xreal(:,k)+T*dX;
+
+%    X(:,k+1) = Adt*X(:,k) + Bdt*U(:,k);  % Fully Linear Dynamics
 end
 
-Red2Deg = [1,180/pi,180/pi,180/pi]';
+Rad2Deg = [180/pi,180/pi,180/pi]';
 
 %Plots
 t = (0:kT-1)*T;
 figure(1);
 subplot(2,1,1);
-plot(t,Xreal([5,7,9,11],:).*Red2Deg);
-legend('Alt','\phi','\theta','\psi');
-title('Real Outputs');
+plot(t,Xreal(5,:));
+legend('Alt');
+title('Real Altitude');
+ylabel('Meters(m)');
 
 subplot(2,1,2);
-plot(t,Xest([1,3,5,7],:).*Red2Deg);
-legend('Alt_e','\phi_e','\theta_e','\psi_e');
-title('Estimated Outputs');
+plot(t,Xreal([7,9,11],:).*Rad2Deg);
+legend('\phi','\theta','\psi');
+title('Real Attitude');
+ylabel('Degrees(d)');
 
 figure(2);
+subplot(2,1,1);
+plot(t,Xest(1,:));
+legend('Alt_e');
+title('Estimated Altitude');
+ylabel('Meters(m)');
+
+subplot(2,1,2);
+plot(t,Xest([3,5,7],:).*Rad2Deg);
+legend('\phi_e','\theta_e','\psi_e');
+title('Estimated Attitude');
+ylabel('Degrees(d)');
+
+figure(3);
+subplot(2,1,1);
+plot(t,e(1,:));
+legend('e_z');
+title('Altitude prediction error');
+ylabel('Error meters(m)');
+
+subplot(2,1,2);
+plot(t,e([2,3,4],:).*Rad2Deg);
+legend('e_\phi','e_\theta','e_\psi');
+title('Attitude prediction error');
+ylabel('Error degrees(d)');
+
+figure(4);
 plot(t,U);
 legend('U1','U2','U3','U4','U5','U6');
-title('Inputs');
+title('Inputs PWM  Signal');
+ylabel('Micro Seconds(ms)');
