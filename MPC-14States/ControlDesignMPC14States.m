@@ -101,20 +101,9 @@ Bdt = sysdt.b;
 Cdt = sysdt.c; 
 Ddt = sysdt.d;
 
-%% Discrete-Time Increment Augmaneted System 
-% xinc = Ainc*xinc + Binc*uinc, xinc = [x;u]
-% y = Cinc*xinc + d
-
 r = 4;                               % number of reference inputs
 n = size(Adt,2);                     % number of states
-q = size(C,1);                       % number of controlled outputs
-
-Ainc = [Adt Bdt; 
-        zeros(6,14) eye(6,6)];
-   
-Binc = [Bdt; eye(6,6)];
-
-Cinc = [Cdt zeros(4,6)];
+q = size(Cdt,1);                       % number of controlled outputs
 
 %% Discrete-Time Full State-Feedback Control
 % State feedback control, Z Phi Theta Psi are controlled outputs
@@ -220,12 +209,12 @@ N = 20;  % Prediction Horizon
 % qu = [800*ones(6,1); zeros(6,1)]; % Input Constraints
 % 
 
- Kxmax = [eye(14); -1*eye(14)];
- xmax = [10;10;90*pi/180;10;90*pi/180;10;90*pi/180;10;16000;16000;16000;16000;16000;16000;
-         0;0;90*pi/180;0;90*pi/180;0;90*pi/180;0;0;0;0;0;0;0]; % State Constraints
+Kxmax = [eye(14); -1*eye(14)];
+xmax = [10;10;90*pi/180;10;90*pi/180;10;90*pi/180;10;16000;16000;16000;16000;16000;16000;
+        0;0;90*pi/180;0;90*pi/180;0;90*pi/180;0;0;0;0;0;0;0]; % State Constraints
      
- umin = zeros(6,1);
- umax = 800*ones(6,1);
+umin = zeros(6,1);
+umax = 800*ones(6,1);
  
 % 
 % [Pc, qc, Sc] = constraint_mats(F,G,Pu,qu,Px,qx,Pxf,qxf); % Constraints As Linear Inequality 
