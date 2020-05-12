@@ -1,0 +1,784 @@
+\documentclass[12pt,a4paper,twoside]{report}
+
+\usepackage[lmargin=2.54cm,tmargin=2.54cm,rmargin=2.54cm,bmargin=2.52cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+
+\usepackage{mathptmx}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{pdfpages} 
+\usepackage{amsmath}
+%\usepackage{showframe}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{The University of Sheffield}
+\fancyhead[RE,LO]{Akinola Alexander Dada}
+\fancyfoot[CE,CO]{\thepage}
+\fancyfoot[LE,RO]{Master's Dissertation}
+\fancyfoot[RE,LO]{ACSE}
+
+\linespread{1.5}
+
+\title{ Modelling, Simulation, and Implementation of Linear Control for Asymmetric Multirotor Unmanned Aerial Vehicles}
+\author{Akinola Alexander Dada \\ Reg No.160140802}
+\date{$\today$}
+
+\begin{document}
+		
+	\maketitle
+	
+	\newpage
+	
+	\tableofcontents
+	
+	\newpage
+	
+	\listoffigures
+	
+	\newpage
+	\begin{abstract}
+		Unmanned Aerial Vehicles (UAVs) are aerial systems not directly controlled by onboard personnel. There are many types of UAV platforms, chiefly defined by the characteristics of their mechanical construction. One such class of UAVs are multi-rotors which possess multiple rotor wing actuators. These types of UAVs have a wide range of applications due to their ability to perform vertical/Short take-off and landing (VSTOL), stationary and low speed flight, coupled with their relatively simple mechanical designs when compared to single rotor constructions, such as more traditional helicopters. The major challenge in dealing with these types of UAVs is their inherent instability in flight, save for the intervention of complex control systems. Therefore, in order to understand control schemes capable of  producing guaranteed requirement meeting performance, this project seeks to investigate the physical characteristics and responses of UAVs through mathematical modelling, then proceeding to, design develop and implement and compare the performance of 2 advanced linear control schemes on an embedded microprocessor where this level of insight is requisite. Which are, Linear Quadratic Gaussian (LQG) and Linear Quadratic Model Predictive Control (LQ-MPC). 
+	\end{abstract}
+	\newpage
+	
+	\section{Executive Summary}
+		This report documents the steps undertaken in the investigation of asymmetric multirotor UAV characteristics, as well as a walkthrough of the processes involved in using those characteristics to guide and inform the design, development and implementation of linear feedback control systems which are capable of providing guaranteed performance.
+		\\
+		The first section provides a project introduction containing background information pertinent to the investigation, detailing the history, nature and potential uses of UAVs. This section includes the systems engineering approaches taken, such as breaking down the project aims and objectives and setting them up as a set of task requirements with achievable milestones. This section provides information on project planning and management which includes the use of Gantt charts amongst others. This section will also detail all considerations and changes made to the project due to the COVID-19 pandemic.
+		\\
+		The second section reviews and provides an analysis of the relevant supporting literature collected, which is referenced throughout the writing. The supporting research materials take the form of scientific journals articles, independent research publications, exerts from university lectures, Master’s/ PhD thesis publications and published books.
+		\\ 
+		The third section briefly discusses the mechanical design and construction of the specific asymmetric Y6 ‘hexa-rotor’ UAV being used as the case study. This Section goes through and details the processes and results of analysing the UAV and deriving a mathematical representation of the physical characteristic through a combination of first principles dynamic modelling and hardware-in-the-loop (HIL) testing. This section explores and expatiates on different modelling techniques while discussing the various assumptions made during the modelling process and the reasoning behind the adopting of the techniques chosen. This section then converts the derived model into various forms useful for control design, analysis and simulation while presenting rigorous analyses of the system characteristics along with a dynamic simulation using industry standard applications.
+		\\
+		The forth section details the process behind the design and development of an LQG feedback controller, then discusses and analyses the simulation results. This section then discusses the limitations of LQG controllers. This section details the design and development of LQ-MPC feedback controllers. Extending from the previous section, this section presents and justifies the reasoning behind transitioning to LQ-MPC as well as analysing the simulation results of the LQ-MPC feedback controller. This section then compares the performance of the LQG and LQ-MPC feedback controllers using appropriate metrics.
+		\\ 
+		The fifth section discusses the characteristics of the embedded Linux single board computers (SBCs), using the Beagle bone Blue platform. This section discusses and details the processes and considerations behind implementing UAV control system on the platform. The section then presents a Unified Modelling Language (UML) Class diagram detailing an implementation proposal for an embedded LQG Controller in the C Language.
+		\\
+		The sixth and final section concludes the report and presents possibilities for future work and development.
+		
+	\newpage
+	
+	\section{Introduction, Background, Aims and Objectives }
+		
+		\begin{enumerate}
+			\item
+				Background.
+			\item 
+				Aims and Objectives. 
+			\item 
+				Project Management.
+		\end{enumerate}
+	
+	 	\newpage
+	 	
+		\subsection{Background}
+		
+			UAVs are aerial systems which are not directly controlled by a human onboard the vehicle. There are many types of UAV platforms which are chiefly defined by the characteristics of their mechanical constructions [3][4]. These defining criteria break down to include:
+			
+			\begin{itemize}
+				\item
+					The position, number and type of their actuators.
+				\item 
+					Their mode/modes of flight. 
+				\item 
+					Their use cases specific features.
+			\end{itemize}
+		
+			One such type of UAVs are multi-rotors, defined as such due to their multiple rotor wing actuators. UAVs of this description were developed in response to the mechanical complexity of single or dual rotor winged aircraft such as the various helicopter and auto-gyros variants. The greater simplicity of multirotor craft could potentially lead to reduced development, construction and maintenance costs as well as greater reliability in use. Both classes of UAVs possess the ability to perform operations requiring VTOL, stationary and low speed flight [12].
+			\\
+			These features enable them to be utilised in many wide ranging applications, where great dexterity in motion is required, and as such would not be possible using fixed winged platforms, such as operations required during; directed precision administration of substances to plants in precision agriculture, frequent and or detailed inspection of standing structures, precision wide area surveillance, amongst many others [6].
+			\\
+			However, the major challenge in dealing with multirotor UAVs is their inherent instability in real world flight situations, where disturbances are present, making it impossible to operate these craft with direct open loop control of their actuators, as is possible and frequently done with fixed winged craft. Therefore, the need for the development of control systems is apparent. 
+			\\
+			In order for the developed control systems to behave in a guaranteed predictable manner and be able to meet defined performance specifications, it becomes necessary to understand the behaviour of the system to be controlled and thus derive a mathematical behavioural representation to be used in guiding and informing the design process, which is done through mathematical systems modelling. This level of insight is also required in the development of advanced control schemes.
+		
+		
+		\subsection{Aims and Objectives}
+			
+			The framework of this project was set around the design and development of control software for VSTOL model aircraft. From this broad theme, the aims of modelling an asymmetrical multi-rotor platform, developing multiple control schemes and then implementing these schemes on a multi-rotor platform via an embedded SBC were derived.
+			\\
+			These aims break down into multiple objective and milestones which must each be achieved to fulfil the full scope of aims outlined. These objectives can be broadly classified into 2 categories: 
+	
+				\subsection*{Basic Objectives}
+				
+					\begin{enumerate}
+						\item
+							Develop a mathematical model representing the dynamics of the multi-rotor aircraft.
+						\item
+							Develop a dynamic simulation of the crafts behaviour.
+						\item
+							Develop LQG feedback control.
+						\item
+							Investigate feedback control laws in simulation with the mathematical model to achieve behavioural targets.
+						\item
+							Develop flight control software to interface with sensors and implement control laws.
+						\item
+							Implement the flight control software on an embedded microprocessor unit(**).
+						\item
+							Discuss the results of performance comparisons between the simulation and hardware implementations(**).
+					\end{enumerate}
+				
+				\subsection*{Advanced Objectives}
+				
+					\begin{enumerate}
+						\item
+							Investigate the application of LQ-MPC schemes in simulation.
+						\item	
+							Incorporate and implement LQ-MPC schemes unto the flight control software(**).
+						\item	
+							Discuss the differences between the LQG and LQ-MPC implementations.
+					\end{enumerate}
+				
+		\subsection{Project Management}
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=1\linewidth]{ProjectInitialTimetable.png}
+				\caption{Initial Timetable}
+				\label{fig:initialtimetable}
+			\end{figure}
+		
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=1\linewidth]{ProjectFinalTimetable.png}
+				\caption{Final Timetable}
+				\label{fig:finaltimetable}
+			\end{figure}
+		
+			In order to properly execute on the project Aims and Objectives, project activities were coordinated and managed by further breaking down or grouping task then laying them out in tabulations which was used to generate the project Gantt charts.
+			\\
+			The project has by in large proceeded along on the initial schedule proposed with only one major non SARSCOVID-2 related changes made to tasks and execution dates from the initial proposal. 
+			\\
+			Due to the effects and responses to the global SARSCOVID-2 pandemic, which first emerged in Wuhan city China in late November of 2019, The University of Sheffield was forced into closure/Cancellation of all on-site and in-person teaching, meetings and instruction from March of 2020. This coupled with the government mandated nationwide quarantine and lockdown in the United Kingdom made access to the necessary facilities for the testing and evaluation of any developed UAV software impossible. As such, activities and work towards meeting the objectives succeeded by a double Asterix in the previous subsections is not being undertaken. Project planning has been adjusted accordingly. This has also led to changes in term dates which resulted in adjustments being made to task timelines.
+			\\
+			All material purchases were made on time, acquiring key hardware such as the main flight computer, the flight radio control system, which will serve as the main communication unit sending control commands to the multi-rotor, electronics speed controllers, and load cells which will be used to develop the lab-bench platforms to identify the actuator dynamics specified in the actuator dynamics section. All post hoc minor changes to task completion periods are reflected in timeline changes from the initial proposal table. 
+			\\
+			The only non SARSCOVID-2 enforced change in the project from its initial proposal was the dropping of a PID control design section which occurred before, and is reflected in, the S2 week project proposal review. This change was made to refocus the project objectives solely on model-based control design outcomes.
+			\\ 
+			All changes to task completion dates for further objectives are displayed in the project plan expressed in the table below was used to produce the final full project Gantt chart available in the Appendix [A1]. The transition from the original project proposal to the final which was executed upon is see through comparison of the two table figures.
+			
+	\newpage
+	
+	\section{Review Of Literature }	
+	
+		In preparing to execute the project tasks, various supporting and reference materials were acquired. The various literature take the form of articles published in scientific journals, research publications, exerts from university lectures, Masters and PhD thesis publications and published books, all of which together broadly cover and present 3 major themes that are relevant to the project’s investigation:
+		
+		\begin{enumerate}
+			\item 
+				Mathematical Modelling and Systems Identification. 
+			\item 
+				Control Systems Design.
+			\item 
+				Simulation and Implementation.
+		\end{enumerate}
+	
+		\newpage
+		
+		\subsection{Mathematical Modelling and System Identification}
+			
+			\subsection*{UAV}
+				
+				The UAV is actuated by 6 1000Kv brushless direct current (BLDC) motors [14], attached to 6 10x45inch propellers and is powered by a 4-cell lithium-polymer battery with an operational voltage range of 16.8 volts to 12.8 volts. The UAV has dimensions of, 45 cm in length from rear motor centres to from motor centres, 44 cm in length from left motor centres to right motor centres, and a mass of 2.1 kilograms. The exact details involved with the design, development and construction of UAVs is beyond the scope of the project investigation but material, mechanical and electronic consideration when designing such craft are explored in [12].
+				
+			\subsection*{Rigid-Body Dynamics}
+				In modelling systems, it is first necessary to state all assumptions made about its characteristics. These assumptions simplify the process of systems model abstraction to ensure minimum viability standards are met. Following that, multirotors can be defined as a rigid-bodies free to move in three-dimensional (3-D) space, therefore, they move with 6 degrees of freedom (6-DOF). With this modelling assumption, the motion of the vehicles is subject to the laws of rigid body Kinematics and Kinetics. All the acquired material takes this stance. 
+				\\
+				Vehicle motion is defined in terms of 2 coordinate frames moving relative to one another where the physical quantities that change with time, states, change with respect to one frame or the other. They are the Earth Frame: Fe, fixed to the earth, Body Frame: Fb, Attached to the vehicle body. Each frame consists of 3 orthogonal axes, xEyEzE and xByBzB, nomenclature varies from source to source, respectively about which rotational and translational motion can occur, and along which translational motion can occur [1][2][4][15]. 
+				\\
+				The sources obtained explore 2 ways for representing this rotational and translational motion of the body frame with respect to the earth frame:
+				\\
+				Sources [1][2][3][4][5][6][7][9] present their models using Euler angles which describe arbitrary orientation in the 3-dimensional Euclidean space using three parameters which represent a sequence of three elemental rotations about each axes of the coordinate system. Any orientation in 3D space can be achieved by composing these 3 elemental rotations.
+				\\ 
+				Sources [1][8][16] present representations through Quaternions which solve issues present with computing Euler angles such as computational expense and rotational numerical singularities which occur when certain orientations are reached, as it does not require the calculation of sin and cos when certain angles go to 0 or 90 degrees and their multiples. Quaternions represent any arbitrary orientation using a rotation of a single angle about an imaginary axis. 
+				\\
+				These rigid body assumptions also allow for the utilisation of several Mechanical Modelling techniques and conventions which are used to derive the non-linear dynamics of the body frame mechanical systems considering both kinematics and Kinetics:
+				
+				\begin{itemize}
+					\item
+						The Newton-Euler convention which derives representations of systems dynamics through the application of first principles using newtons 2nd law of motion showing the effects of forces applied to the rigid body by its actuators. utilised in [2][3][5][6][7][8][9]
+					\item 
+						The Euler-Lagrange convention which derives representations of systems dynamics through the study of energy differentials between kinetic and gravitational potential generated by motion. utilised in [4]. 
+					\item 
+						The Newton-Hamiltonian.
+					\item 
+						Pure Hardware-in-the-Loop system identification, which decouples each axes of motion and determines approximate model frameworks for each then populates said framework with experimentally obtained elements. such was the process taken by [30]
+				\end{itemize}
+				
+				This investigation utilises the Euler-angle representation and the Newton-Euler convention due to its intuitive familiarity and relative simplicity.
+				\\
+				Due to the UAVs layout, it is asymmetric, this creates a system mass is not geometrically evenly distributed about the centre of mass leading to where inertia is not represented by a diagonal inertial inertia but instead one with off diagonal elements and thus creating transposed reference frames. However, for the purpose of this investigation, it is assumed that the system is symmetrical as the off-diagonal terms in the inertia matrix are far lower in magnitude than the diagonal terms, thus can be reasonably neglected. Otherwise, the entire coordinates system would be adjusted and transformed to produce a true diagonal matrix as presented in [10]. 
+				\\
+				In order to design the controllers, the non-linear model obtained via the Newton-Euler convention needs to be linearised. This is accomplished through the application of Jacobi’s linearisation as presented in [11]. This process produces a full linear state space representation of systems dynamics around stable operating points. This model is then discretized for implement ability in digital embedded systems computer.
+				
+			\subsection*{Actuator Dynamics}	
+				As stated in the UAV section, the multi-rotor is actuated by BLDC motors [14]To fully develop a system model, these must be modelled. This can either be done via first principles calculations as presented in [2][8] experimental systems identification as presented in [9][12][14][15][16]. 
+				\\
+				The systems identification approach involves the derivation of a lumped parameter linear input- output model, encompassing the electronic speed control, motor and propeller dynamics, between input Pulse width modulated (PWM) signal duty cycles or pulse width and the output angular velocities torque and thrust forces. This has the advantage of reducing complex dynamics enabling the utilisation of a minimum viable model and as such, is being implemented in this investigation.
+				
+		\subsection{Control Systems Design, Simulation and Implementation}
+		
+			\subsection*{LQG}
+				The Linear Quadratic Gaussian makes use of the full state of a system, obtained from limited measurements through the application of a Gaussian estimator, in this case a Kalman filter[23][24][25][26], to obtain the full state. It is a form of optimal control where its objective is to find a set of control actions which minimize some cost or performance function to bring the system’s state to a desired set of values. Sources [18][31] present derivations of state feedback control leading to different implementation of LQG control. 
+				
+			\subsection*{LQ-MPC}
+				Like LQG, MPC is also a kind of optimal control, however, this technique’s cost or performance function is limited to looking at future states over some fixed finite horizon and control signals can be determined so that they implicitly taking into account and determine control action so as to meet physical constraints on the system. MPC is also known as receding horizon control (RHC) as it only acts on the first step in the horizon of states before recalculating and performing this action over and over until the target is achieved.
+				\\ 
+				MPC does not refer to any one algorithm or method but instead a series of methodological philosophy which implements certain key concepts and ideas in various ways as stated by[28]. Thus, this investigation makes a limiting delineation by specifying LQ-MPC which limits the scope to MPC consisting of linear systems and quadratic cost functions.
+				\\ 
+				Sources [27][28][29] flush out and give step by step guides and best practices and considerations to follow when designing LQ-MPC. Source [27] in particular discusses and reasons through the limitations of LQG, derivation of LQ-MPC from the perspective of transitioning from and LQG formulation. one source [30] also discusses various implementations methods including utilising machine leaning techniques to estimate certain optimisation parameters, as well as proposing and implementing such a controller.
+				\\
+				The developed Control systems will be implemented on a Beagle Bone Blue Linux based single board computer (SBC) extending from the Robot Control Library (RCL) [33]. Source [31] presents consideration for the implementation of flight control systems and source [32] presents considerations for designing software in general looking at systems engineering approaches.
+			\newpage
+			
+	\section{Mathematical Modelling}
+		
+		\begin{enumerate}
+			\item
+				UAV
+			\item 
+				Kinematics and Euler Angles 
+			\item 
+				Kinetics
+			\item 
+				Actuator Dynamics and System Identification
+			\item 
+				Model Analysis
+		\end{enumerate}
+		
+		\newpage
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.6\linewidth]{Y6UAV1-removebg-preview.png}
+			\caption{Y6 Hexarotor UAV}
+			\label{fig:Y6Hexarotor}
+		\end{figure}
+		
+		\subsection{UAV}
+			The UAV under consideration throughout this project is one of my own design, which is an asymmetrical Y6 hexarotor, meaning that it possesses 6 actuators which are arranged in such a configuration where it resembles the shape of a "Y". This kind of configuration has its actuators is 3 counter-rotating co-axial pairs. A coaxial Y6- hexarotor is mechanically simpler than a classical helicopter since it has propellers with constant pitch and without a swash plate [6]. The advantages of Y6- hexarotors with respect to other multirotor configurations and classical helicopters is that the double drive configuration increases the thrust without increasing the frame size, while naturally eliminating the loss of efficiency due to torque compensation, another advantage of this configuration is a better stability. However, the disadvantages are the higher energy consumption for six propulsion units, the added power demands and inefficiency due to the increased number of actuators and the aerodynamic interaction present within the co-axial actuator combinations[9].
+			\\
+			The UAV is actuated by 6 1000Kv brushless direct current (BLDC) motors [14], attached to 6 10x45inch propellers and is powered by a 4-cell lithium-polymer battery with an operational voltage range of 16.8 volts to 12.8 volts. The exact details involved with the design, development and construction of UAVs is beyond the scope of the project investigation but material, mechanical and electronic consideration when designing such craft are explored in [12].
+			
+			\newpage
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.8\linewidth]{UAVwithFrames.png}
+				\caption{Coordinate Frames}
+				\label{fig:Coordinate frames}
+			\end{figure}
+			
+			Mathematical models are used to describes the characteristics of physical systems. They are derived from assumptions made about a systems behaviour which are represented abstractly using mathematics [3]. In modelling systems, it is first necessary to state all assumptions made about its characteristics. These assumptions simplify the process of systems model abstraction to ensure minimum viability standards are met. This allows for a mapping of multirotor movement and behaviour with the respect to it inputs and external influences. This means mathematical models can be considered as a series of functions that map inputs onto outputs while determining all the time important dependant elements of the  system, and as such, using mathematical models, it is possible to predict position and attitude of multirotor [3]. 
+			\\
+			Following that, initially multirotors can be defined as; rigid-bodies free to move in 3-D space, with 6-DOF, with all motion being either rotational or translational.
+			\\
+			More detailed mathematical models may describe certain multirotor behaviour more accurately, but they also require more computational resources which can lead to, longer simulation times, the inability to successfully complete model simulations [5], more complex than necessary control design processes and solutions.
+			\\
+			This project will present 2 models, a Non-linear model utilised for simulation and a Linear model utilised in control design.
+			\\
+			
+			\subsection{Kinematics and Euler Angles}
+			
+				Multirotor motion can conveniently be described by a number of variables called states, that are related to suitably chosen axes systems or reference frames [1]. These are:
+				
+				\begin{itemize}
+					\item
+						The Earth Frame: Fe
+					\item 
+						The Body Frame: Fb  
+				\end{itemize}
+				
+				Each frame consists of 3 orthogonal axes, \(Xe,Ye,Ze\) and \(Xb,Yb,Zb\) respectively, about and along which rotational and translational motion respectively  can occur. Where Fe is fixed to the earth near the multirotor such that a flat earth assumption can be made and sustained [2] and Fb is attached to the vehicle centred at the UAV’s centre of mass which is free to move with respect to Fe. The usual convention for the axes representation is to have a fixed right-handed axes system with the Z axes pointing downwards, towards the earth when levelled or hovering, the X axis pointing forward and the y axis pointing to the right side. This convention is referred to as the NORTH-EAST-DOWN Right-handed coordinate system [1],[2],[8].
+				\\
+				Multirotor mathematical models have to describe attitude and position according to the geometry of the UAV [6]. one of the most important parts of multirotor modelling is understanding the geometric and kinematic relationships between the reference frames [8]. Kinematics is the study motion of in terms of positions and velocities without regard to the forces causing the motion. Given the definition of coordinate frames of reference, system variables can now be defined in terms of these reference frames.
+				\\
+				In the Fe, we define vectors:
+				\\
+				$$
+				\vec{El} = 
+				\begin{bmatrix}
+					x \\
+					y \\
+					z
+				\end{bmatrix}
+				$$
+				which represent the linear translational positions of Fb’s centre in all 3 axes respectively, centre with respect to (w.r.t) Fe.
+				\\
+				$$
+				\vec{Er} = 
+				\begin{bmatrix}
+					\phi \\
+					\theta \\
+					\psi
+				\end{bmatrix}
+				$$
+				which represent the angular rotation of Fb about all 3 axes respectively, w.r.t Fe. Which are also known as (roll, pitch, yaw) respectively.
+				\\
+				In the Fb, we define vectors:
+				\\
+				$$
+				\vec{Bl} = 
+				\begin{bmatrix}
+					u \\
+					v \\
+					w
+				\end{bmatrix}
+				$$
+				which represents the linear velocity of each Fb axis respectively.
+				\\
+				$$
+				\vec{Br} = 
+				\begin{bmatrix}
+					p \\
+					q \\
+					r
+				\end{bmatrix}
+				$$
+				which represents the angular velocity of each Fb axis respectively.
+				\\
+				From these 12 elemental variables and 4 elemental vectors all, subsequent states and motion can be derived and represented [1][2][4].
+				\\
+				Taking the \(\phi, \theta, \psi\) representation, the rotational motion of Fb w.r.t Fe can be derived by looking at the rotation about each axis individually. Decomposing any arbitrary motion and orientation in the 3-D Euclidean space in this manner presents a sequence of three elemental rotations about each axes of the coordinate system w.r.t its counterpart in Fb. These elemental rotation angles are known as Euler angles and rotations are represented as direction cosine matrices [1][2]. These are:
+				\\
+				$$
+				R_\psi = 
+				\begin{bmatrix}
+					C_\psi & S_\psi & 0  \\
+					-S_\psi & C_\psi & 0  \\
+					0 & 0 & 1
+				\end{bmatrix}
+				$$
+				\\
+				$$
+				R_\theta = 
+				\begin{bmatrix}
+					C_\theta & 0 & -S_\theta \\
+					0 & 1 & 0 \\
+					S_\theta & 0 & C_\theta
+				\end{bmatrix}
+				$$
+				\\
+				$$
+				R_\phi = 
+				\begin{bmatrix}
+					1 & 0 & 0 \\
+					0 & C_\phi & S_\phi  \\
+					0 & -S_\phi & C_\phi
+				\end{bmatrix}
+				$$
+				\\
+				These elemental rotations can by combined using the ZYX convention which multiplies them together in that specific sequence:
+				\[R_\psi \cdot R_\theta \cdot R_\phi\]
+				to produce a matrix, the inverse of which is denoted as R, and is able to map the translational motion of Fb unto Fe give any set of arbitrary \(\phi, \theta, \psi\) values. [1,2,3,4,5,6,7,8,9]
+				\\
+				$$
+				R = 
+				\begin{bmatrix}
+					C_\theta C_\psi & -C_\theta S_\psi + S_\phi S_\theta C_\psi & -S_\phi S_\psi + C_\phi S_\theta C_\psi \\
+					C_\theta S_\psi &  C_\phi C_\psi + S_\phi S_\theta S_\psi   & -S_\phi C_\psi + C_\phi S_\theta S_\psi \\
+					-S_\theta       &  S_\phi C_\theta                          &  C_\phi C_\theta
+				\end{bmatrix}
+				$$
+				\\
+				where : 
+				\[ \dot{\vec{El}} = R \cdot \vec{Bl} \]
+				\\
+				Which maps the linear velocity and acceleration of Fb to linear velocity and acceleration with respect to Fe.
+				\\
+				Similarly, to map the angular velocities and accelerations of Fb w.r.t Fe requires another transformation matrix, T, the inverse of which is also derived from Euler angle manipulation [1,4]. 
+				\\
+				$$
+				T = 
+				\begin{bmatrix}
+					1 & S_\phi T_\theta & C_\phi T_\theta \\
+					0 & C_\phi & -S_\phi\\
+					0 & \frac{S_\phi}{C_\theta}  & \frac{C_\phi}{C_\theta}
+				\end{bmatrix}
+				$$ 
+				\\
+				Where:
+				\\
+				\[\dot{\vec{Er}} = T \cdot \vec{Br} \]
+				\\
+				where S, C, T, represent Sin, Cosine and Tan respectively.
+				
+			\subsection{Kinetics}
+			
+				Kinetics is the study of motion considering the forces and torques which cause the motion. As stated in the previous UAV subsection, the project looks at a Y6 hexarotor UAV which possesses 6 BLDC motors with propellers in a coaxial motor layout. Each motor propeller unit produces a thrust force, the collective effect of which can be summed and lumped together as a single force F, which means:
+				\\
+				\[\sum_{n = 1}^{n = 6}F_n\]
+				\\
+				where n denotes the motor index.
+				\\
+				Each motor propeller unit also produces a reaction torque. When the motors turn, in overcoming air resistance, a reactive force acts on the propellers in the direction opposite to the rotation of the motors which produce a torque acting on the UAV body. These torques, $\tau$, can then also be summed together, meaning:
+				\\
+				\[\sum_{n = 1}^{n = 6}\tau_n\] 
+				\\
+				The co-axial configuration also ensures single point torque balancing [6]. meaning, so long as all rotors pair each produce the same torque, the net reactive torque produced is zero.
+				\\
+				For a determined configuration of the propellers, the translational and angular motion of co-axial Y6 hexarotor is controlled by thrust forces and torques produced by each motor. The main thrust is the sum of all rotors thrust, and rotational movement is generated by the differences of motor thrust and torque [9].
+				
+				\subsection*{Newton-Euler}
+				
+					The Multirotor 6-DOF rigid body kinetics and takes into account the mass M, and the inertia of the body I. These are described by differential equations, which are derived through the utilization of the Newton-Euler modelling convention which derives representations of systems dynamics through the application of first principles via newtons 2nd law of motion showing the effects of all forces and torques applied to the rigid body by its actuators and environment while observing the resultant accelerations produced.
+					\\
+					Resolving the Forces acting linearly on the UAV:
+					\\
+					$$ 
+					M 
+					\cdot 
+					\begin{bmatrix}
+						\ddot{x} \\
+						\ddot{y} \\
+						\ddot{z}
+					\end{bmatrix}
+					=
+					M 
+					\cdot
+					\begin{bmatrix}
+						0 \\
+						0 \\
+						g
+					\end{bmatrix}
+					-
+					\begin{bmatrix}
+						C_\theta C_\psi & -C_\theta S_\psi + S_\phi S_\theta C_\psi & -S_\phi S_\psi + C_\phi S_\theta C_\psi \\
+						C_\theta S_\psi &  C_\phi C_\psi + S_\phi S_\theta S_\psi   & -S_\phi C_\psi + C_\phi S_\theta S_\psi \\
+						-S_\theta       &  S_\phi C_\theta                          &  C_\phi C_\theta
+					\end{bmatrix}
+					\cdot
+					\begin{bmatrix}
+						\ddot{u} \\
+						\ddot{v} \\
+						\ddot{w} 
+					\end{bmatrix}
+					-
+					\begin{bmatrix}
+						D_lxx & 0 & 0 \\
+						0 & D_lyy & 0 \\
+						0 & 0 & D_lzz
+					\end{bmatrix}
+					\cdot
+					\begin{bmatrix}
+						\dot{x} \\
+						\dot{y} \\
+						\dot{z} 
+					\end{bmatrix}
+					$$ 
+					\[ M \cdot \ddot{\vec{El}} = R \cdot \ddot{\vec{Bl}} - M \cdot \vec{g} - diag(D_l) \cdot \dot{\vec{El}}\] 
+					where M is mass g is acceleration due to gravity acting in the vertical Ze axis plane, and \(D_l\) is a diagonal matrix of drag coefficients with aerodynamic drag acting directly proportionally with Velocity in the Fe frame.
+					\\
+					Given that all thrust forces from the motor act along the same Zb axis plane, and there are no other force acting in the other axes therefore, the linear acceleration vector can be rewritten as:
+					\\
+					$$ 
+					M 
+					\cdot 
+					\begin{bmatrix}
+						\ddot{x} \\
+						\ddot{y} \\
+						\ddot{z}
+					\end{bmatrix}
+					=
+					M 
+					\cdot
+					\begin{bmatrix}
+						0 \\
+						0 \\
+						g
+					\end{bmatrix}
+					-
+					\begin{bmatrix}
+						C_\theta C_\psi & -C_\theta S_\psi + S_\phi S_\theta C_\psi & -S_\phi S_\psi + C_\phi S_\theta C_\psi \\
+						C_\theta S_\psi &  C_\phi C_\psi + S_\phi S_\theta S_\psi   & -S_\phi C_\psi + C_\phi S_\theta S_\psi \\
+						-S_\theta       &  S_\phi C_\theta                          &  C_\phi C_\theta
+					\end{bmatrix}
+					\cdot
+					\begin{bmatrix}
+						0 \\
+						0 \\
+						\sum F_n 
+					\end{bmatrix}
+					-
+					\begin{bmatrix}
+						D_lxx & 0 & 0 \\
+						0 & D_1yy & 0 \\
+						0 & 0 & D_lzz
+					\end{bmatrix}
+					\cdot
+					\begin{bmatrix}
+						\dot{x} \\
+						\dot{y} \\
+						\dot{z} 
+					\end{bmatrix}
+					$$ 
+					\\
+					
+					Resolving the Torques and Forces acting angularly on the UAV in Fb:
+					\\
+					$$ 
+					\begin{bmatrix}
+						Ixx & 0 & 0 \\
+						0 & Iyy & 0 \\
+						0 & 0 & Izz
+					\end{bmatrix}
+					\cdot 
+					\begin{bmatrix}
+						\dot{p} \\
+						\dot{q} \\
+						\dot{r}
+					\end{bmatrix}
+					=
+					\begin{bmatrix}
+						A_p \\
+						A_q \\
+						A_r
+					\end{bmatrix}
+					-
+					\begin{bmatrix}
+						p \\
+						q \\
+						r 
+					\end{bmatrix}
+					\times
+					\begin{bmatrix}
+						Ixx & 0 & 0 \\
+						0 & Iyy & 0 \\
+						0 & 0 & Iyy
+					\end{bmatrix}
+					\cdot
+					\begin{bmatrix}
+						p \\
+						q \\
+						r 
+					\end{bmatrix}
+					-
+					\begin{bmatrix}
+						D_rxx & 0 & 0 \\
+						0 & D_ryy & 0 \\
+						0 & 0 & D_rzz
+					\end{bmatrix}
+					\cdot
+					\begin{bmatrix}
+						p \\
+						q \\
+						r
+					\end{bmatrix}
+					$$ 
+					\[ I \cdot \dot{\vec{Br}} = A - C -  diag(D_r) \cdot \vec{Br}  \]
+					\\
+					Where A is the vector of torques generated by the sum of motor forces and torques in each axis, C is the Corriolis matrix formed of the cross product between the angular velocity vector and the diagonal inertia Tensor I, and \(D_r\) is the diagonal matrix of air resistance coefficients acting against motion in each axis.. 
+					\\
+					The A vector Breaks down to:
+					\\
+					\[ A_p = L_1 ((F_1+F_2) - (F_3+F_4)) \]
+					\\
+					\[ A_q = L_2 ((F_1+F_2+F_3+F_4) - L3 (F_5+F_6)) \]
+					\\
+					\[ A_r = \sum_{n = 1}^{n = 6}\tau_n \]
+					Where L is the perpendicular distance from each motor group to the centre of mass.
+					
+					\subsection*{Inertia}
+					
+						\begin{figure}[h!]
+							\centering
+							\includegraphics[width=0.6\linewidth]{UAVBodyFrame.png}
+							\caption{UAV with Body Frame}
+							\label{fig:uavbodyframe}
+						\end{figure}
+						 
+						Due to the asymmetry of the Y6 hexarotor, mass is not even distributed across the UAV frame. This creates a particular imbalance of inertia about the centre of mass, which is the centre of all rotation in Fb. This leads to a case where I has off diagonal elements[10]. i.e:
+						\\
+					    $$ 
+						 I = 
+						 \begin{bmatrix}
+							 Ixx & Ixy & Ixy \\
+							 Iyx & Iyy & Iyz \\
+							 Izx & Izy & Izz
+						 \end{bmatrix}
+						$$
+						 \\
+						 Also, this creates a situation whereby Fb as shown in Figure 5, is inaccurate and instead one transposed to some other orientation meaning rotation about the centre mass will occur in an oblong manner.
+						 \\
+						 To correct this, it is possible to adjust the inertia tensor by find some diagonalising operation such as performing an Eigen vector decomposition [10], this transformation will then need to be applied to all terms in the angular motion calculation.
+						 \\  
+						 However, for the purpose of this investigation, it is possible to make the assumption that the system is symmetrical as presented by a purely diagonal inertial tensor. This is due to the off-diagonal terms in the inertia matrix being far smaller in magnitude than the diagonal terms themselves, meaning that the transposed reference frame does not differ too significantly from assumed symmetrical axes, thus any deviations can be reasonably neglected [10].
+					 
+				 \subsection*{Non-Linear Model}
+				 	
+				 	$$ 
+				 	M 
+				 	\cdot 
+				 	\begin{bmatrix}
+				 	\ddot{x} \\
+				 	\ddot{y} \\
+				 	\ddot{z}
+				 	\end{bmatrix}
+				 	=
+				 	M 
+				 	\cdot
+				 	\begin{bmatrix}
+				 	0 \\
+				 	0 \\
+				 	g
+				 	\end{bmatrix}
+				 	-
+				 	\begin{bmatrix}
+				 	C_\theta C_\psi & -C_\theta S_\psi + S_\phi S_\theta C_\psi & -S_\phi S_\psi + C_\phi S_\theta C_\psi \\
+				 	C_\theta S_\psi &  C_\phi C_\psi + S_\phi S_\theta S_\psi   & -S_\phi C_\psi + C_\phi S_\theta S_\psi \\
+				 	-S_\theta       &  S_\phi C_\theta                          &  C_\phi C_\theta
+				 	\end{bmatrix}
+				 	\cdot
+				 	\begin{bmatrix}
+				 	0 \\
+				 	0 \\
+				 	\sum F_n 
+				 	\end{bmatrix}
+				 	-
+				 	\begin{bmatrix}
+				 	D_lxx & 0 & 0 \\
+				 	0 & D_1yy & 0 \\
+				 	0 & 0 & D_lzz
+				 	\end{bmatrix}
+				 	\cdot
+				 	\begin{bmatrix}
+				 	\dot{x} \\
+				 	\dot{y} \\
+				 	\dot{z} 
+				 	\end{bmatrix}
+				 	$$ 
+				 	\\
+				 	$$ 
+				 	\begin{bmatrix}
+				 	Ixx & 0 & 0 \\
+				 	0 & Iyy & 0 \\
+				 	0 & 0 & Izz
+				 	\end{bmatrix}
+				 	\cdot 
+				 	\begin{bmatrix}
+				 	\dot{p} \\
+				 	\dot{q} \\
+				 	\dot{r}
+				 	\end{bmatrix}
+				 	=
+				 	\begin{bmatrix}
+				 	A_p \\
+				 	A_q \\
+				 	A_r
+				 	\end{bmatrix}
+				 	-
+				 	\begin{bmatrix}
+				 	p \\
+				 	q \\
+				 	r 
+				 	\end{bmatrix}
+				 	\times
+				 	\begin{bmatrix}
+				 	Ixx & 0 & 0 \\
+				 	0 & Iyy & 0 \\
+				 	0 & 0 & Iyy
+				 	\end{bmatrix}
+				 	\cdot
+				 	\begin{bmatrix}
+				 	p \\
+				 	q \\
+				 	r 
+				 	\end{bmatrix}
+				 	-
+				 	\begin{bmatrix}
+				 	D_rxx & 0 & 0 \\
+				 	0 & D_ryy & 0 \\
+				 	0 & 0 & D_rzz
+				 	\end{bmatrix}
+				 	\cdot
+				 	\begin{bmatrix}
+				 	p \\
+				 	q \\
+				 	r
+				 	\end{bmatrix}
+				 	$$ 
+				 	\\
+				 	\[ A_p = L_1 ((F_1+F_2) - (F_3+F_4)) \]
+				 	\[ A_q = L_2 ((F_1+F_2+F_3+F_4) - L3 (F_5+F_6)) \]
+				 	\[ A_r = \sum_{n = 1}^{n = 6}\tau_n \]
+				 	\\
+				 	$$
+				 	\begin{bmatrix}
+				 	\dot{\phi} \\
+				 	\dot{\theta} \\
+				 	\dot{\psi}
+				 	\end{bmatrix}
+				 	=
+				 	\begin{bmatrix}
+				 	1 & S_\phi T_\theta & C_\phi T_\theta \\
+				 	0 & C_\phi & -S_\phi\\
+				 	0 & \frac{S_\phi}{C_\theta}  & \frac{C_\phi}{C_\theta}
+				 	\end{bmatrix}
+				 	\cdot
+				 	\begin{bmatrix}
+				 	p \\
+				 	q \\
+				 	r 
+				 	\end{bmatrix}
+				 	$$ 
+					\\
+					where applying \(\dot{\vec{Er}} = T \cdot \vec{Br} \) converts angular velocity in Fb to angular velocity w.r.t Fe.
+					
+					\newpage
+			
+			\subsection{Actuator Dynamics and System Identification}
+				
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.8\linewidth]{TestStand1.jpg}
+					\caption{Motor Test Stand}
+					\label{fig:motorteststand}
+				\end{figure}
+				
+				As a starting point, let us begin with a basic calculation of the thrust and the
+				torque generated by the propeller. In order not to lose generality, this calculation considers the thrust and the torque to be a function of the propeller’s diameter, propeller’s pitch, the air-density, the revolutions per minute (RPM) and
+				free-stream inflow velocity (VIn).
+				It is well known that a propeller with a given pitch and at a given RPM will
+				produce less thrust at higher speed. Moreover, the theoretical maximum speed,
+				i.e. the speed at which no thrust is produced, is determined by the propeller’s
+				pitch and RPMs. These effects are captured in the following equation,
+		
+				p
+				pitch
+				h
+				
+				i
+				(F.9)
+				where F is the force in (Newtons),  is the air density in (kg/m3
+				), d is the propeller’s diameter in inches, pitch is the propeller’s pitch in inches,  is the propeller speed in RPMs and VIn is the propeller’s inflow airspeed in (m/s) and is
+				given by,
+			
+				is the tilting angle of the ith propeller measured positive towards the nose.
+				82 F.4. Forces and Moments
+				It can be shown that the torque generated has similar behavior to thrust, e.g.
+				quadratic w.r.t rpm at VIn = 0. In this case, for simplicity, torque will be considered
+				as a percentage of the thrust generated. The model is given in F.11.
+			
+				with k being determined by the thrust and torque at a given condition, e.g. at full
+				throttle. In that case k = .
+				
+				In order to account for potential delays in the input response, a first order was
+				selected to model the response from input command to output velocity of the propeller. 
+				time constant of was selected on the basis of the response time given
+				in for a 400 Hz Electronic Speed Controller (ESC). The model is given below,
+
+				It should be noted that the term ˙
+				i would potentially represent an additional moment acting in the aircraft due to propeller acceleration. However, given that the
+				purpose is to find a quasi-stationary solution for a relaxed hovering-loitering and
+				that the time constant is relatively small, it was considered acceptable to ignore
+				this term.  		
+				
+				
+			
+	\bibliographystyle{plain}			
+	\bibliography{ProjectResearchPapers}
+				
+\end{document}
