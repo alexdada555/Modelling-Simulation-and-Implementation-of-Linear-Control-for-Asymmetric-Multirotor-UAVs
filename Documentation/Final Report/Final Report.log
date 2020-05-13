@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.27)  9 MAY 2020 00:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.27)  14 MAY 2020 00:01
 entering extended mode
 **"./Final Report.tex"
 ("Final Report.tex"
@@ -64,11 +64,6 @@ Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
 File: t1enc.def 2018/08/11 v2.0j Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 ))
-(C:\Users\alexd\AppData\Roaming\MiKTeX\2.9\tex/latex/cite\cite.sty
-LaTeX Info: Redefining \cite on input line 302.
-LaTeX Info: Redefining \nocite on input line 332.
-Package: cite 2015/02/27  v 5.5
-)
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\mathptmx.sty"
 Package: mathptmx 2005/04/12 PSNFSS-v9.2a Times w/ Math, improved (SPQR, WaS) 
 LaTeX Font Info:    Redeclaring symbol font `operators' on input line 28.
@@ -282,19 +277,19 @@ LaTeX Info: Redefining \] on input line 2845.
 ) ("Final Report.aux")
 \openout1 = `"Final Report.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 30.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 32.
  ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\t1ptm.fd"
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
@@ -394,46 +389,46 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 32
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 34
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\ot1ztmcm.fd"
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 32
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 34
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omlztmcm.fd"
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 32
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 34
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omsztmcm.fd"
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 32
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 34
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omxztmcm.fd"
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 32.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 34.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 32.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 34.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 32.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 34.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 32.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 34.
  [1
 
 {C:/Users/alexd/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 36.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 38.
  ("Final Report.toc"
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
@@ -454,12 +449,47 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 
  [3
 
+] ("Final Report.lot")
+\tf@lot=\write5
+\openout5 = `"Final Report.lot"'.
+
+ [4
+
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 43.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 50.
  [1]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 48.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 55.
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--69
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--69
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--69
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--69
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--69
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--69
+
+ []
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -469,233 +499,380 @@ This may cause the page layout to be inconsistent, however.
 
 [2] [3] [4]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 78.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 84.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 85.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 91.
  ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 84.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 91.
  [5]
-<ProjectInitialTimetable.png, id=32, 718.93594pt x 476.53032pt>
+<ProjectInitialTimetable.png, id=35, 718.93594pt x 476.53032pt>
 File: ProjectInitialTimetable.png Graphic file (type png)
 <use ProjectInitialTimetable.png>
-Package pdftex.def Info: ProjectInitialTimetable.png  used on input line 140.
-(pdftex.def)             Requested size: 452.96826pt x 300.24478pt.
+Package pdftex.def Info: ProjectInitialTimetable.png  used on input line 147.
+(pdftex.def)             Requested size: 498.26784pt x 330.27507pt.
+
+Overfull \hbox (45.29958pt too wide) in paragraph at lines 147--148
+ [][] 
+ []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<ProjectFinalTimetable.png, id=33, 792.71156pt x 394.47375pt>
+<ProjectFinalTimetable.png, id=36, 792.71156pt x 394.47375pt>
 File: ProjectFinalTimetable.png Graphic file (type png)
 <use ProjectFinalTimetable.png>
-Package pdftex.def Info: ProjectFinalTimetable.png  used on input line 147.
-(pdftex.def)             Requested size: 452.96826pt x 225.41216pt.
+Package pdftex.def Info: ProjectFinalTimetable.png  used on input line 154.
+(pdftex.def)             Requested size: 498.26784pt x 247.95396pt.
+
+Overfull \hbox (45.29958pt too wide) in paragraph at lines 154--155
+ [][] 
+ []
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--170
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--170
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--170
+
+ []
+
 [6]
-Underfull \vbox (badness 1931) has occurred while \output is active []
 
- [7 <./ProjectInitialTimetable.png> <./ProjectFinalTimetable.png>] [8] [9] [10]
+LaTeX Warning: Text page 7 contains only floats.
 
-Overfull \hbox (3.41087pt too wide) in paragraph at lines 202--204
+
+Underfull \vbox (badness 5637) has occurred while \output is active []
+
+ [7 <./ProjectInitialTimetable.png> <./ProjectFinalTimetable.png>] [8] [9]
+Overfull \hbox (3.98639pt too wide) in paragraph at lines 205--206
+[]\T1/ptm/m/n/12 Sources [1][8][16] present rep-re-sen-ta-tions through Quater-
+nions which solve is-sues present
+ []
+
+[10]
+Overfull \hbox (3.41087pt too wide) in paragraph at lines 212--214
 []\T1/ptm/m/n/12 The Newton-Euler con-ven-tion which de-rives rep-re-sen-ta-tio
 ns of sys-tems dy-nam-ics through
  []
 
 
-Overfull \hbox (10.79094pt too wide) in paragraph at lines 204--206
+Overfull \hbox (10.79094pt too wide) in paragraph at lines 214--216
 []\T1/ptm/m/n/12 The Euler-Lagrange con-ven-tion which de-rives rep-re-sen-ta-t
 ions of sys-tems dy-nam-ics through
  []
 
-[11] [12] [13] [14]
-<Y6UAV1-removebg-preview.png, id=62, 579.16376pt x 434.62375pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 221--226
+
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 238--245
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 238--245
+
+ []
+
+
+Underfull \vbox (badness 1642) has occurred while \output is active []
+
+ [12]
+[13] [14]
+<Y6UAV1-removebg-preview.png, id=65, 579.16376pt x 434.62375pt>
 File: Y6UAV1-removebg-preview.png Graphic file (type png)
 <use Y6UAV1-removebg-preview.png>
-Package pdftex.def Info: Y6UAV1-removebg-preview.png  used on input line 256.
-(pdftex.def)             Requested size: 271.7837pt x 203.95485pt.
+Package pdftex.def Info: Y6UAV1-removebg-preview.png  used on input line 266.
+(pdftex.def)             Requested size: 362.37598pt x 271.9376pt.
  [15 <./Y6UAV1-removebg-preview.png>]
-<UAVwithFrames.png, id=68, 473.51906pt x 314.67563pt>
+<UAVwithFrames.png, id=72, 473.51906pt x 314.67563pt>
 File: UAVwithFrames.png Graphic file (type png)
 <use UAVwithFrames.png>
-Package pdftex.def Info: UAVwithFrames.png  used on input line 270.
-(pdftex.def)             Requested size: 362.37598pt x 240.8221pt.
+Package pdftex.def Info: UAVwithFrames.png  used on input line 278.
+(pdftex.def)             Requested size: 317.0764pt x 210.71632pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 275--283
+Underfull \hbox (badness 10000) in paragraph at lines 283--290
 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 283--290
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--290
+
+ []
+
+
+Underfull \vbox (badness 2837) has occurred while \output is active []
 
  [16 <./UAVwithFrames.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 295--301
+Underfull \hbox (badness 10000) in paragraph at lines 302--306
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 308--311
+Underfull \hbox (badness 10000) in paragraph at lines 302--306
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 318--323
+Underfull \hbox (badness 10000) in paragraph at lines 313--316
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 323--328
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 330--333
+Underfull \hbox (badness 10000) in paragraph at lines 335--338
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 340--347
+Underfull \hbox (badness 10000) in paragraph at lines 345--352
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 354--356
+Underfull \hbox (badness 10000) in paragraph at lines 345--352
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 363--365
+Underfull \hbox (badness 10000) in paragraph at lines 359--361
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 368--370
 
  []
 
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 375--378
+Underfull \hbox (badness 10000) in paragraph at lines 380--383
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--394
+Underfull \hbox (badness 10000) in paragraph at lines 393--399
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 401--405
+Underfull \hbox (badness 10000) in paragraph at lines 406--410
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 411--413
+Underfull \hbox (badness 10000) in paragraph at lines 416--418
 
  []
 
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 413--419
+Underfull \hbox (badness 10000) in paragraph at lines 418--424
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 427--431
+Underfull \hbox (badness 10000) in paragraph at lines 430--434
 
  []
 
 
-Overfull \hbox (56.1543pt too wide) detected at line 471
-\OML/ztmcm/m/it/12 M \OMS/ztmcm/m/n/12  [] \OT1/ztmcm/m/n/12 = \OML/ztmcm/m/it
-/12 M \OMS/ztmcm/m/n/12  []   []  []   []  []
+Overfull \hbox (40.1922pt too wide) detected at line 470
+\OML/ztmcm/m/it/12 M [] \OT1/ztmcm/m/n/12 = \OML/ztmcm/m/it/12 M [] \OMS/ztmcm/
+m/n/12   [] []   [] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 472--477
+Underfull \hbox (badness 10000) in paragraph at lines 471--476
 
  []
 
 [20]
-Overfull \hbox (70.71072pt too wide) detected at line 517
-\OML/ztmcm/m/it/12 M \OMS/ztmcm/m/n/12  [] \OT1/ztmcm/m/n/12 = \OML/ztmcm/m/it
-/12 M \OMS/ztmcm/m/n/12  []   []  []   []  []
+Overfull \hbox (54.74863pt too wide) detected at line 512
+\OML/ztmcm/m/it/12 M [] \OT1/ztmcm/m/n/12 = \OML/ztmcm/m/it/12 M [] \OMS/ztmcm/
+m/n/12   [] []   [] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 517--519
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 520--522
+Underfull \hbox (badness 10000) in paragraph at lines 512--516
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 571--577
+Underfull \hbox (badness 10000) in paragraph at lines 562--568
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 577--579
+Underfull \hbox (badness 10000) in paragraph at lines 568--570
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 579--581
+Underfull \hbox (badness 10000) in paragraph at lines 570--572
 
  []
 
-<UAVBodyFrame.png, id=90, 382.42876pt x 305.64188pt>
+<UAVBodyFrame.png, id=93, 382.42876pt x 305.64188pt>
 File: UAVBodyFrame.png Graphic file (type png)
 <use UAVBodyFrame.png>
-Package pdftex.def Info: UAVBodyFrame.png  used on input line 588.
+Package pdftex.def Info: UAVBodyFrame.png  used on input line 579.
 (pdftex.def)             Requested size: 271.7837pt x 217.22177pt.
 [21]
-Underfull \hbox (badness 10000) in paragraph at lines 593--595
+Underfull \hbox (badness 10000) in paragraph at lines 584--586
 
  []
 
-
-Overfull \hbox (70.71072pt too wide) detected at line 652
-\OML/ztmcm/m/it/12 M \OMS/ztmcm/m/n/12  [] \OT1/ztmcm/m/n/12 = \OML/ztmcm/m/it
-/12 M \OMS/ztmcm/m/n/12  []   []  []   []  []
- []
-
+<BLDC.png, id=98, 258.21469pt x 220.57407pt>
+File: BLDC.png Graphic file (type png)
+<use BLDC.png>
+Package pdftex.def Info: BLDC.png  used on input line 605.
+(pdftex.def)             Requested size: 181.18454pt x 154.77774pt.
 [22 <./UAVBodyFrame.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 652--654
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 702--704
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 706--708
-
- []
-
-[23]
-<TestStand1.jpg, id=102, 4149.5025pt x 2182.1525pt>
+<TestStand1.jpg, id=103, 4149.5025pt x 2182.1525pt>
 File: TestStand1.jpg Graphic file (type jpg)
 <use TestStand1.jpg>
-Package pdftex.def Info: TestStand1.jpg  used on input line 736.
-(pdftex.def)             Requested size: 362.37598pt x 190.55829pt.
- [24 <./TestStand1.jpg>] ("Final Report.bbl") [25] ("Final Report.aux") ) 
+Package pdftex.def Info: TestStand1.jpg  used on input line 612.
+(pdftex.def)             Requested size: 226.48413pt x 119.10309pt.
+<InputStepData.png, id=104, 421.575pt x 316.18124pt>
+File: InputStepData.png Graphic file (type png)
+<use InputStepData.png>
+Package pdftex.def Info: InputStepData.png  used on input line 623.
+(pdftex.def)             Requested size: 362.37598pt x 271.78513pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 617--630
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 617--630
+
+ []
+
+[23 <./BLDC.png> <./TestStand1.jpg>] [24 <./InputStepData.png (PNG copy)>]
+<ModelStep.png, id=111, 421.575pt x 316.18124pt>
+File: ModelStep.png Graphic file (type png)
+<use ModelStep.png>
+Package pdftex.def Info: ModelStep.png  used on input line 639.
+(pdftex.def)             Requested size: 362.37598pt x 271.78513pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 635--648
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 635--648
+
+ []
+
+[25 <./ModelStep.png (PNG copy)>]
+<ThrustData.png, id=115, 421.575pt x 316.18124pt>
+File: ThrustData.png Graphic file (type png)
+<use ThrustData.png>
+Package pdftex.def Info: ThrustData.png  used on input line 657.
+(pdftex.def)             Requested size: 362.37598pt x 271.78513pt.
+<TorqueData.png, id=116, 421.575pt x 316.18124pt>
+File: TorqueData.png Graphic file (type png)
+<use TorqueData.png>
+Package pdftex.def Info: TorqueData.png  used on input line 663.
+(pdftex.def)             Requested size: 362.37598pt x 271.78513pt.
+ [26 <./ThrustData.png (PNG copy)> <./TorqueData.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 672--676
+
+ []
+
+
+Overfull \hbox (54.74863pt too wide) detected at line 712
+\OML/ztmcm/m/it/12 M [] \OT1/ztmcm/m/n/12 = \OML/ztmcm/m/it/12 M [] \OMS/ztmcm/
+m/n/12   [] []   [] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 712--716
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 770--774
+
+ []
+
+[27]
+Underfull \hbox (badness 10000) in paragraph at lines 863--867
+
+ []
+
+[28] [29]
+Underfull \hbox (badness 10000) in paragraph at lines 915--920
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 922--924
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 926--933
+
+ []
+
+
+Overfull \hbox (64.81685pt too wide) detected at line 950
+[]
+ []
+
+
+Underfull \vbox (badness 3826) has occurred while \output is active []
+
+ [30]
+[31]
+Overfull \hbox (29.44788pt too wide) in paragraph at lines 973--1001
+[][] 
+ []
+
+[32] [33] ("Final Report.aux") ) 
 Here is how much of TeX's memory you used:
- 5676 strings out of 492895
- 83325 string characters out of 3133479
- 168846 words of memory out of 3000000
- 9446 multiletter control sequences out of 15000+200000
- 55252 words of font info for 92 fonts, out of 3000000 for 9000
+ 5630 strings out of 492895
+ 82754 string characters out of 3133479
+ 177076 words of memory out of 3000000
+ 9392 multiletter control sequences out of 15000+200000
+ 65806 words of font info for 102 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,12n,43p,1292b,297s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Pr
-ogram Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb><C:/Users/alexd/AppData/Roaming/MiKTeX/2.9/fonts/type1/urw/sy
-mbol/usyr.pfb><C:/Users/alexd/AppData/Roaming/MiKTeX/2.9/fonts/type1/urw/symbol
-/usyr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Final Report.pdf" (28 pages, 2170652 bytes).
+ 42i,12n,43p,1309b,297s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/ba
+se/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alexd/AppData
+/Roaming/MiKTeX/2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Users/alexd/AppData/Roa
+ming/MiKTeX/2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/tim
+es/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on "Final Report.pdf" (37 pages, 2317687 bytes).
 PDF statistics:
- 139 PDF objects out of 1000 (max. 8388607)
+ 175 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
