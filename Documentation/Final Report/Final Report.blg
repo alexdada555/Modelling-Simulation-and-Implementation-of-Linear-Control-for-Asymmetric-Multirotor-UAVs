@@ -1,5 +1,8 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: Final Report.aux
-The style file: plain.bst
-I found no \citation commands---while reading file Final Report.aux
-Database file #1: ProjectResearchPapers.bib
-(There was 1 error message)
+[0] Config.pm:304> INFO - This is Biber 2.13
+[1] Config.pm:307> INFO - Logfile is 'Final Report.blg'
+[84] biber-MSWIN64:315> INFO - === 
+[133] Biber.pm:375> INFO - Reading 'Final Report.bcf'
+[401] Utils.pm:316> ERROR - Error: Found biblatex control file version 3.7, expected version 3.6.
+This means that your biber (2.13) and biblatex (3.14) versions are incompatible.
+See compat matrix in biblatex or biber PDF documentation.
+[401] Biber.pm:114> INFO - ERRORS: 1

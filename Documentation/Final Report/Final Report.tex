@@ -11,9 +11,21 @@
 \usepackage{subcaption}
 \usepackage{pdfpages} 
 \usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{mwe}
+
 %\usepackage{showframe}
 %\usepackage[citestyle=alphabetic,bibstyle=authortitle]{biblatex} 
 %\addbibresource{ProjectResearchPapers.bib}
+\usepackage{hyperref}
+
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -53,23 +65,22 @@
 	\newpage
 	
 	\section*{Executive Summary}
-		This report documents the steps undertaken in the investigation of asymmetric multirotor UAV characteristics, as well as a walkthrough of the processes involved in using those characteristics to guide and inform the design, development and implementation of linear feedback control systems which are capable of providing guaranteed performance.
+	
+		The first chapter provides a project introduction containing background information pertinent to the investigation, briefly discussing the nature and potential uses of UAVs. This section includes the systems engineering approaches taken, such as breaking down the project aims and objectives and setting them up as a set of task requirements with achievable milestones. This section provides information on project planning and management which includes the use of Gantt charts amongst others. This section will also detail all considerations and changes made to the project due to the SARSCOVID-2 pandemic.
 		\\ \\
-		The first section provides a project introduction containing background information pertinent to the investigation, briefly discussing the nature and potential uses of UAVs. This section includes the systems engineering approaches taken, such as breaking down the project aims and objectives and setting them up as a set of task requirements with achievable milestones. This section provides information on project planning and management which includes the use of Gantt charts amongst others. This section will also detail all considerations and changes made to the project due to the SARSCOVID-2 pandemic.
+		The second chapter reviews and provides an analysis of the relevant supporting literature collected, which is referenced throughout the writing. The supporting research materials take the form of scientific journals articles, independent research publications, exerts from university lectures, Master’s/ PhD thesis publications and published books.
 		\\ \\
-		The second section reviews and provides an analysis of the relevant supporting literature collected, which is referenced throughout the writing. The supporting research materials take the form of scientific journals articles, independent research publications, exerts from university lectures, Master’s/ PhD thesis publications and published books.
+		The third chapter briefly discusses the mechanical design and construction of the specific asymmetric Y6 ‘hexarotor’ UAV being used as the case study. This Section goes through and details the processes and results of analysing the UAV and deriving a mathematical representation of the physical characteristic through a combination of first principles dynamic modelling and hardware-in-the-loop (HIL) testing. This section explores and expatiates on different modelling techniques while discussing the various assumptions made during the modelling process and the reasoning behind the adopting of the techniques chosen. This section then converts the derived model into various forms useful for control design, analysis and simulation while presenting rigorous analyses of the system characteristics along with a dynamic simulation using industry standard applications.
 		\\ \\
-		The third section briefly discusses the mechanical design and construction of the specific asymmetric Y6 ‘hexarotor’ UAV being used as the case study. This Section goes through and details the processes and results of analysing the UAV and deriving a mathematical representation of the physical characteristic through a combination of first principles dynamic modelling and hardware-in-the-loop (HIL) testing. This section explores and expatiates on different modelling techniques while discussing the various assumptions made during the modelling process and the reasoning behind the adopting of the techniques chosen. This section then converts the derived model into various forms useful for control design, analysis and simulation while presenting rigorous analyses of the system characteristics along with a dynamic simulation using industry standard applications.
+		The forth chapter details the process behind the design and development of an LQG feedback controller, then discusses and analyses the simulation results. This section then discusses the limitations of LQG controllers. This section details the design and development of LQ-MPC feedback controllers. Extending from the previous section, this section presents and justifies the reasoning behind transitioning to LQ-MPC as well as analysing the simulation results of the LQ-MPC feedback controller. This section then compares the performance of the LQG and LQ-MPC feedback controllers using appropriate metrics.
 		\\ \\
-		The forth section details the process behind the design and development of an LQG feedback controller, then discusses and analyses the simulation results. This section then discusses the limitations of LQG controllers. This section details the design and development of LQ-MPC feedback controllers. Extending from the previous section, this section presents and justifies the reasoning behind transitioning to LQ-MPC as well as analysing the simulation results of the LQ-MPC feedback controller. This section then compares the performance of the LQG and LQ-MPC feedback controllers using appropriate metrics.
+		The fifth chapter discusses the characteristics of the embedded Linux single board computers (SBCs), using the BeagleBone Blue platform. This section discusses and details the processes and considerations behind implementing UAV control systems on the platform. The section then presents a Unified Modelling Language (UML) Class diagram detailing an implementation proposal for an embedded LQG Controller in the C Language.
 		\\ \\
-		The fifth section discusses the characteristics of the embedded Linux single board computers (SBCs), using the BeagleBone Blue platform. This section discusses and details the processes and considerations behind implementing UAV control systems on the platform. The section then presents a Unified Modelling Language (UML) Class diagram detailing an implementation proposal for an embedded LQG Controller in the C Language.
-		\\ \\
-		The sixth and final section concludes the report and presents possibilities for future work and development.
+		The sixth and final chapter concludes, summarises results and finding then presents possibilities for future work and development.
 		
 	\newpage
 	
-	\section{Introduction}
+	\chapter{Introduction}
 		
 		\begin{enumerate}
 			\item
@@ -79,12 +90,10 @@
 			\item 
 				Project Management.
 		\end{enumerate}
-	
-	 	\newpage
-	 	
-		\subsection{Background}
+
+		\section{Background}
 		
-			UAVs are aerial systems which are not directly controlled by a human onboard the vehicle. There are many types of UAV platforms which are chiefly defined by the characteristics of their mechanical constructions [3][4]. These defining criteria break down to include:
+			UAVs are aerial systems which are not directly controlled by a human onboard the vehicle. There are many types of UAV platforms which are chiefly defined by the characteristics of their mechanical constructions [3],[4]. These defining criteria break down to include:
 			
 			\begin{itemize}
 				\item
@@ -104,13 +113,13 @@
 			In order for the developed control systems to behave in a guaranteed predictable manner and be able to meet defined performance specifications, it becomes necessary to understand the behaviour of the system to be controlled and thus derive a mathematical behavioural representation to be used in guiding and informing the design process, which is done through mathematical systems modelling. This level of insight is also required in the development of advanced control schemes.
 		
 		
-		\subsection{Aims and Objectives}
+		\section{Aims and Objectives}
 			
 			The framework of this project was set around the design and development of control software for VSTOL model aircraft. From this broad theme, the aims of modelling an asymmetric multi-rotor platform, developing multiple control schemes and then implementing these schemes on a multirotor platform via an embedded SBC were derived.
 			\\
 			These aims break down into multiple objectives and milestones which must each be achieved to fulfil the full scope of the aims outlined. These objectives can be broadly classified into 2 categories: 
 	
-				\subsection*{Basic Objectives}
+				\subsection{Basic Objectives}
 				
 					\begin{enumerate}
 						\item
@@ -129,7 +138,7 @@
 							Discuss the results of performance comparisons between the simulation and hardware implementations(**).
 					\end{enumerate}
 				
-				\subsection*{Advanced Objectives}
+				\subsection{Advanced Objectives}
 				
 					\begin{enumerate}
 						\item
@@ -140,7 +149,7 @@
 							Discuss the differences between the LQG and LQ-MPC implementations.
 					\end{enumerate}
 				
-		\subsection{Project Management}
+		\section{Project Management}
 			
 			\begin{figure}[h!]
 				\centering
@@ -156,66 +165,66 @@
 				\label{fig:finaltimetable}
 			\end{figure}
 		
-			In order to properly execute on the project Aims and Objectives, project activities were coordinated and managed by further breaking down or grouping task then laying them out in tabulations which were used to generate the project Gantt charts.
+			In order to properly execute on the project Aims and Objectives, project activities were coordinated and managed by further breaking down or grouping task then laying them out in tabulations, Figures 1.1 and 1.2, which were used to generate the project Gantt charts.
 			\\
 			The project has by in large proceeded along on the initial schedule proposed with only one major non SARSCOVID-2 related change made to tasks and execution dates from the initial proposal. 
 			\\ \\
-			Due to the effects and responses to the global SARSCOVID-2 pandemic, which first emerged in Wuhan city China in late November of 2019, The University of Sheffield was forced into closure/Cancellation of all on-site and in-person teaching, meetings and instruction from March of 2020. This coupled with the government mandated nationwide quarantine and lockdown in the United Kingdom made access to the necessary facilities for the testing and evaluation of any developed UAV software impossible. As such, activities and work towards meeting the objectives succeeded by a double Asterix in the previous subsections is not being undertaken. Project planning has been adjusted accordingly. This has also led to changes in term dates which resulted in adjustments being made to task timelines.
+			Due to the effects and responses to the global SARSCOVID-2 pandemic, The University of Sheffield was forced into closure/Cancellation of all on-site and in-person teaching, meetings and instruction from March of 2020. This coupled with the government mandated nationwide quarantine and lock down in the United Kingdom made access to the necessary facilities for the testing and evaluation of any developed UAV software impossible. As such, activities and work towards meeting the objectives succeeded by a Double-Asterix in the previous aims and objectives section are not being undertaken. Project planning has been adjusted accordingly. This has also led to changes in term dates which resulted in adjustments being made to task timelines.
 			\\ \\
-			All material purchases were made on time, acquiring key hardware such as the main flight computer, the flight radio control system, which would have served as the main communication unit sending control commands to the multirotor, electronics speed controllers, and load cells which will be used to develop the lab-bench platforms to identify the actuator dynamics. All Ad hoc minor changes to task completion periods are reflected in timeline changes from the initial proposal table to the final proposal table. 
+			Regarding other aspects of the project, all material purchases were made on time, acquiring key hardware such as the main flight computer, the flight radio control system, which would have served as the main communication unit sending control commands to the multirotor, electronics speed controllers, and load cells which will be used to develop the lab-bench platforms to identify the actuator dynamics. All Ad hoc minor changes to task completion periods are reflected in timeline changes from the initial proposal table, Figure 1.1, to the final proposal table, Figure 1.2. 
 			\\
-			The only non SARSCOVID-2 enforced change in the project from its initial proposal was the dropping of a PID control design section which occurred before, and is reflected in, the S2 week project proposal review. This change was made to refocus the project objectives solely on model-based control design outcomes.
+			The only major change to the project scope, not enforce by SARSCOVID-2, from its initial proposal was the dropping of a PID control design section and all such tasks, which occurred before, and is reflected in, the S2 week project proposal review. This change was made to refocus the project objectives solely on model-based control design outcomes.
 			\\ \\
-			All changes to task completion dates for further objectives are displayed in the final proposal table which was used to produce the final full project Gantt chart available in the Appendix.
+			All changes to task completion dates for further objectives are displayed in the final proposal table, Figure 1.2, which was used to produce the final project Gantt chart available as an Appendix.
 			
 	\newpage
 	
-	\section{Review Of Literature }	
+	\chapter{Review Of Literature}	
 	
-		In preparing to execute the project tasks, various supporting and reference materials were acquired. The various literature take the form of articles published in scientific journals, research publications, exerts from university lectures, Masters and PhD thesis publications and published books, all of which together broadly cover and present 3 major themes that are relevant to the project’s investigation:
+		\section{Introduction}
 		
-		\begin{enumerate}
-			\item 
-				Mathematical Modelling and Systems Identification. 
-			\item 
-				Control Systems Design.
-			\item 
-				Simulation and Implementation.
-		\end{enumerate}
-	
-		\newpage
+			In preparing to execute the project tasks, various supporting and reference materials were acquired. The various literature take the form of articles published in scientific journals, research publications, exerts from university lectures, Masters and PhD thesis publications and published books, all of which together broadly cover and present 3 major themes that are relevant to the project’s investigation:
 		
-		\subsection{Mathematical Modelling and System Identification}
+			\begin{enumerate}
+				\item 
+					Mathematical Modelling and Systems Identification. 
+				\item 
+					Control Systems Design.
+				\item 
+					Simulation and Implementation.
+			\end{enumerate}
+		
+		\section{Mathematical Modelling and System Identification}
 			
-			\subsection*{UAV}
+			\subsection{UAV}
 				
 				The UAV is actuated by 6 1000Kv brushless direct current (BLDC) motors [14], attached to 6 10x45inch propellers and is powered by a 4-cell lithium-polymer battery with an operational voltage range of 16.8 volts to 12.8 volts. The UAV has dimensions of, 45 cm in length from rear motor centres to from motor centres, 44 cm in length from left motor centres to right motor centres, and a mass of 1.3 kilograms. The exact details involved with the design, development and construction of UAVs is beyond the scope of the project investigation but material, mechanical and electronic consideration when designing such craft are explored in [12].
 				
-			\subsection*{Dynamics}
+			\subsection{Dynamics}
 				In modelling systems, it is first necessary to state all assumptions made about its characteristics. These assumptions simplify the process of systems model abstraction to ensure minimum viability standards are met. Following that, multirotors can be defined as rigid-bodies free to move in three-dimensional (3-D) space, therefore, they move with 6 degrees of freedom (6-DOF). With this modelling assumption, the motion of the vehicles is subject to the laws of rigid body Kinematics and Kinetics. All the acquired material takes this stance. 
 				\\
-				Vehicle motion is defined in terms of 2 coordinate frames moving relative to one another where the physical quantities that change with time, states, change with respect to one frame or the other. They are the Earth-Frame, fixed to the earth and the Body-Frame, attached to the vehicle body. Each frame consists of 3 orthogonal axes, whose nomenclature varies from source to source, about and along which rotational and translational motion can occur respectively [1][2][4][15]. 
+				Vehicle motion is defined in terms of 2 coordinate frames moving relative to one another where the physical quantities that change with time, states, change with respect to one frame or the other. They are the Earth-Frame, fixed to the earth and the Body-Frame, attached to the vehicle body. Each frame consists of 3 orthogonal axes, whose nomenclature varies from source to source, about and along which rotational and translational motion can occur respectively [1,][2],[4],[15]. 
 				\\
 				The sources obtained explore 2 ways for representing this rotational motion of the reference frames:
 				
 				\begin{itemize}
 					\item 
-						Sources [1][2][3][4][5][6][7][9] present their models using Euler angles which describe arbitrary orientation in the 3-dimensional Euclidean space using three parameters which represent a sequence of three elemental rotations about each axes of the coordinate system. Any orientation in 3D space can be achieved by composing these 3 elemental rotations.
+						Sources [1],[2],[3],[4],[5],[6],[7],[9] present their models using Euler angles which describe arbitrary orientation in the 3-dimensional Euclidean space using three parameters which represent a sequence of three elemental rotations about each axes of the coordinate system. Any orientation in 3D space can be achieved by composing these 3 elemental rotations.
 					\item
-						Sources [1][8][16] present representations through Quaternions which solve issues present with computing Euler angles such as computational expense and numerical singularities which occur when certain orientations are reached, as it does not require the calculation of sin and cos when certain angles go to 0 or 90 degrees and their multiples. Quaternions represent any arbitrary orientation by constructing rotations as that of a single angle about an imaginary axis. 
+						Sources [1],[8],[16] present representations through Quaternions which solve issues present with computing Euler angles such as computational expense and numerical singularities which occur when certain orientations are reached, as it does not require the calculation of sin and cos when certain angles go to 0 or 90 degrees and their multiples. Quaternions represent any arbitrary orientation by constructing rotations as that of a single angle about an imaginary axis. 
 				\end{itemize}
 				\space
 				The rigid body assumptions also allow for the utilisation of several Mechanical Modelling techniques and conventions which are used to derive the non-linear dynamics of the body frame mechanical systems considering both kinematics and Kinetics:
 				
 				\begin{itemize}
 					\item
-						The Newton-Euler convention which derives representations of systems dynamics through the application of first principles using newtons 2nd law of motion showing the effects of forces applied to the rigid body by its actuators and environment. utilised in [2][3][5][6][7][8][9]
+						The Newton-Euler convention which derives representations of systems dynamics through the application of first principles using newtons 2nd law of motion showing the effects of forces applied to the rigid body by its actuators and environment. Utilised in [2],[3],[5],[6],[7],[8],[9].
 					\item 
-						The Euler-Lagrange convention which derives representations of systems dynamics through the study of energy differentials between kinetic and gravitational potential generated by motion. utilised in [4]. 
+						The Euler-Lagrange convention which derives representations of systems dynamics through the study of energy differentials between kinetic and gravitational potential generated by motion. Utilised in [4]. 
 					\item 
 						The Newton-Hamiltonian.
 					\item 
-						Pure Hardware-in-the-Loop system identification, which decouples each axes of motion and determines approximate model frameworks for each then populates said framework with experimentally obtained elements. such was the process taken by [30]
+						Pure Hardware-in-the-Loop system identification, which decouples each axes of motion and determines approximate model frameworks for each then populates said framework with experimentally obtained elements. Such was the process taken by [28]
 				\end{itemize}
 				\space
 				This investigation utilises the Euler-angle representation and the Newton-Euler convention due to its intuitive familiarity and relative simplicity.
@@ -224,42 +233,58 @@
 				\\ \\
 				In order to design the controllers, the non-linear model obtained via the Newton-Euler convention needs to be linearised. This is accomplished through the application of Jacobi’s linearisation method as presented in [11]. This process produces a full linear state space representation of systems dynamics around stable operating points. This model is then discretized for implementation in digital embedded systems.
 				
-			\subsection*{Actuator Dynamics}	
-				As stated in the UAV subsection, the multi-rotor is actuated by BLDC motors [14], To fully develop a system model, these must be modelled. This can either be done via first principles calculations as presented in [2][8][17] or via experimental systems identification as presented in [9][12][14][15][16]. 
+			\subsection{Actuator Dynamics}	
+				As stated in the UAV subsection, the multi-rotor is actuated by BLDC motors [14], To fully develop a system model, these must be modelled. This can either be done via first principles calculations as presented in [2],[8],[17] or via experimental systems identification as presented in [9],[12],[14],[15],[16]. 
 				\\
 				The systems identification approach involves the derivation of a lumped parameter linear input- output model, encompassing the electronic speed control unit, motor and propeller dynamics, between input Pulse width modulated (PWM) signal duty cycles or pulse width and the output angular velocity, torque and thrust forces. This has the advantage of reducing complex dynamics enabling the utilisation of a minimum viable model and as such, is being implemented in this investigation.
 				
-		\subsection{Control Systems Design, Simulation and Implementation}
+		\section{Control Systems Design, Simulation and Implementation}
 		
-			\subsection*{LQG}
-				The Linear Quadratic Gaussian makes use of the full state of a system, obtainable from a limited set of measurements through the application of a Gaussian estimator, in this case a Kalman filter[23][24][25][26], to obtain the full state. It is a form of optimal control where its objective is to find a set of control actions which minimize some cost or performance function to bring the system’s state to a desired set of values. Sources [18][19][21][22][31] present derivations of state feedback control leading to different implementation of LQG control. Source [20] details implementation of LQG control in embedded systems.
+			\subsection{LQG}
+				The Linear Quadratic Gaussian makes use of the full state of a system, obtainable from a limited set of measurements through the application of a Gaussian estimator, in this case a Kalman filter [21],[22],[23],[24] to obtain the full state. It is a form of optimal control where its objective is to find a set of control actions which minimize some cost or performance function to bring the system’s state to a desired set of values. Sources [18],[19],[20],[25] present derivations of state feedback control leading to different implementation of LQG control. Source [19] in particular details implementation of LQG control in embedded systems.
 				
-			\subsection*{LQ-MPC}
+			\subsection{LQ-MPC}
 				Like LQG, MPC is also a kind of optimal control, however, this technique’s cost or performance function is limited to looking at future states over some fixed finite horizon and control signals can be determined so that they implicitly taking into account and determine control action so as to meet physical constraints on the system. MPC is also known as receding horizon control (RHC) as it only acts on the first step in the horizon of states before recalculating and performing this action over and over until the target is achieved.
 				\\ \\
 				MPC does not refer to any one algorithm or method but instead a series of methodological philosophy which implements certain key concepts and ideas in various ways as stated by[28]. Thus, this investigation makes a limiting delineation by specifying LQ-MPC which limits the scope to MPC consisting of linear systems and quadratic cost functions.
 				\\
-				Sources [27][28][29] flush out and give step by step guides and best practices and considerations to follow when designing Linear predictive control techniques. Source [27] in particular discusses and reasons through the limitations of LQG and the derivation of LQ-MPC from the perspective of transitioning from an LQG formulation. one source [30] also discusses various implementations methods including utilising machine leaning techniques to estimate certain optimisation parameters, as well as proposing and implementing such a controller.
+				Sources [25],[26],[27] flush out and give step by step guides and best practices and considerations to follow when designing Linear predictive control techniques. Source [25] in particular discusses and reasons through the limitations of LQG and the derivation of LQ-MPC from the perspective of transitioning from an LQG formulation. one source [28] also discusses various implementations methods including utilising machine leaning techniques to estimate certain optimisation parameters, as well as proposing and implementing such a controller.
 				\\ \\
-				The developed Control systems will be implemented on a Beagle Bone Blue Linux based single board computer (SBC) extending from the Robot Control Library (RCL) [33]. Sources [20][31] presents consideration for the implementation of flight control systems and source [32] presents considerations for designing software in general looking at systems engineering approaches.
-			\newpage
+				The developed Control systems will be implemented on a Beagle Bone Blue Linux based single board computer (SBC) extending from the Robot Control Library (RCL) [31]. Sources [19],[29] presents consideration for the implementation of flight control systems and source [30] presents considerations for designing software in general looking at systems engineering approaches.
 			
-	\section{Mathematical Modelling}
-		
-		\begin{enumerate}
-			\item
-				UAV
-			\item 
-				Kinematics 
-			\item 
-				Kinetics
-			\item 
-				Actuator Dynamics
-			\item 
-				Linearisation
-		\end{enumerate}
+			\section{summary}	
+			
+				This Chapter:
+				\\
+				\begin{itemize}
+					\item 
+						Descried the Material available from the reference source material gathered.
+					\item 
+						Highlighted the major take aways from each source and put them in the context of the larger project objectives.
+					\item
+						Presented the reasoning behind the selective application of source material.
+				\end{itemize}
 		
 		\newpage
+			
+	\chapter{Mathematical Modelling}
+		
+		\section{Introduction}
+		
+			Mathematical models are used to describes the characteristics of physical systems. They are derived from assumptions made about a systems behaviour which are represented abstractly using mathematics. In modelling systems, it is first necessary to state all assumptions made about its characteristics. These assumptions simplify the process of model abstraction to ensure minimum viability standards are met. This allows for a mapping of a multirotor movements and behaviour with the respect to it inputs and external influences meaning mathematical models can be considered as a series of functions that map inputs onto outputs while determining all the important time dependant elements of the system. In order to successfully accomplish the development of an appropriate mathematical model for both simulation and control design, the following topics will be explored:
+			
+			\begin{enumerate}
+				\item
+					UAV
+				\item 
+					Kinematics 
+				\item 
+					Kinetics
+				\item 
+					Actuator Dynamics
+				\item 
+					Linearisation
+			\end{enumerate}
 		
 		\begin{figure}[h!]
 			\centering
@@ -268,406 +293,403 @@
 			\label{fig:Y6Hexarotor}
 		\end{figure}
 		\space
-		\subsection{UAV}
+		\section{UAV}
+		
 			The UAV under consideration throughout this project is an asymmetrical Y6 hexarotor. This kind of configuration has actuators in 3 counter-rotating co-axial pairs and 3 motor groups. A coaxial Y6 hexarotor is mechanically simpler than a classical helicopter since it has propellers with constant pitch and without a swash plate [6]. The advantages of Y6- hexarotors with respect to other multirotor configurations and classical helicopters is that the double drive configuration increases the thrust without increasing the frame size, while naturally eliminating the loss of efficiency due to torque compensation, another advantage of this configuration is better stability. However, the disadvantages are the higher energy consumption for six propulsion units and inefficiency due to the aerodynamic interaction present with co-axial actuator combinations[9]. The UAV is actuated by 6 1000Kv BLDC motors [14], attached to 6 10x45inch propellers and is powered by a 4-cell lithium-polymer battery. The exact details involved with the design, development and construction of UAVs is beyond the scope of the project investigation but material, mechanical and electronic consideration when designing such craft are explored in [12].
-			
-			\newpage
 			
 			\begin{figure}[h!]
 				\centering
 				\includegraphics[width=0.7\linewidth]{UAVwithFrames.png}
 				\caption{Coordinate Frames}
 				\label{fig:Coordinate frames}
-			\end{figure}
-			
-			Mathematical models are used to describes the characteristics of physical systems. They are derived from assumptions made about a systems behaviour which are represented abstractly using mathematics [3]. In modelling systems, it is first necessary to state all assumptions made about its characteristics. These assumptions simplify the process of model abstraction to ensure minimum viability standards are met. This allows for a mapping of multirotor movement and behaviour with the respect to it inputs and external influences. This means mathematical models can be considered as a series of functions that map inputs onto outputs while determining all the important time  dependant elements of the system, and as such, it is possible to predict the position and attitude of multirotors [3]. 
-			\\ \\
+			\end{figure} 
+		
 			Following that, initially, multirotors can be defined as; rigid-bodies free to move in 3-D space with 6-DOF, with all motion restricted to being either rotational or translational.
 			\\ \\
 			More detailed mathematical models may describe certain multirotor characteristics more accurately, but they also require more computational resources which can lead to, longer simulation times, the inability to successfully complete simulations [5], and more complex than necessary control design processes and solutions.
 			\\ \\
 			This project will derive and present 2 models, a Non-linear model utilised in simulation, and a Linear model utilised in analysis and control design.
 			
-			\subsection{Kinematics}
+		\section{Kinematics}
 			
-				Multirotor mathematical models have to describe attitude and position according to the geometry of the UAV [6]. one of the most important parts of multirotor modelling is understanding the geometric and kinematic relationships between the reference frames [8]. Kinematics is the study of motion in terms of positions and velocities without regard to the forces causing the motion. Multirotor motion can be described by a number of variables called states, that are related and change with suitably chosen axes systems or reference frames [1]. These reference frames are:
+			Multirotor mathematical models have to describe attitude and position according to the geometry of the UAV [6]. one of the most important parts of multirotor modelling is understanding the geometric and kinematic relationships between the reference frames [8]. Kinematics is the study of motion in terms of positions and velocities without regard to the forces causing the motion. Multirotor motion can be described by a number of variables called states, that are related and change with suitably chosen axes systems or reference frames [1]. These reference frames are:
 				
-				\begin{itemize}
-					\item
-						The Earth Frame: Fe
-					\item 
-						The Body Frame: Fb  
-				\end{itemize}
-				\space
-				Each frame consists of 3 orthogonal axes, \(Xe,Ye,Ze\) and \(Xb,Yb,Zb\) respectively, about and along which rotational and translational motion respectively can occur. Where Fe is fixed to the earth near the multirotor such that a flat earth assumption can be made and sustained [2] and Fb is attached to the vehicle, centred at the UAV’s centre of mass, which is free to move with respect to Fe. The usual convention for the axes representation is to have a fixed right-handed axes system with the positive Z axes pointing downwards, towards the earth when levelled or hovering, the positive X axis pointing forward and the positive y axis pointing towards right or starboard side. This convention is referred to as the NORTH-EAST-DOWN Right-handed coordinate system [1],[2],[8]. Given the definition of the coordinate reference frames, system variables can now be defined in terms of these reference frames.
-				\\ \\
-				In the Fe, we define vectors:
+			\begin{itemize}
+				\item
+					The Earth Frame: Fe
+				\item 
+					The Body Frame: Fb  
+			\end{itemize}
+			\space
+			Each frame consists of 3 orthogonal axes, \(Xe,Ye,Ze\) and \(Xb,Yb,Zb\) respectively, about and along which rotational and translational motion respectively can occur. Where Fe is fixed to the earth near the multirotor such that a flat earth assumption can be made and sustained [2] and Fb is attached to the vehicle, centred at the UAV’s centre of mass, which is free to move with respect to Fe. The usual convention for the axes representation is to have a fixed right-handed axes system with the positive Z axes pointing downwards, towards the earth when levelled or hovering, the positive X axis pointing forward and the positive y axis pointing towards right or starboard side. This convention is referred to as the NORTH-EAST-DOWN Right-handed coordinate system [1],[2],[8]. Given the definition of the coordinate reference frames, system variables can now be defined in terms of these reference frames.
+			\\ \\
+			In the Fe, we define vectors:
+			\\
+			\begin{equation}
+			\vec{El} = 
+			\begin{bmatrix}
+				x \\
+				y \\
+				z
+			\end{bmatrix}
+			\end{equation}
+			which represent the linear translational positions of Fb’s centre with respect to (w.r.t) Fe.
+			\\
+			\begin{equation}
+			\vec{Er} = 
+			\begin{bmatrix}
+				\phi \\
+				\theta \\
+				\psi
+			\end{bmatrix}
+			\end{equation}
+			which represent the angular rotation of Fb about all 3 axes respectively, w.r.t Fe. Which are also known as (roll, pitch, yaw) respectively.
+			\\
+			In the Fb, we define vectors:
+			\\
+			\begin{equation}
+			\vec{Bl} = 
+			\begin{bmatrix}
+				u \\
+				v \\
+				w
+			\end{bmatrix}
+			\end{equation}
+			which represents the linear velocity in each Fb axis respectively.
+			\\
+			\begin{equation}
+			\vec{Br} = 
+			\begin{bmatrix}
+				p \\
+				q \\
+				r
+			\end{bmatrix}
+			\end{equation}
+			which represents the angular velocity in each Fb axis respectively.
+			\\
+			From these 12 elemental variables and 4 elemental vectors all, subsequent states and motion can be derived and represented [1],[2],[4].
+			\\ \\
+			Taking the \(\phi, \theta, \psi\) representation, the rotational motions of Fb w.r.t Fe can be derived by looking at rotations about each axis individually. Decomposing any arbitrary motion and orientation in 3-D Euclidean space in this manner presents a sequence of three elemental rotations of each axes of Fb w.r.t its counterpart in Fe. These elemental rotation angles are known as $\emph{Euler angles}$  and rotations are represented as direction cosine matrices [1],[2]. These are:
+			\\
+			\begin{equation}
+			R_\psi = 
+			\begin{bmatrix}
+				C_\psi & S_\psi & 0  \\
+				-S_\psi & C_\psi & 0  \\
+				0 & 0 & 1
+			\end{bmatrix}
+			\end{equation}
+			\\
+			\begin{equation}
+			R_\theta = 
+			\begin{bmatrix}
+				C_\theta & 0 & -S_\theta \\
+				0 & 1 & 0 \\
+				S_\theta & 0 & C_\theta
+			\end{bmatrix}
+			\end{equation}
+			\\
+			\begin{equation}
+			R_\phi = 
+			\begin{bmatrix}
+				1 & 0 & 0 \\
+				0 & C_\phi & S_\phi  \\
+				0 & -S_\phi & C_\phi
+			\end{bmatrix}
+			\end{equation}
+			\space
+			These elemental rotations can by combined using the ZYX convention which multiplies them together in the specific sequence:
+			\[R^{-1} = R_\psi \cdot R_\theta \cdot R_\phi\]
+			to produce a matrix, the inverse of which, R, is able to map the translational motion of Fb unto Fe give any set of arbitrary \(\phi, \theta, \psi\) values. [1],[2],[3],[4],[5],[6],[7],[8],[9].
+			\\
+			\begin{equation}
+			R = 
+			\begin{bmatrix}
+				C_\theta C_\psi & -C_\theta S_\psi + S_\phi S_\theta C_\psi & -S_\phi S_\psi + C_\phi S_\theta C_\psi \\
+				C_\theta S_\psi &  C_\phi C_\psi + S_\phi S_\theta S_\psi   & -S_\phi C_\psi + C_\phi S_\theta S_\psi \\
+				-S_\theta       &  S_\phi C_\theta                          &  C_\phi C_\theta
+			\end{bmatrix}
+			\end{equation}
+			\\
+			Therefore: 
+			\[ \dot{\vec{El}} = R \cdot \vec{Bl} \]
+			\\
+			Which maps the linear velocities and accelerations in Fb to linear velocities and accelerations with respect to Fe.
+			\\
+			Similarly, to map the angular velocities and accelerations in Fb w.r.t Fe requires another transformation matrix, the inverse of which, T, is also derived from the manipulation of Euler angles [1],[4]. 
+			\\
+			\begin{equation}
+			T = 
+			\begin{bmatrix}
+				1 & S_\phi T_\theta & C_\phi T_\theta \\
+				0 & C_\phi & -S_\phi\\
+				0 & \frac{S_\phi}{C_\theta}  & \frac{C_\phi}{C_\theta}
+			\end{bmatrix}
+			\end{equation} 
+			\\
+			Therefore:
+			\\
+			\[\dot{\vec{Er}} = T \cdot \vec{Br} \]
+			\\
+			Where S, C, T, represent Sin, Cosine and Tan respectively.
+				
+			\section{Kinetics}
+			
+			Kinetics is the study of motion considering the forces and torques which cause the motion. As stated in the previous UAV subsection, the project looks at a Y6 hexarotor UAV which possesses 6 BLDC motors with propellers in a coaxial motor layout. Each motor propeller unit produces a thrust force, the collective effect of which can be summed and lumped together as a single force F, which means:
+			\\
+			\[\sum_{n = 1}^{n = 6}F_n\]
+			\\
+			where n denotes the motor index.
+			\\
+			Each motor propeller unit or propulsive unit, also produces a reaction torque. When a motor turns, in overcoming air resistance, a reactive force acts on the propeller in the direction opposite to the motor's rotation which produce a torque acting on the UAV body. These torques, $\tau$, can then also be summed together, meaning:
+			\\
+			\[\sum_{n = 1}^{n = 6}\tau_n\] 
+			\\
+			The co-axial configuration also ensures single point torque balancing [6]. meaning, so long as all rotors pair each produce the same torque, the net reactive torque produced is zero. The translational and angular motion of the Y6 hexarotor is controlled by thrust forces and torques produced by each motor. The main thrust is the sum of all rotors thrust, and rotational movement is generated by differences in individual  motor thrusts and torques [9].
+				
+			\subsection{Newton-Euler}
+				
+				The Multirotor 6-DOF rigid body kinetics and takes into account the mass, and the inertia of the body. These are described by differential equations, which are derived through the utilization of the Newton-Euler modelling convention which derives representations of systems dynamics through the application of first principles via newtons 2nd law of motion aggregating all forces and torques applied to the rigid body by its actuators and environment while observing the resultant accelerations produced.
 				\\
-				$$
-				\vec{El} = 
+				Resolving the Forces acting linearly on the UAV:
+				\\
+				\begin{equation}
+				M 
 				\begin{bmatrix}
-					x \\
-					y \\
-					z
+					\ddot{x} \\
+					\ddot{y} \\
+					\ddot{z}
 				\end{bmatrix}
-				$$
-				which represent the linear translational positions of Fb’s centre with respect to (w.r.t) Fe.
-				\\
-				$$
-				\vec{Er} = 
+				=
+				M 
 				\begin{bmatrix}
-					\phi \\
-					\theta \\
-					\psi
+					0 \\
+					0 \\
+					g
 				\end{bmatrix}
-				$$
-				which represent the angular rotation of Fb about all 3 axes respectively, w.r.t Fe. Which are also known as (roll, pitch, yaw) respectively.
-				\\
-				In the Fb, we define vectors:
-				\\
-				$$
-				\vec{Bl} = 
-				\begin{bmatrix}
-					u \\
-					v \\
-					w
-				\end{bmatrix}
-				$$
-				which represents the linear velocity in each Fb axis respectively.
-				\\
-				$$
-				\vec{Br} = 
-				\begin{bmatrix}
-					p \\
-					q \\
-					r
-				\end{bmatrix}
-				$$
-				which represents the angular velocity in each Fb axis respectively.
-				\\
-				From these 12 elemental variables and 4 elemental vectors all, subsequent states and motion can be derived and represented [1][2][4].
-				\\ \\
-				Taking the \(\phi, \theta, \psi\) representation, the rotational motions of Fb w.r.t Fe can be derived by looking at rotations about each axis individually. Decomposing any arbitrary motion and orientation in 3-D Euclidean space in this manner presents a sequence of three elemental rotations of each axes of Fb w.r.t its counterpart in Fe. These elemental rotation angles are known as $\emph{Euler angles}$  and rotations are represented as direction cosine matrices [1],[2]. These are:
-				\\
-				$$
-				R_\psi = 
-				\begin{bmatrix}
-					C_\psi & S_\psi & 0  \\
-					-S_\psi & C_\psi & 0  \\
-					0 & 0 & 1
-				\end{bmatrix}
-				$$
-				\\
-				$$
-				R_\theta = 
-				\begin{bmatrix}
-					C_\theta & 0 & -S_\theta \\
-					0 & 1 & 0 \\
-					S_\theta & 0 & C_\theta
-				\end{bmatrix}
-				$$
-				\\
-				$$
-				R_\phi = 
-				\begin{bmatrix}
-					1 & 0 & 0 \\
-					0 & C_\phi & S_\phi  \\
-					0 & -S_\phi & C_\phi
-				\end{bmatrix}
-				$$
-				\space
-				These elemental rotations can by combined using the ZYX convention which multiplies them together in the specific sequence:
-				\[R_\psi \cdot R_\theta \cdot R_\phi\]
-				to produce a matrix, the inverse of which, R, is able to map the translational motion of Fb unto Fe give any set of arbitrary \(\phi, \theta, \psi\) values. [1],[2],[3],[4],[5],[6],[7],[8],[9].
-				\\
-				$$
-				R = 
+				-
 				\begin{bmatrix}
 					C_\theta C_\psi & -C_\theta S_\psi + S_\phi S_\theta C_\psi & -S_\phi S_\psi + C_\phi S_\theta C_\psi \\
 					C_\theta S_\psi &  C_\phi C_\psi + S_\phi S_\theta S_\psi   & -S_\phi C_\psi + C_\phi S_\theta S_\psi \\
 					-S_\theta       &  S_\phi C_\theta                          &  C_\phi C_\theta
 				\end{bmatrix}
-				$$
-				\\
-				Therefore: 
-				\[ \dot{\vec{El}} = R \cdot \vec{Bl} \]
-				\\
-				Which maps the linear velocities and accelerations in Fb to linear velocities and accelerations with respect to Fe.
-				\\
-				Similarly, to map the angular velocities and accelerations in Fb w.r.t Fe requires another transformation matrix, the inverse of which, T, is also derived from the manipulation of Euler angles [1],[4]. 
-				\\
-				$$
-				T = 
 				\begin{bmatrix}
-					1 & S_\phi T_\theta & C_\phi T_\theta \\
-					0 & C_\phi & -S_\phi\\
-					0 & \frac{S_\phi}{C_\theta}  & \frac{C_\phi}{C_\theta}
+					\ddot{u} \\
+					\ddot{v} \\
+					\ddot{w} 
 				\end{bmatrix}
-				$$ 
+				-
+				\begin{bmatrix}
+					D_lxx & 0 & 0 \\
+					0 & D_lyy & 0 \\
+					0 & 0 & D_lzz
+				\end{bmatrix}
+				\begin{bmatrix}
+					\dot{x} \\
+					\dot{y} \\
+					\dot{z} 
+				\end{bmatrix}
+				\end{equation}  
+				\[ M \cdot \ddot{\vec{El}} = R \cdot \ddot{\vec{Bl}} - M \cdot \vec{g} - diag(D_l) \cdot \dot{\vec{El}}\] 
+				where M is mass, g is acceleration due to gravity acting in the vertical Ze axis plane, and \(D_l\) is a diagonal matrix of drag coefficients with aerodynamic drag acting directly proportional to velocity in the Fe frame.
 				\\
-				Therefore:
+				Given that all thrust forces from the motor act along the same Zb axis plane, and there are no other force acting in the other axes therefore, the resultant equation can be rewritten as:
 				\\
-				\[\dot{\vec{Er}} = T \cdot \vec{Br} \]
+				\begin{equation}
+				M 
+				\begin{bmatrix}
+					\ddot{x} \\
+					\ddot{y} \\
+					\ddot{z}
+				\end{bmatrix}
+				=
+				M 
+				\begin{bmatrix}
+					0 \\
+					0 \\
+					g
+				\end{bmatrix}
+				-
+				\begin{bmatrix}
+					C_\theta C_\psi & -C_\theta S_\psi + S_\phi S_\theta C_\psi & -S_\phi S_\psi + C_\phi S_\theta C_\psi \\
+					C_\theta S_\psi &  C_\phi C_\psi + S_\phi S_\theta S_\psi   & -S_\phi C_\psi + C_\phi S_\theta S_\psi \\
+					-S_\theta       &  S_\phi C_\theta                          &  C_\phi C_\theta
+				\end{bmatrix}
+				\begin{bmatrix}
+					0 \\
+					0 \\
+					\sum F_n 
+				\end{bmatrix}
+				-
+				\begin{bmatrix}
+					D_lxx & 0 & 0 \\
+					0 & D_1yy & 0 \\
+					0 & 0 & D_lzz
+				\end{bmatrix}
+				\begin{bmatrix}
+					\dot{x} \\
+					\dot{y} \\
+					\dot{z} 
+				\end{bmatrix}
+				\end{equation}  
+				Resolving the torques and forces acting angularly on the UAV in Fb:
 				\\
-				Where S, C, T, represent Sin, Cosine and Tan respectively.
-				
-			\subsection{Kinetics}
-			
-				Kinetics is the study of motion considering the forces and torques which cause the motion. As stated in the previous UAV subsection, the project looks at a Y6 hexarotor UAV which possesses 6 BLDC motors with propellers in a coaxial motor layout. Each motor propeller unit produces a thrust force, the collective effect of which can be summed and lumped together as a single force F, which means:
+				\begin{equation}
+				\begin{bmatrix}
+					Ixx & 0 & 0 \\
+					0 & Iyy & 0 \\
+					0 & 0 & Izz
+				\end{bmatrix} 
+				\begin{bmatrix}
+					\dot{p} \\
+					\dot{q} \\
+					\dot{r}
+				\end{bmatrix}
+				=
+				\begin{bmatrix}
+					A_p \\
+					A_q \\
+					A_r
+				\end{bmatrix}
+				-
+				\begin{bmatrix}
+					p \\
+					q \\
+					r 
+				\end{bmatrix}
+				\times
+				\begin{bmatrix}
+					Ixx & 0 & 0 \\
+					0 & Iyy & 0 \\
+					0 & 0 & Iyy
+				\end{bmatrix}
+				\begin{bmatrix}
+					p \\
+					q \\
+					r 
+				\end{bmatrix}
+				-
+				\begin{bmatrix}
+					D_rxx & 0 & 0 \\
+					0 & D_ryy & 0 \\
+					0 & 0 & D_rzz
+				\end{bmatrix}
+				\begin{bmatrix}
+					p \\
+					q \\
+					r
+				\end{bmatrix}
+				\end{equation} 
+				\[ I \cdot \dot{\vec{Br}} = A - C -  diag(D_r) \cdot \vec{Br}  \]
+				Where A is the vector of torques generated by the sum of motor forces and torques in each axis, C is the Corriolis matrix formed of the cross product between the angular velocity vector and the diagonal inertia Tensor I, and \(D_r\) is the diagonal matrix of drag coefficients acting against motion in each axis.. 
 				\\
-				\[\sum_{n = 1}^{n = 6}F_n\]
-				\\
-				where n denotes the motor index.
-				\\
-				Each motor propeller unit or propulsive unit, also produces a reaction torque. When a motor turns, in overcoming air resistance, a reactive force acts on the propeller in the direction opposite to the motor's rotation which produce a torque acting on the UAV body. These torques, $\tau$, can then also be summed together, meaning:
-				\\
-				\[\sum_{n = 1}^{n = 6}\tau_n\] 
-				\\
-				The co-axial configuration also ensures single point torque balancing [6]. meaning, so long as all rotors pair each produce the same torque, the net reactive torque produced is zero. The translational and angular motion of the Y6 hexarotor is controlled by thrust forces and torques produced by each motor. The main thrust is the sum of all rotors thrust, and rotational movement is generated by differences in individual  motor thrusts and torques [9].
-				
-				\subsection*{Newton-Euler}
-				
-					The Multirotor 6-DOF rigid body kinetics and takes into account the mass, and the inertia of the body. These are described by differential equations, which are derived through the utilization of the Newton-Euler modelling convention which derives representations of systems dynamics through the application of first principles via newtons 2nd law of motion aggregating all forces and torques applied to the rigid body by its actuators and environment while observing the resultant accelerations produced.
-					\\
-					Resolving the Forces acting linearly on the UAV:
-					\\
-					$$ 
-					M 
-					\begin{bmatrix}
-						\ddot{x} \\
-						\ddot{y} \\
-						\ddot{z}
-					\end{bmatrix}
-					=
-					M 
-					\begin{bmatrix}
-						0 \\
-						0 \\
-						g
-					\end{bmatrix}
-					-
-					\begin{bmatrix}
-						C_\theta C_\psi & -C_\theta S_\psi + S_\phi S_\theta C_\psi & -S_\phi S_\psi + C_\phi S_\theta C_\psi \\
-						C_\theta S_\psi &  C_\phi C_\psi + S_\phi S_\theta S_\psi   & -S_\phi C_\psi + C_\phi S_\theta S_\psi \\
-						-S_\theta       &  S_\phi C_\theta                          &  C_\phi C_\theta
-					\end{bmatrix}
-					\begin{bmatrix}
-						\ddot{u} \\
-						\ddot{v} \\
-						\ddot{w} 
-					\end{bmatrix}
-					-
-					\begin{bmatrix}
-						D_lxx & 0 & 0 \\
-						0 & D_lyy & 0 \\
-						0 & 0 & D_lzz
-					\end{bmatrix}
-					\begin{bmatrix}
-						\dot{x} \\
-						\dot{y} \\
-						\dot{z} 
-					\end{bmatrix}
-					$$ 
-					\[ M \cdot \ddot{\vec{El}} = R \cdot \ddot{\vec{Bl}} - M \cdot \vec{g} - diag(D_l) \cdot \dot{\vec{El}}\] 
-					where M is mass, g is acceleration due to gravity acting in the vertical Ze axis plane, and \(D_l\) is a diagonal matrix of drag coefficients with aerodynamic drag acting directly proportional to velocity in the Fe frame.
-					\\
-					Given that all thrust forces from the motor act along the same Zb axis plane, and there are no other force acting in the other axes therefore, the resultant equation can be rewritten as:
-					\\
-					$$ 
-					M 
-					\begin{bmatrix}
-						\ddot{x} \\
-						\ddot{y} \\
-						\ddot{z}
-					\end{bmatrix}
-					=
-					M 
-					\begin{bmatrix}
-						0 \\
-						0 \\
-						g
-					\end{bmatrix}
-					-
-					\begin{bmatrix}
-						C_\theta C_\psi & -C_\theta S_\psi + S_\phi S_\theta C_\psi & -S_\phi S_\psi + C_\phi S_\theta C_\psi \\
-						C_\theta S_\psi &  C_\phi C_\psi + S_\phi S_\theta S_\psi   & -S_\phi C_\psi + C_\phi S_\theta S_\psi \\
-						-S_\theta       &  S_\phi C_\theta                          &  C_\phi C_\theta
-					\end{bmatrix}
-					\begin{bmatrix}
-						0 \\
-						0 \\
-						\sum F_n 
-					\end{bmatrix}
-					-
-					\begin{bmatrix}
-						D_lxx & 0 & 0 \\
-						0 & D_1yy & 0 \\
-						0 & 0 & D_lzz
-					\end{bmatrix}
-					\begin{bmatrix}
-						\dot{x} \\
-						\dot{y} \\
-						\dot{z} 
-					\end{bmatrix}
-					$$ 
-					\\
-					Resolving the torques and forces acting angularly on the UAV in Fb:
-					\\
-					$$ 
-					\begin{bmatrix}
-						Ixx & 0 & 0 \\
-						0 & Iyy & 0 \\
-						0 & 0 & Izz
-					\end{bmatrix} 
-					\begin{bmatrix}
-						\dot{p} \\
-						\dot{q} \\
-						\dot{r}
-					\end{bmatrix}
-					=
-					\begin{bmatrix}
-						A_p \\
-						A_q \\
-						A_r
-					\end{bmatrix}
-					-
-					\begin{bmatrix}
-						p \\
-						q \\
-						r 
-					\end{bmatrix}
-					\times
-					\begin{bmatrix}
-						Ixx & 0 & 0 \\
-						0 & Iyy & 0 \\
-						0 & 0 & Iyy
-					\end{bmatrix}
-					\begin{bmatrix}
-						p \\
-						q \\
-						r 
-					\end{bmatrix}
-					-
-					\begin{bmatrix}
-						D_rxx & 0 & 0 \\
-						0 & D_ryy & 0 \\
-						0 & 0 & D_rzz
-					\end{bmatrix}
-					\begin{bmatrix}
-						p \\
-						q \\
-						r
-					\end{bmatrix}
-					$$ 
-					\[ I \cdot \dot{\vec{Br}} = A - C -  diag(D_r) \cdot \vec{Br}  \]
-					\\
-					Where A is the vector of torques generated by the sum of motor forces and torques in each axis, C is the Corriolis matrix formed of the cross product between the angular velocity vector and the diagonal inertia Tensor I, and \(D_r\) is the diagonal matrix of drag coefficients acting against motion in each axis.. 
-					\\
-					The A vector breaks down to:
-					\\
-					\[ A_p = L_1 ((F_1+F_2) - (F_3+F_4)) \]
-					\\
-					\[ A_q = L_2 ((F_1+F_2+F_3+F_4) - L_3 (F_5+F_6)) \]
-					\\
-					\[ A_r = \sum_{n = 1}^{n = 6}\tau_n \]
-					Where L is the perpendicular distance from each motor group to the centre of mass.
+				The A vector breaks down to:
+				\begin{equation}
+				 A_p = L_1 ((F_1+F_2) - (F_3+F_4))
+				\end{equation}
+				\begin{equation}
+				 A_q = L_2 ((F_1+F_2+F_3+F_4) - L_3 (F_5+F_6)) 
+				\end{equation}
+				\begin{equation}
+				 A_r = \sum_{n = 1}^{n = 6}\tau_n 
+				\end{equation}
+				Where L is the perpendicular distance from each motor group to the centre of mass.
 					
-					\subsection*{Inertia}
+				\subsection{Asymmetry}
 					
-						\begin{figure}[h!]
-							\centering
-							\includegraphics[width=0.6\linewidth]{UAVBodyFrame.png}
-							\caption{UAV with Body Frame}
-							\label{fig:uavbodyframe}
-						\end{figure}
+					\begin{figure}[h!]
+						\centering
+						\includegraphics[width=0.6\linewidth]{UAVBodyFrame.png}
+						\caption{UAV with Body Frame}
+						\label{fig:uavbodyframe}
+					\end{figure}
 						
-						Due to the asymmetry of the Y6 hexarotor, mass is not even distributed across the UAV frame. This creates a particular imbalance of inertia about the centre of mass, which is the centre of all rotation in Fb. This leads to a case where I has off diagonal elements[10]. i.e:
-						\\
-					    $$ 
-						 I = 
-						 \begin{bmatrix}
-							 Ixx & Ixy & Ixy \\
-							 Iyx & Iyy & Iyz \\
-							 Izx & Izy & Izz
-						 \end{bmatrix}
-						$$
-						 \\
-						 This creates a situation whereby Fb as shown in Figure 5, is inaccurate and instead, is transposed to some other orientation, meaning rotation about the centre mass will occur in an oblong manner.
-						 \\
-						 To correct this, it is possible to adjust the inertia tensor by deriving some diagonalising operation such as performing an Eigen vector decomposition [10], this transformation will then need to be applied to all Inertia dependant terms in the angular motion calculation.
-						 \\  
-						 However, for the purpose of this investigation, it is possible to operate under the assumption that the system is symmetrical, as presented by a purely diagonal inertial tensor. This is due to the off-diagonal terms in the inertia matrix being far lower in magnitude than the diagonal terms themselves, meaning that the transposed reference frame does not differ too significantly from assumed symmetrical axes, thus any deviations can be reasonably neglected [10].
+					Due to the asymmetry of the Y6 hexarotor, mass is not even distributed across the UAV frame. This creates a particular imbalance of inertia about the centre of mass, which is the centre of all rotation in Fb. This leads to a case where I has off diagonal elements[10]. i.e:
+					\\
+					$$ 
+					\begin{bmatrix}
+						Ixx & Ixy & Ixy \\
+						Iyx & Iyy & Iyz \\
+						Izx & Izy & Izz
+					\end{bmatrix}
+					$$
+					\\
+					This creates a situation whereby Fb as shown in Figure 3.3, is inaccurate and instead, is transposed to some other orientation, meaning rotation about the centre mass will occur in an oblong manner.
+					\\
+					To correct this, it is possible to adjust the inertia tensor by deriving some diagonalising operation such as performing an Eigen vector decomposition [10], this transformation will then need to be applied to all Inertia dependant terms in the angular motion calculation.
+					\\  
+					However, for the purpose of this investigation, it is possible to operate under the assumption that the system is symmetrical, as presented by a purely diagonal inertial tensor. This is due to the off-diagonal terms in the inertia matrix being far lower in magnitude than the diagonal terms themselves, meaning that the transposed reference frame does not differ too significantly from assumed symmetrical axes, thus any deviations can be reasonably neglected [10].
 			
-			\subsection{Actuator Dynamics}
+		\section{Actuator Dynamics}
 			
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.4\linewidth]{BLDC.png}
-					\caption{A2212/13T 1000KV BLDC Motor}
-					\label{fig:BLDC}
-				\end{figure}
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.5\linewidth]{BLDC.png}
+				\caption{A2212/13T 1000KV BLDC Motor}
+				\label{fig:BLDC}
+			\end{figure}
 				
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.5\linewidth]{TestStand1.jpg}
-					\caption{Motor Test Stand}
-					\label{fig:motorteststand}
-				\end{figure}
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth]{TestStand1.jpg}
+				\caption{Motor Test Stand}
+				\label{fig:motorteststand}
+			\end{figure}
 				
-				The thrust forces and torques acting on the multirotor UAV are primarily generated by propulsion units consisting of a BLDC motor, shown in Figure 6, an ECS and propeller. In order to produce a useful and fully developed systems model, the characteristics of the propulsive units must be known. This can either be done via first principles analysis looking at the mechanical, electrical and aerodynamic properties of each individual component, before calculating and then applying the results together in series to produce a high order, high fidelity model[17]. 
-				\\ \\
-				However taking this approach in many cases is unnecessary. This is due to being able to derive a lumped parameter model, which views the sum total of all the individual components as a single system with singular dynamics. Therefore, using system's response analysis and computational methods such as data fitting, it is possible via experimental systems identification to generate a lower order, minimum realisation model of sufficient fidelity [9],[12],[15],[16]. The systems identification approach involves the derivation of lumped parameter linear input-output models, between input PWM signal width and the output angular velocity, torque and thrust forces respectively using a motor test stand, shown in Figure 7, which consists of a load cell, for measuring forces and torques as well as an electronic revolutions per minute (RPM) sensor.
-				\\
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.8\linewidth]{InputStepData.png}
-					\caption{Motor Input Step Data}
-					\label{fig:inputstepdata}
-				\end{figure}
-				\\
-				Using the Test stand, input-output PWM to RPM data is collected. Shown in Figure 8, is the response of the propulsive unit to a step input of 500$\mu s$. This data was then passed through the MATLAB system identification application where in order to account for potential delays in the input response, a first order transfer function model of the form:
-				\\
-				\[ \omega_n(s) = \frac{K_u}{\tau_m s + 1} \mu_n(s) \]
-				\\
-				is fit to the data where, $K_u$, is motor gain and $\tau_m$ is the response time constant, $\mu_n$ is the input PWM signal width and $\omega_n$ is the angular velocity. Figure 9 shows the response of the identified model to the same step of 500$\mu s$.
-				\\
-				This transfer function can then be reformulated into a differential equation
-				\[\dot{\omega_n} = -\frac{1}{\tau_m}\omega_n	 + \frac{K_u}{\tau_m}\mu_n\]
-				\\
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.8\linewidth]{ModelStep.png}
-					\caption{First Order Model Step Response}
-					\label{fig:modelstep}
-				\end{figure}
-				\\
-				it is important to note that due to filtration present in the ESCs, the response time constant is sensitive to the frequency of the input PWM signal, therefore, throughout the investigation a frequency of 400 Hz is maintained.
-				\\ \\
-				Similarly, using the test stand, as shown in Figure 10 and Figure 11, data showing the relationship between the force and torque produced by the propulsion unit against generated angular velocity is shown. 2 quadratic models of the form: 
-				\\
-				\[ F_n = K_a \omega_n^2 + K_b\omega_n \]
-				\[\tau_n = K_\tau \omega_n^2 \]
-				\\
-				respectively are then fit to the data where $\omega$ is the angular velocity of the motor, $K_a$, $K_b$ and $K_\tau$ are the force and torque coefficients respectively derived from the quadratic models.
-				
-				\newpage
-				
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.8\linewidth]{ThrustData.png}
-					\caption{Thrust against RPM}
-					\label{fig:thrustdata}
-				\end{figure}
-				\begin{figure}[h!]
-					\centering
-					\includegraphics[width=0.8\linewidth]{TorqueData.png}
-					\caption{Torque against RPM}
-					\label{fig:torquedata}
-				\end{figure}
+			The thrust forces and torques acting on the multirotor UAV are primarily generated by propulsion units consisting of a BLDC motor, shown in Figure 3.4, an ECS and propeller. In order to produce a useful and fully developed systems model, the characteristics of the propulsive units must be known. This can either be done via first principles analysis looking at the mechanical, electrical and aerodynamic properties of each individual component, before calculating and then applying the results together in series to produce a high order, high fidelity model as is presented in [17]. 
+			\\ \\
+			However taking this approach in many cases is unnecessary. This is due to being able to derive a lumped parameter model, which views the sum total of all the individual components as a single system with singular dynamics. Therefore, using system's response analysis and computational methods such as data fitting, it is possible via experimental systems identification to generate a lower order, minimum realisation model of sufficient fidelity [9],[12],[15],[16]. The systems identification approach involves the derivation of lumped parameter linear input-output models, between input PWM signal width and the output angular velocity, torque and thrust forces respectively using a motor test stand, shown in Figure 3.5, which consists of a load cell, for measuring forces and torques as well as an electronic revolutions per minute (RPM) sensor.
+			\\
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth]{InputStepData.png}
+				\caption{Motor Input Step Data}
+				\label{fig:inputstepdata}
+			\end{figure}
+			\\
+			Using the Test stand, input-output PWM to RPM data is collected. Shown in Figure 3.6, is the response of the propulsive unit to a step input of 500$\mu s$. This data was then passed through the MATLAB system identification application where in order to account for potential delays in the input response, a first order transfer function model of the form:
+			\\
+			\[ \frac{K_u}{\tau_m s + 1} \]
+			\\
+			This transfer function can then be reformulated into a differential equation
+			\begin{equation}
+			\dot{\omega_n} = -\frac{1}{\tau_m}\omega_n	 + \frac{K_u}{\tau_m}\mu_n
+			\end{equation}
+			This fit to the data where, $K_u$, is motor gain and $\tau_m$ is the response time constant, $\mu_n$ is the input PWM signal width and $\omega_n$ is the angular velocity. Figure 3.7 shows the response of the identified model to the same step of 500$\mu s$.
 			
-			\newpage
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth]{ModelStep.png}
+				\caption{First Order Model Step Response}
+				\label{fig:modelstep}
+			\end{figure}
 			
-			\subsection*{Non-Linear Model}
+			It is important to note that due to filtration present in the ESCs, the response time constant is sensitive to the frequency of the input PWM signal, therefore, throughout the investigation a frequency of 400 Hz is maintained. Similarly, using the test stand, as shown in Figure 3.8 and Figure 3.9, data showing the relationship between the force and torque produced by the propulsion unit against generated angular velocity is shown. 2 quadratic models of the form: 
+			\begin{equation}
+			F_n = K_a \omega_n^2 + K_b\omega_n
+			\end{equation}
+			\begin{equation}
+			\tau_n = K_\tau \omega_n^2
+			\end{equation}
+			respectively are then fit to the data where $\omega$ is the angular velocity of the motor, $K_a$, $K_b$ and $K_\tau$ are the force and torque coefficients respectively derived from the quadratic models. Due to the complex aerodynamic interactions from the overlapping air flow between the coaxial pairs, the actual thrust force produced is lower that the sum of the two propulsion units if taken individually [14]. This loss is represented by a gain $K_w$ that is less than 1 and applied to all the propulsion units on top.	
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth]{ThrustData.png}
+				\caption{Thrust against RPM}
+				\label{fig:thrustdata}
+			\end{figure}
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=0.7\linewidth]{TorqueData.png}
+				\caption{Torque against RPM}
+				\label{fig:torquedata}
+			\end{figure}
+		
+		\newpage
+			
+		\section{Non-Linear Model}
 			
 			Going through the modelling process presents the following non-linear mathematical model describing the dynamics of the Y6 hexarotor UAV. which will be used to produce a simulation of the system in MATLAB/Simulink.
 			\\
@@ -789,10 +811,10 @@
 			r 
 			\end{bmatrix}
 			$$ 
-			
-			\newpage
 		
-		\subsection{Linearisation}
+		\newpage
+		
+		\section{Linearisation}
 				
 			As with the UAV dynamics presented in the previous subsection, the majority of real world systems are non-linear, in that the states of the systems evolve in some fashion that does not satisfy the criteria for linearity. However, the majority of techniques developed over the decades in systems and control theory have been developed for application to and analysis of linear systems. Therefore in order to utilise these techniques in the presence of Non-linearities it is pertinent to devise some means, a least in a limited sense, of operating with Non-linear systems as if they were linear.[11] one means of accomplishing this is through the application of the  Jacobian process linearisation of non-linear systems about specific operating or equilibrium points.[11],[18]. First however, several assumptions need to be made to reduce the model complexity making it more amicable to linearisation. 
 				
@@ -814,7 +836,7 @@
 			\end{itemize}
 			\space
 			This reduces the model down to:
-			$$ 
+			\begin{equation}
 				M 
 				\begin{bmatrix}
 				\ddot{x} \\
@@ -839,8 +861,8 @@
 				0 \\
 				\sum F_n 
 				\end{bmatrix}
-			$$
-			$$ 
+			\end{equation} 
+			\begin{equation} 
 				\begin{bmatrix}
 				Ixx & 0 & 0 \\
 				0 & Iyy & 0 \\
@@ -857,21 +879,40 @@
 				L_2 ((F_1+F_2+F_3+F_4) - L3 (F_5+F_6)) \\
 				\sum_{n = 1}^{n = 6}\tau_n
 				\end{bmatrix}
-			$$ 
-				\[\dot{\omega_n} = -\frac{1}{\tau_m}\omega_n	 + \frac{K_u}{\tau_m}\mu_n\]
-				\[ F_n = K_a \omega_n^2\]
-				\[\tau_n = K_\tau \omega_n^2 \]
+			\end{equation}
+			\begin{equation} 
+				\dot{\omega_n} = -\frac{1}{\tau_m}\omega_n	 + \frac{K_u}{\tau_m}\mu_n
+			\end{equation}
+			\begin{equation} 
+				F_n = K_a \omega_n^2
+			\end{equation}
+			\begin{equation} 
+				\tau_n = K_\tau \omega_n^2
+			\end{equation}
 				\\
 				Multiplying out the matrices and collecting terms produces 6 distinct 2nd order non-linear Differential and 1 linear differential equation replicated for each motor representing the motor dynamics:
 				\\
-				\[\ddot{x} = \frac{\sum_{n=1}^{n=6}K_a \omega_n^2}{M}C\phi S\theta C\psi  + \frac{\sum_{n=1}^{n=6}K_a \omega_n^2}{M}S\phi S\psi \]
-				\[\ddot{y} = \frac{\sum_{n=1}^{n=6}K_a \omega_n^2}{M}C\phi S\theta C\psi  - \frac{\sum_{n=1}^{n=6}K_a \omega_n^2}{M}S\phi C\psi \]
-				\[\ddot{z} = g - \frac{\sum_{n=1}^{n=6}K_a \omega_n^2}{M}C\phi C\theta \]
-				\[\ddot{\phi} = \frac{L_1}{Ixx} ((K_a \omega_1^2+K_a \omega_2^2 +) - (K_a \omega_3^2+K_a \omega_4^2)) \]
-				\[\ddot{\theta} = \frac{L_2}{Iyy} ((K_a \omega_1^2+K_a \omega_2^2+K_a \omega_3^2+K_a \omega_4^2) - \frac{L3}{Iyy} (K_a \omega_5^2+K_a \omega_6^2)) \]
-				\[\ddot{\psi} = \frac{\sum_{n = 1}^{n = 6}K_\tau \omega_n^2}{Izz} \]
-				\[\dot{\omega_n} = -\frac{1}{\tau_m}\omega_n	 + \frac{K_u}{\tau_m}\mu_n\]
-				
+			\begin{equation}
+				\ddot{x} = \frac{\sum_{n=1}^{n=6}K_a \omega_n^2}{M}C\phi S\theta C\psi  + \frac{\sum_{n=1}^{n=6}K_a \omega_n^2}{M}S\phi S\psi
+			\end{equation}
+			\begin{equation}
+				\ddot{y} = \frac{\sum_{n=1}^{n=6}K_a \omega_n^2}{M}C\phi S\theta C\psi  - \frac{\sum_{n=1}^{n=6}K_a \omega_n^2}{M}S\phi C\psi
+			\end{equation}
+			\begin{equation}
+				\ddot{z} = g - \frac{\sum_{n=1}^{n=6}K_a \omega_n^2}{M}C\phi C\theta
+			\end{equation}
+			\begin{equation}
+				\ddot{\phi} = \frac{L_1}{Ixx} ((K_a \omega_1^2+K_a \omega_2^2 +) - (K_a \omega_3^2+K_a \omega_4^2))
+			\end{equation}
+			\begin{equation}
+				\ddot{\theta} = \frac{L_2}{Iyy} ((K_a \omega_1^2+K_a \omega_2^2+K_a \omega_3^2+K_a \omega_4^2) - \frac{L3}{Iyy} (K_a \omega_5^2+K_a \omega_6^2))
+			\end{equation}
+			\begin{equation}
+				\ddot{\psi} = \frac{\sum_{n = 1}^{n = 6}K_\tau \omega_n^2}{Izz}
+			\end{equation}
+			\begin{equation}
+				\dot{\omega_n} = -\frac{1}{\tau_m}\omega_n	 + \frac{K_u}{\tau_m}\mu_n
+			\end{equation}
 				Here we can define the full state vector:
 				$$
 				X =
@@ -887,7 +928,7 @@
 				\end{bmatrix}
 				$$
 				
-				\subsection*{Jacobian Linearisation}
+				\subsection{Jacobian Method}
 					
 					In order to linearise the system equations, equilibrium points must be defined. These are the set of states and input values for which the system is stationary i.e:
 					\[\dot{X} = f(X_e,\mu_e) = 0\]
@@ -901,41 +942,41 @@
 					$$
 					\mu_e = 
 					\begin{bmatrix}
-						\mu_e1,\mu_e1,\mu_e1,\mu_e1,\mu_e1,\mu_e1
+						\mu_e1,\mu_e2,\mu_e3,\mu_e4,\mu_e5,\mu_e6
 					\end{bmatrix}
 					$$
 					Following this, the system states are redefined in terms of deviations from these equilibrium points:
 					\[\bar{X} = X - X_e\] 
 					\[\bar{\mu} = \mu - \mu_e\] 
 					These deviation variables are then substituted back into the dynamics equations and a first order Taylor's series expansion is performed. where:
-					\[
+					\begin{equation}
 						\dot{\bar{X}} = f(\bar{X},\bar{\mu}) + \frac{\partial f}{\partial X}\bigg\vert_{\mu = \mu_e}^{X = X_e} + \frac{\partial f}{\partial \mu}\bigg\vert_{\mu = \mu_e}^{X = X_e}
-					\]
+					\end{equation}
 					and:
-					\[ f(\bar{X},\bar{\mu_e}) = 0 \]
+					\[ f(\bar{X},\bar{\mu}) = 0 \]
 					These differential equations approximately govern the deviation variables, and as long as they remain small, this presents a linear, time-invariant, differential equation, as the derivatives of $\bar{X}$ are now linear combinations of the deviation states and the deviation inputs, $\bar{\mu}$ [11]. 
 					\\
-					Finally, the Linear State-Space model emerges following:
+					Finally, the Linear Continuous-Time State-Space model emerges following:
 					\\
-					\[
+					\begin{equation}
 						A = \frac{\partial f}{\partial X}\bigg\vert_{\mu = \mu_e}^{X = X_e}, \in R ^{n\times n}
-					\] 
+					\end{equation}
 					\\
-					\[ 
+					\begin{equation}
 						B = \frac{\partial f}{\partial \mu}\bigg\vert_{\mu = \mu_e}^{X = X_e} , \in R ^{n\times m}
-					\]
+					\end{equation} 
 					Where n is the number of states, m the number of inputs, A the n-by-n dynamics matrix and B the n-by-m input matrix.
 					\\ \\
 					Thus:
 					\\
 					\setcounter{MaxMatrixCols}{15}
 					A = 
-					$$
+					\begin{equation}
 					\begin{bmatrix}
 						0&1&0&0&0&0&0&0&0&0&0&0&0&0\\
-						0&0&0&0&0&0&0&0&\frac{2K_a\omega_e1}{M}&\frac{2K_wK_a\omega_e2}{M}&\frac{2K_a\omega_e3}{M}&\frac{2KwKa\omega_e4}{M}&\frac{2KwKa\omega_e5}{M}&\frac{2KwKa\omega_e6}{M}\\
+						0&0&0&0&0&0&0&0&\frac{2K_a\omega_e1}{M}&\frac{2K_wK_a\omega_e2}{M}&\frac{2K_a\omega_e3}{M}&\frac{2K_wK_a\omega_e4}{M}&\frac{2K_wK_a\omega_e5}{M}&\frac{2K_wK_a\omega_e6}{M}\\
 						0&0&0&1&0&0&0&0&0&0&0&0&0&0\\
-						0&0&0&0&0&0&0&0&\frac{2L_1Kthrust\omega_e1}{Ixx}&\frac{2L_1K_wK_a\omega_e2}{Ixx}& \frac{-2L_1K_a\omega_e3}{Ixx}&\frac{-2L_1K_wK_a\omega_e4}{Ixx}&0&0\\
+						0&0&0&0&0&0&0&0&\frac{2L_1K_a\omega_e1}{Ixx}&\frac{2L_1K_wK_a\omega_e2}{Ixx}& \frac{-2L_1K_a\omega_e3}{Ixx}&\frac{-2L_1K_wK_a\omega_e4}{Ixx}&0&0\\
 						0&0&0&0&0&1&0&0&0&0&0&0&0&0\\
 						0&0&0&0&0&0&0&0&\frac{2L_1K_a*\omega_e}{Iyy}&\frac{2L_2K_wK_a\omega_e2}{Iyy}& \frac{2L_2K_a\omega_e3}{Iyy}&\frac{2L_2K_wK_a\omega_4}{Iyy}&\frac{-2L_3K_a*\omega_e5}{Iyy}&\frac{-2L_3K_wK_a\omega_e6}{Iyy}\\
 						0&0&0&0&0&0&0&1&0&0&0&0&0&0\\
@@ -947,10 +988,10 @@
 						0&0&0&0&0&0&0&0&0&0&0&0&\frac{-1}{\tau_m}&0\\
 						0&0&0&0&0&0&0&0&0&0&0&0&0&\frac{-1}{\tau_m}
 					\end{bmatrix}
-					$$
+					\end{equation}
 					\\
 					B = 
-					$$
+					\begin{equation}
 					\begin{bmatrix}
 					0&0&0&0&0&0\\
 					0&0&0&0&0&0\\
@@ -960,51 +1001,664 @@
 					0&0&0&0&0&0\\
 					0&0&0&0&0&0\\
 					0&0&0&0&0&0\\
-					\frac{K_u}{Mtau}&0&0&0&0&0\\
-					0&\frac{K_u}{Mtau}&0&0&0&0\\
-					0&0&\frac{K_u}{Mtau}&0&0&0\\
-					0&0&0&\frac{K_u}{Mtau}&0&0\\
-					0&0&0&0&\frac{K_u}{Mtau}&0\\
-					0&0&0&0&0&\frac{K_u}{Mtau}
+					\frac{K_u}{\tau_m}&0&0&0&0&0\\
+					0&\frac{K_u}{\tau_m}&0&0&0&0\\
+					0&0&\frac{K_u}{\tau_m}&0&0&0\\
+					0&0&0&\frac{K_u}{\tau_m}&0&0\\
+					0&0&0&0&\frac{K_u}{\tau_m}&0\\
+					0&0&0&0&0&\frac{K_u}{\tau_m}
 					\end{bmatrix}
-					$$
+					\end{equation}
+					Where $n = 14$ and $m = 6$.
+			
+			\section{Summary}
+				
+				This Chapter:
+				\\
+				\begin{itemize}
+					\item 
+				 		Introduced and defined the UAV system under consideration.
+				 	\item 
+				 		Discussed and derived the mathematical equations describing the non-linear behaviour of the UAV, from both the kinematics and kinetics representations while implementing Euler angles, the Newton-Euler convention, and describing their relevance to modelling. 
+				 	\item
+				 		Presented the means by which through experimental identification of the key aspects that define the actuation forces may be derived and discussed the relevance of mass distribution considerations.
+				 	\item
+				 		Presented a means of converting the derived non-linear dynamics into a form which could be utilised in the development of linear control systems, then developed and presented said linearised model.
+				\end{itemize}
+			 
 			\newpage
 			
-			\begin{tabular}{ |p{2cm}||p{10cm}|p{3cm}|p{3cm}|  }
+			\begin{table}[h!]
+			\centering
+			\begin{tabular}{ |p{1.5cm}||p{9.5cm}|p{5cm}|  }
 				\hline
 				\multicolumn{3}{|c|}{Model Parameters} \\
 				\hline
 				Character& Name  & Value  \\
 				\hline
-				F        &  Thrust Force                                         & AFG\\
-				$\tau$   &  Torque                                               & ALA\\
-				M        &  Mass                                                 & ALB\\
-				Ixx      &  Inertia about Xb                                     & DZA\\
-				Iyy      &  Inertia about Yb                                     & ASM\\
-				Izz      &  Inertia about Zb                                     & AND\\
-				$D_lxx$  &  Translational Drag Coefficient in Xe                 & AGO\\
-				$D_lyy$  &  Translational Drag Coefficient in Ye                 & AGO\\
-				$D_lzz$  &  Translational Drag Coefficient in Ze                 & AGO\\
-				$D_rxx$  &  Angular Drag Coefficient in Xb                       & AGO\\
-				$D_ryy$  &  Angular Drag Coefficient in Yb                       & AGO\\
-				$D_rzz$  &  Angular Drag Coefficient in Zb                       & AGO\\
-				$L_1$    &  Lateral Length From Motor 1 To Center Of Mass        & AGO\\
-				$L_2$    &  Longitudinal Length From Motor 1 To Center Of Mass   & AGO\\
-				$L_3$    &  Longitudinal Length From Motor 5 To Center Of Mass   & AGO\\
-				$K_u$    &  Motor RPM Gain                                       & AGO\\
-				$\tau_m$ &  Motor RPM Time Constant                              & AGO\\
-				$K_a$    &  Quadratic RPM to Force Gain                          & AGO\\
-				$K_b$    &  Linear RPM to Force Gain                             & AGO\\
-				$K_\tau$ &  Quadratic RPM to Torque Gain                         & AGO\\
+				M        &  Mass                                                 & 1.455882 Kg\\
+				Ixx      &  Inertia about Xb                                     & 0.014$N/m^2$\\
+				Iyy      &  Inertia about Yb                                     & 0.028$N/m^2$\\
+				Izz      &  Inertia about Zb                                     & 0.038$N/m^2$\\
+				$D_lxx$  &  Translational Drag Coefficient in Xe                 & 0.01212\\
+				$D_lyy$  &  Translational Drag Coefficient in Ye                 & 0.01212\\
+				$D_lzz$  &  Translational Drag Coefficient in Ze                 & 0.0648\\
+				$D_rxx$  &  Angular Drag Coefficient in Xb                       & 0\\
+				$D_ryy$  &  Angular Drag Coefficient in Yb                       & 0\\
+				$D_rzz$  &  Angular Drag Coefficient in Zb                       & 0\\
+				$L_1$    &  Lateral Length From Motor 1 To Center Of Mass        & 0.19 m\\
+				$L_2$    &  Longitudinal Length From Motor 1 To Center Of Mass   & 0.18 m\\
+				$L_3$    &  Longitudinal Length From Motor 5 To Center Of Mass   & 0.30 m\\
+				$K_u$    &  Motor RPM Gain                                       & $515.5 \times \tau_m$\\
+				$\tau_m$ &  Motor RPM Time Constant                              & $\frac{1}{44.22}$\\
+				$K_w$    &  Quadratic RPM to Force Gain                          & 0.85\\
+				$K_a$    &  Quadratic RPM to Force Gain                          & 1.812e-07\\
+				$K_b$    &  Linear RPM to Force Gain                             & 0.0007326\\
+				$K_\tau$ &  Quadratic RPM to Torque Gain                         & 7.708e-10\\
+				$\mu_e$  &  Equilibrium Input values                         	 & (176.1, 178.5, 177.2, 177.6, 202.2, 202.4)\\
+				$\omega_e$& Equilibrium Motor Angular Velocities                 & $\mu_e \times K_u $\\
+				$g$      & Acceleration Due To Gravity                           & 9.81 \\
+				
 				\hline
 			\end{tabular}
+			\caption{Table of Model Parameters}
+			\label{table:modelparameters}
+			\end{table}
 			
 			\newpage
-	\section{Linear Quadratic Gaussian Control}
+			
+	\chapter{Linear Quadratic Gaussian and Model Predictive Control}
 		
+		\section{Introduction}
+		
+			The objective of this investigation is to devise control systems capable of taking the UAV to a state of stable hovering conditions. The purpose of designing and implementing control systems is to reject or minimise the effects of disturbance to the system, as well as change the characteristics of the system so as to meet performance requirements. Therefore in order to accomplish this with the UAV model derived in chapter 3, this investigation seeks to develop both LQG and an LQ-MPC control systems. These are both advanced linear model based controller that are extremely powerful in their application and are able to nominally provide stability guarantees with wide margins. In order to develop and then implement these the following themes will be explored:
+		 
+			\begin{enumerate}
+				\item 
+					Discretization
+				\item 
+					Model Analysis
+				\item 
+					LQG
+				\item
+					LQ-MPC
+			\end{enumerate}
+		
+		\section{Discretization}
+			The Linearised model obtained in chapter 3 is derived in the continuous-time domain. In order to design control systems which can be implemented unto a digital embedded microprocessor, it must be in discrete-time domain.
+			\\
+			This can be done either by designing the control systems in the continuous-time domain then converting the resulting continuous control laws into discrete ones, or by transforming the entire continuous-time system model to the discrete-time domain then designing the control law using the discrete-time system model [18]. This investigation utilises the latter method.
+			\\
+			To convert a state space model of form:
+			\[
+				\dot{X(t)} = AX(t) + B\mu(t)
+			\]
+			Produces:
+			\begin{equation}
+				X(k+1) = A_{dt}X(k) + B_{dt}\mu(k)
+			\end{equation}
+			where:
+			\begin{equation}
+				A_{dt} = e^{AT} 
+			\end{equation}
+			\begin{equation}
+				B_{dt} = A^{-1}(e^{AT} - I)B
+			\end{equation}
+			\space
+			T is the discretization sample time, k is the time increment, and I an identity matrix of sufficient dimension.
+			
+		\section{Model Analysis}
+			
+			Model-Based feedback control systems design utilises insights gained from having the system model on hand to inform the design process and determine how best adjustments should be made. In order to accomplish this, the system is first thoroughly analysed and understood. Given the linear state state-space model developed at the end of chapter 3, the discretization performed in previous section, along with the values presented in the Table 3.1, it is possible to use linear system analysis techniques to arrive at key insight such as:
+			
+			\begin{itemize}
+				\item 
+					Stability
+				\item 
+					Reachability
+				\item
+					Observability
+			\end{itemize}
+		
+			\subsection{Stability}
+			
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.8\linewidth]{DiscreteSystemPoles.png}
+					\caption{Open-Loop Eigenvalues}
+					\label{fig:discretesystemeigenvalues}
+				\end{figure}
+			
+				Stability theory plays a key role in the design of control. There are different kinds of stability problems that arise in the study of dynamical systems. The stability of systems about equilibrium operating points is usually characterised in the Lyapunov sense where an equilibrium point is said to be stable where all solutions starting nearby the equilibrium points stay nearby for all time, otherwise the system is said to be unstable [13],[18]. 
+				\\
+				This definition of stability can be further specified to define stability in the asymptotic sense, where a system is said to be asymptotically stable if all solutions starting nearby the equilibrium points not only stays nearby, but also tend to the equilibrium point as time goes to infinity [13],[18].
+				\\
+				For linear state-space models, stability can be assertained from the locations of the eigenvalues, $\lambda$, of the $A_{dt}$ matrix, This is know as Lyapunov's indirect method [13] where:
+				
+				\begin{equation}
+					det|A_{dt} - \lambda I| = 0
+				\end{equation}
+				\space
+				Figure 4.1 reveals the presence 6 eigenvalues with a value less than 1, and 8 eigenvalues with a value of 1. For discrete-time systems, stability can be said to be asymptotic if all eigenvalues are strictly within the unit circle, Lyapunov if all eigenvalues are within or on the unit circle, and unstable otherwise [18]. Therefore the linear systems model can be said to be stable in the sense of Lyapunov. This implies also that the non-linear systems model is locally stable in the sense of Lyapunov about the equilibrium points $X_e$.
+				\\
+				However due to real world disturbances such as model uncertainty, sensor noise and external wind disturbances, the system will not remain at the point of equilibrium save for the intervention of some control law to reject the effect of these disturbances. Hence the system although statically stable is dynamically unstable.
+				
+			\subsection{Reachability}
+				
+				Reachability is a property which is determined by coupling the inputs into the system and the states, a system is said to reachable if for any initial set of state values $X_0$, and any final set of state value, $X_f$, there is a control signal $\mu(k)$ that can take the system from $X_0$ at k = 0, to  $X_f$ with some finite time [18].
+				\\
+				A system is said to be reachable if the reachability matrix:
+				\begin{equation}
+				W_r = 
+					\begin{bmatrix}
+					B_{dt} & A_{dt}B_{dt} & \dots & A_{dt}^{n-1}B_{dt}
+					\end{bmatrix}
+				\end{equation}
+				is full rank equalling n.
+				\\
+				Thus, as the rank of $W_r$ is equals to n, the system can be said to be reachable. 
+				\\
+				The less stringent property of stabilisability can also be defined where only the unstable states need be reachable.
+				
+			\subsection{Observability}
+				
+				Like reachability, Observability is a property which is determined by coupling, in this case, that between the system outputs and the system states. Therefore the system outputs, $Y$, must be defined where $Y$ is a subset of the state $X$ :
+				\[
+					Y \in X
+				\]
+				The measured systems outputs are:
+				\begin{equation}
+					Y = [z,\phi,\theta,\psi]
+				\end{equation}
+				There for a matrix to perform the state selection is defined as:
+				\\
+				\begin{equation}
+					Y(k) = CX(k)  
+				\end{equation}
+				\[
+					C \in R^{p \times n}  
+				\]
+				where p is the number of outputs.
+				\\
+				Thus:
+				\setcounter{MaxMatrixCols}{15}
+				\begin{equation}
+					C =
+					\begin{bmatrix}
+						1&0&0&0&0&0&0&0&0&0&0&0&0&0 \\
+						0&0&1&0&0&0&0&0&0&0&0&0&0&0 \\
+						0&0&0&0&1&0&0&0&0&0&0&0&0&0 \\
+						0&0&0&0&0&0&1&0&0&0&0&0&0&0
+					\end{bmatrix}  
+				\end{equation}
+				\[
+				p = 4  
+				\]
+				where:
+				\[
+					C_{dt} = C
+				\]
+				A system is said to observable if for all time, it is possible to, from a limited set of state measurements $Y(k)$, and the inputs $\mu(k)$, to \emph{uniquely} obtain the full state [18].
+				\\
+				A system is said to be observable if the observability matrix:
+				\begin{equation}
+					W_o = 
+					\begin{bmatrix}
+					C_{dt}\\
+					C_{dt}A_{dt}\\ 
+					\vdots \\
+					C_{dt}A_{dt}^{n-1}
+					\end{bmatrix}
+				\end{equation}
+				is full rank equalling n.
+				\\
+				Again as with reachability, a less stringent property, detectability, can also be defined where only the unstable states need be observable.
+				\\ \\
+				Interestingly, for this combination of dynamics $A_{dt}$ and $C_{dt}$, it is found that the $W_0$ is not full rank, and therefore the system in its current form is not observable. Upon further analysis, it is discovered that this is as a result of a phenomenon created due to the Coaxial propulsion unit configuration, as there are numerous combinations of thrust force values that each individual propulsion unit can generate which produce the same resultant torque about the centre of mass making it impossible to uniquely obtain the full state. One possible solution is to modify the UAV design to include RPM sensors to measure at least 2 non-coaxial motors. However, in the upcoming LQG section, a more elegant solution is proposed.
+		
+		\section{LQG}
+		
+			\subsection{Full-State Feedback}
+			
+				Given a discrete-time linear state-space model of form:
+				\[
+					X(k+1) = A_{dt}X(k) + B_{dt} \mu(k)
+				\]
+				\[
+					Y(k) = C_{dt} X(k)
+				\]
+				Full-state feedback is a control technique which makes use of the full-state, $X(k)$ of a system, to modify the system's eigenvalue so as to change its characteristic responses[18]. This is done by determining some set of gains $K$ which when applied to the system states and the resultant of which being fed back into the system, adjust the dynamics of the system, where:
+				
+				\begin{equation}
+					\mu(k) = -K X(k)
+				\end{equation}
+				
+				This leads to a modified closed loop system:
+				
+				\begin{equation}
+					X(k+1) = (A_{dt}-B_{dt}K) X(k)
+				\end{equation}
+				
+				Where the eigenvalue are now determined by:
+				
+				\begin{equation}
+					det|(A_{dt}-B_{dt}K) - \lambda I| = 0
+				\end{equation}
+				
+			\subsection{LQR}
+				
+				LQR is a technique for finding the set of gains K, in a manner which is in some wise optimal [18],[19],[20],[25]. In order to accomplish this, LQR seeks to find a control sequence \emph{\emph{$\mu$}} to minimise a \emph{quadratic} cost function by formulating the control problem as optimisation problem \(P_\infty(X(0))\), where :
+				
+				\(P_\infty(X(0)) = \)				
+				\begin{equation}
+					min_\mu  V_\infty(X(0),\emph{\emph{$\mu$}}) = \sum_{k = 0}^{k = \infty} X^{T} Q X + \mu^{T} R \mu
+				\end{equation}
+				\(s.t\)
+				\[
+					X(k+1) = A_{dt}X(k) + B_{dt} \mu(k) , k=1,2,3\dots
+				\]
+				Where Q n-by-n, and R m-by-m, are 2-norm weighing matrices on the states and inputs respectively.
+				\\
+				Such an optimisation over an infinite horizon, as \(k \to \infty \), would be intractable, however through the application of the Bellman's principle of optimality, the solution emerges as a result of the derivation of the Discrete Algebraic Riccati Equation (DARE) [25] where:
+				
+				\(DARE = \)
+				\[
+					K = - (R + B_{dt}^{T} \Pi B_{dt})^{-1} B_{dt}^{T} \Pi A_{dt}
+				\]
+				\begin{equation}
+					\Pi = Q + A_{dt}^{T} A_{dt} - A_{dt}^{T} \Pi B_{dt}(R + B_{dt}^{T} \Pi B_{dt})^{-1} B_{dt}^{T} \Pi A_{dt}
+				\end{equation}
+				\\
+				In order for the optimisation problem to be feasible, certain criteria must be satisfied [18],[25]:
+				
+				\begin{itemize}
+					\item
+						Q be at least Positive Semi-definite (P.S.D) and R be strictly Positive Definite (P.D).
+					\item
+						\( (A_{dt},B_{dt}) \) must be at least stabilisable.
+					\item
+						\( (C_{dt},A_{dt}) \) must be at least detectable.
+				\end{itemize} 
+			
+			\subsection{Reference Tracking and Integral Action}
+				
+				The Control Problem as set up in the previous subsections is on capable of realising a control system with the goal of driving all system states to the equilibrium. However, in order for the control system to be usefully implemented on a UAV, it must be able to track and set outputs $Y$ to, a desired reference target signals, \emph{\emph{r}}, preferably with no errors asymptotically.
+				\\
+				Therefore, to accomplish this, the system's model must be augmented to include behaviour which seeks to minimise errors between a reference target and UAV output. hence:
+				
+				\begin{equation}
+					X_{aug} = 
+					\begin{bmatrix}
+						X \\
+						X_I
+					\end{bmatrix}
+				\end{equation}
+				
+				Where 	\(X_I = \emph{\emph{r}} - Y \):
+				\begin{equation}
+					X_I =
+					\begin{bmatrix}
+						Z_I \\
+						\phi_I\\
+						\theta_I\\
+						\psi_I
+					\end{bmatrix}
+				\end{equation}
+				
+				This Leads to augmented discrete state-space Matrices:
+				\\
+				\begin{equation}
+					A_{aug} =
+					\begin{bmatrix}
+						A_{dt} & \emph{\emph{0}} \\
+						-C_{dt}A_{dt} & I
+					\end{bmatrix}
+					,
+					B_{aug} =
+					\begin{bmatrix}
+						B_{dt}\\
+						-C_{dt}B_{dt}
+					\end{bmatrix}
+					,
+					C_{aug} =
+					\begin{bmatrix}
+						C_{dt} & \emph{\emph{0}}
+					\end{bmatrix}
+				\end{equation}
+				\\   
+				Where \emph{\emph{0}} is a square zeros matrix of dimension P and I is an identity matrix of dimension p.
+				\\
+				Solving the LQR optimisation problem with, $A_{aug}$,$B_{aug}$,$C_{aug}$ and Q n+p-by-n+p, given this augmented system, produces a control law [19]: 
+				
+				\begin{equation}
+					\mu(k) = - K X(k) + K_I X_I(k)
+				\end{equation}
+				
+				Where:
+				
+				\begin{equation}
+					X_{aug}(k+1) = (A_{aug} - B_{aug}K_{y}) X_{aug}(k) + B_{aug}K_I \emph{\emph{r}}(k)
+				\end{equation}
+				\[
+					K_{y} =
+					\begin{bmatrix}
+						K & -K_{I}
+					\end{bmatrix}
+				\]
+				\\
+				This is implemented in the MATLAB-Simulink enivronment while taking into account the SBC dynamics such the effects of quantisation as well as digital to analog and vise-versia conversions which are always present in digital controllers which interface with the analog continuous-time systems:
+				\\
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=1\linewidth]{LQRSimulink.png}
+					\caption{LQR Simulink Implimentation}
+					\label{fig:lqrsimulinkimplimentation}
+				\end{figure}
+				
+			\subsection{State Estimation}
+			
+				The control law devised in LQR subsection was produced under the assumption that the full state of the system, X, is available for full-state feedback, however, this is not the case as only a limited number of state measurements are available and these form the measured outputs, Y. Therefore, in order to utilise a full-state feedback control law, the full-state of the system must be estimated from the limited measurements present. This is performed through the implementation of a State Observer/Estimator. State estimators accomplish this by apply knowledge of the system dynamics through the utilisation of the system's model and its observability property [18],[21],[22],[23],[24].
+				\\ \\
+				The estimator mimics the system dynamics giving: 
+				\[
+					\hat{X}(k+1) = A_{dt}\hat{X} + B_{dt} \mu(k) + L e
+				\]
+				\begin{equation}
+					\hat{Y}(k) = C_{dt}\hat{X}
+				\end{equation}
+				\\
+				where $\hat{X}$ and $\hat{Y}$ are the estimated system states and outputs, L is the estimator gain with e being the output error, which is the difference between the estimator model and the system outputs.
+				\[
+					e = Y - \hat{Y}
+				\]
+				As with the systems model, the behaviour of estimator model and thus the quality of the estimation is determined by the state estimation error dynamics [18], where:
+				\[
+					\hat{X_e} = X - \hat{X}
+				\]
+				The open-loop estimator dynamics are given by:
+				\begin{equation}
+					\hat{X_e}(k+1) = A_{dt}(X - \hat{X})
+				\end{equation}
+				\\
+				Due to the implementation of the observer gain $L$, the closed-loop estimator dynamics are give by:
+				\begin{equation}
+					\hat{X_e}(k+1) = (A_{dt} - L C_{dt})\hat{X_e}
+				\end{equation}
+				\\
+				If the eigenvalues of the estimator exist outside the unit circle, then the estimator is unstable and the state estimation is be divergent, and if the system is observable, then it is always possible to derive some gain L, to produce any set of desired eigenvalues [18] 
+				\\
+			\subsection{Estimator Modification}
+			
+				In the earlier observability subsection, it was found that the system is not observable due to propulsion unit configuration, and the emergent thrust and torque combinations making the estimation of a unique full state impossible.
+				\\
+				This can be rectified simply be making the system observable by modifying the hardware and measuring the value of some of the motor states via an RPM sensor.
+				\\
+				There is another way this can be solved without the need to obtain additional sensors, that is by virtually augmenting the output, Y to include terms for at least 2 non coaxial motor pairs, the returning and error vector where the error value for those 2 motors is 0,  therefore:
+				
+				\setcounter{MaxMatrixCols}{15}
+				\begin{equation}
+					C_y =
+					\begin{bmatrix}
+						1&0&0&0&0&0&0&0&0&0&0&0&0&0 \\
+						0&0&1&0&0&0&0&0&0&0&0&0&0&0 \\
+						0&0&0&0&1&0&0&0&0&0&0&0&0&0 \\
+						0&0&0&0&0&0&1&0&0&0&0&0&0&0 \\
+						0&0&0&0&0&0&0&0&1&0&0&0&0&0 \\
+						0&0&0&0&0&0&0&0&0&0&0&1&0&0 \\
+					\end{bmatrix}  
+					,
+					Y_y =
+					\begin{bmatrix}
+						Z \\
+						\phi\\
+						\theta\\
+						\psi\\
+						\omega_1\\
+						\omega_6
+					\end{bmatrix}
+					,
+					e =
+					\begin{bmatrix}
+						e_1 \\
+						e_2\\
+						e_3\\
+						e_4\\
+						0\\
+						0
+					\end{bmatrix}
+				\end{equation}
+				\\
+				This augmentation has the effect of using the model to completely determine the value of the motor by assuming it is a perfect model of the actual system. The augmentation is done solely for the purpose of state estimation so there are still only 4 reference input to the controller and only 4 measured outputs, but with this, the system is now fully observable.
+				
+			\subsection*{The Kalman Filter}
+				
+				Kalman Filtering encompasses a series of techniques for obtaining an estimator gain L, which is in some wise optimal. This is accomplished by constructing an optimisation problem with the objective of minimising a set of noise measurements covariances which arise from disturbances to the system such those due to model uncertainty and noise present in the output sensor readings, these sources of noise are modelled as Gaussian noise distributions. Thus, when used in combination with the LQR, the whole system is called the Linear Quadratic Gaussian.  
+				\\
+				The Kalman Filter problem is a corollary problem to the LQR where optimisation is also performed over infinite horizon, requiring the application of Bellman's optimality principle and is thus derived resulting in another DARE [18],[21].
+				\\
+				There are 2 major implementations of the Kalman filter which are popularly employed.
+					
+				\begin{itemize}
+					\item 
+						The Linear Kalman Filter (LKF)
+					\item 
+						The Extended Kalman Filter (EKF)
+				\end{itemize} 
+				\space
+				The process described above only fully pertains to the design of an LKF. The EKF is utilised in estimating the states of non-linear systems, utilising a the non-linear system model directly but then implementing an online lineariser that linearises the system at each time interval, k, to produce a linear model which is then used to solve for the estimator gain L [21],[22],[243].
+				\\
+				However, through experimentation with the estimator model , it was found that a the systems states could be estimated by modifying the LKF to use the non linear model derived in chapter 3, similar to the EKF. This modified LKF would then use the linear model to derive the estimator gain L and the full state estimations would be derived from applying this gain to the discretised non-linear model.
+				\\
+				This is possible due to the limited operational scope where the system is not expected to deviate far enough from the equilibrium operating points about which the non-linear model was linearised as presented in chapter 3. Therefore this method could be called a Limited EKF of sorts.
+				\\
+				This Limited EKF modification results in more accurate state and output predictions than the standard LKF implementation, as shown when the errors between the actual non-linear model outputs and estimator outputs are compared for both, as shown in Figures 4.3 and 4.4 during a 100 second simulation. 
+					
+				\begin{figure}[h!]
+					\centering
+					\begin{minipage}{0.5\textwidth}
+						\centering
+						\includegraphics[width=1\textwidth]{ModKFerror.png}	
+						\caption{KF Error}
+						\label{fig:modifiedkalmanfiltererror}
+					\end{minipage}\hfill
+					\begin{minipage}{0.5\textwidth}
+						\centering
+						\includegraphics[width=1\textwidth]{ModEKFerror.png}
+						\caption{Limited EKF Error}
+						\label{fig:limitedxtenderkalmanfiltererror}
+					\end{minipage}
+				\end{figure}
+					
+			\subsection{Results}
+				
+				Figures 4.5 shows the closed-loop system eigenvalues , where all values are now in within the unit circle. Figures 4.6 to 4.8 show the response plots of the system inputs, and both the estimated and measured outputs respectively, as the simulation is run over an interval of 100 seconds. The system is subjected to reference step inputs where the results are displayed in Table 4.1:
+				\\ \\
+				
+				\begin{table}[h!]
+					\centering
+					\begin{tabular}{ |p{1.5cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+						\hline
+						\multicolumn{6}{|c|}{Step Responses} \\
+						\hline
+						Output   &  Reference  & Overshoot (\%) & Settling Time (s) & Rise Time (s) & Steady State Error \\
+						\hline
+						Z        &  1 meter         & < 5 &  3   & < 2   & 0\\
+						$\phi$   &  30 degrees      & < 5 & < 1  & < 0.5 & 0\\
+						$\theta$ &  30 degrees      & < 5 & < 1  & < 0.5 & 0\\
+						$\psi$   & 	90 degrees      & 0   & < 5  & < 3   & 0\\
+						\hline
+					\end{tabular}
+					\caption{Table of Step Response values}
+					\label{table:stepresponses}
+				\end{table}
+			
+				\begin{figure}[h!]
+					\centering
+					\begin{minipage}{0.9\textwidth}
+						\centering
+						\includegraphics[width=1\linewidth]{DiscreteSystemPoles2.png}
+						\caption{Closed-Loop Eigenvalues}
+						\label{fig:closedloopeigenvalues}
+					\end{minipage}\hfill
+					\begin{minipage}{0.9\textwidth}
+						\centering
+						\includegraphics[width=1\textwidth]{LQGEKFInputs.png}	
+						\caption{System Input PWM Signal}
+						\label{fig:systeminputs}
+					\end{minipage}\hfill
+				\end{figure}
+				
+				\begin{figure}[h!]
+					\centering
+					\begin{minipage}{0.9\textwidth}
+						\centering
+						\includegraphics[width=1\textwidth]{ModEKFestOutputs.png}
+						\caption{System Estimated Outputs}
+						\label{fig:systemestimatedouputs}
+					\end{minipage}\hfill
+					\begin{minipage}{0.9\textwidth}
+						\centering
+						\includegraphics[width=1\textwidth]{ModEKFrealOutputs.png}
+						\caption{System Measured Outputs}
+						\label{fig:systemmeasuredouputs}
+					\end{minipage}
+				\end{figure}
+			
 		\newpage
+		
+		\section{LQ-MPC}
+			
+			\subsection{Limitations of LQG control}
+			
+				Like LQG, MPC is also a kind of optimal control, however, this technique’s cost or performance function is limited to looking at future states over some fixed finite horizon and control signals can be determined so that they implicitly taking into account and determine control action so as to meet physical constraints on the system. MPC is also known as receding horizon control (RHC) as it only acts on the first step in the horizon of states before recalculating and performing this action over and over until the target is achieved.
+				\\ \\
+				MPC does not refer to any one algorithm or method but instead a series of methodological philosophy which implements certain key concepts and ideas in various ways [28]. Thus, this investigation makes a limiting delineation by specifying LQ-MPC which limits the scope to MPC consisting of linear systems and quadratic cost functions.
+				
+			\subsection{Derivation of LQ-MPC}
+			
+		\section{Summary}
+			
+			This Chapter:
+			\\
+			\begin{itemize}
+				\item 
+				Introduced and defined the UAV system under consideration.
+				\item 
+				Discussed and derived the mathematical equations describing the non-linear behaviour of the UAV, from both the kinematics and kinetics representations while implementing Euler angles, the Newton-Euler convention, and describing their relevance to modelling. 
+				\item
+				Presented the means by which through experimental identification of the key aspects that define the actuation forces may be derived and discussed the relevance of mass distribution considerations.
+				\item
+				Presented a means of converting the derived non-linear dynamics into a form which could be utilised in the development of linear control systems, then developed and presented said linearised model.
+			\end{itemize}
+		
+	\newpage
+		
+	\chapter{Embedded Control Systems Implementation}
+		
+		\section{Introduction}
+			
+			Advanced control systems need to me implemented using digital computers. In an application such as with a UAV, this computation need to occurs on a devices as physically small as possible, due to design consideration such as minimising total vehicle mass. On such class of applicably small computers are SBCs. These are usually fully capable computers in their own right running light weight operating systems, such as watered down Linux distributions, that typically have smaller physical dimension than a smart phone. Such devices have become possible and previlent due to the advent of smartphone technology driving the trend towards cost effective minimisation of processing units. 
+			\\
+		 	Therefore this chapter will go through the considerations and processes involved in implementing control systems and proposes an implementation via a systems engineering framework. Which are:
+			
+			\begin{enumerate}
+				\item
+					Hardware
+				\item
+					Sensors
+				\item
+					Software Libraries
+				\item 
+					UML Implementation
+			\end{enumerate}  
+			
+		\section{Hardware}
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=1\linewidth]{beagle-bone-blue-annotated.png}
+				\caption{BeagleBone Blue SBC}
+				\label{fig:beaglebonebluesbc}
+			\end{figure}
+		
+			The SBC under consideration for the project is Beagle Bone Blue (BBB) from the BeagleBoard group, shown in Figure 5.1, which, in addition to the computation provided by all SBCs, comes equipped with multiple, peripheral communication interfaces such as:
+			\\
+			\begin{itemize}
+				\item
+					Inter-Integrated Circuit ($I^{2}C$)
+				\item
+					Serial Periheral interface (SPI)
+				\item
+					 Genral Purpose Input-Outputs (GPIOs) 
+				\item
+					Universal Asynchronous receiver-Transmitter (UART) 
+			\end{itemize}  
+		
+			The BBB possesses a 1 Gigahertz ARM Cotrex-A8 mirco-processor unit, supported by 512 Megabytes of DDR3 random access memory (RAM). This SCB is also capable of wireless communication through various Bluetooth and Wi-Fi standards. However for thee purposes of this investigation all communication to the SBC will occurs via a radio transmitter to a waiting receiver onboard the UAV. This transmitter will effectively be sending the reference command, r, commands to the controller. 
+			\\
+			This comes equipped with multiple sensor, the addition of which are the most pertinent hardware inclusions with regards to this investigation:
+			\\
+			\begin{itemize}
+				\item
+				Magnetic, Angular rate, Gravity Sensor (MARG)
+				\item
+				Barometric Pressure Sensor (Barometer)
+			\end{itemize}  
+			
+			\subsection{MARG and Barometer}
+			
+				A MARG sensor consists of a 3-0axis gyroscope, which measures angular rate, a 3-axis accelerometer which measure linear acceleration, and a 3-axis magnetometer which measures the strength of the earth's magnetic field. 
+				\\
+				Barometer are sensor which measure atmospheric pressure. their use on UAVs is key as pressure on the surface of the earth is a function of the altitude where it is being measure, therefore the pressure readings from a barometer can be used to estimate the altitude above sea-level of a body [20],[29].
+				\\
+				When combined, the sensors can be used to estimate the angular position and altitude of the body they are attached to. In the form factor able to be implemented on an SBC, MARGs come as mirco elctro-mechanical systems (MEMS) sensors which take the form of integrated circuits. MEMS devices contain moving masses and are able to convert the movement of these masses into readable data [20],[29]. The MARG implemented here is the MPU-9650 from innovosense and the Barometer is the BPM-280 from BOSH.
+				\\
+				In order to be used these devices they must be calibrated to remove bias and offset errors due to the effect of external disturbances, especially on MEMS devices [29]. 
+					
+		\section{Software and UML}
+			
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[width=1\linewidth]{ImplementationStructure.png}
+				\caption{Embedded Component Structure}
+				\label{fig:embeddedcomponentstructure}
+			\end{figure}
+			and even software additions 
+			[31] presents consideration for the implementation of flight control systems
+			Sources [20] extending from the Robot Control Library (RCL)
+		
+			[30] presents considerations for designing software in general looking at systems engineering approaches.
+		
+		\section{Summary}	
+		
+		
+	\newpage
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{ |p{1.5cm}||p{9.5cm}|p{5cm}|  }
+			\hline
+			\multicolumn{3}{|c|}{Control and Implementation Parameters} \\
+			\hline
+			Character& Definition  & Value  \\
+			\hline
+			T        &  Discrete Sample Time                        & 0.01 s\\
+			DAC      &  Digital to Analog converter resolution      & 10 bits\\
+			ADC      &  Analog to Digital converter resolution      & 10 bits\\
+			$V_{op}$ & 	SBC Operating Voltage                       & 3.3 v\\
+			\hline
+		\end{tabular}
+		\caption{Table of Control and Implementation Parameters}
+		\label{table:controlparameters}
+	\end{table}
+
+	\newpage
+	
+	\chapter{Conclusions}
+	
+	\newpage
 						
-	%\bibliographystyle{plain}			
-	%\bibliography{ProjectResearchPapers}
+	\bibliographystyle{plain}			
+	\bibliography{ProjectResearchPapers}
 				
 \end{document}
