@@ -1,53 +1,60 @@
-\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}% 
-\contentsline {section}{\numberline {1.1}Background}{4}{section.1.1}% 
-\contentsline {section}{\numberline {1.2}Aims and Objectives}{5}{section.1.2}% 
-\contentsline {subsection}{\numberline {1.2.1}Basic Objectives}{5}{subsection.1.2.1}% 
-\contentsline {subsection}{\numberline {1.2.2}Advanced Objectives}{6}{subsection.1.2.2}% 
-\contentsline {section}{\numberline {1.3}Project Management}{6}{section.1.3}% 
-\contentsline {chapter}{\numberline {2}Review Of Literature}{9}{chapter.2}% 
-\contentsline {section}{\numberline {2.1}Introduction}{9}{section.2.1}% 
-\contentsline {section}{\numberline {2.2}Mathematical Modelling and System Identification}{9}{section.2.2}% 
-\contentsline {subsection}{\numberline {2.2.1}UAV}{9}{subsection.2.2.1}% 
-\contentsline {subsection}{\numberline {2.2.2}Dynamics}{10}{subsection.2.2.2}% 
-\contentsline {subsection}{\numberline {2.2.3}Actuator Dynamics}{12}{subsection.2.2.3}% 
-\contentsline {section}{\numberline {2.3}Control Systems Design, Simulation and Implementation}{12}{section.2.3}% 
-\contentsline {subsection}{\numberline {2.3.1}LQG}{12}{subsection.2.3.1}% 
-\contentsline {subsection}{\numberline {2.3.2}LQ-MPC}{12}{subsection.2.3.2}% 
-\contentsline {section}{\numberline {2.4}summary}{13}{section.2.4}% 
-\contentsline {chapter}{\numberline {3}Mathematical Modelling}{14}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Introduction}{14}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}UAV}{15}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}Kinematics}{16}{section.3.3}% 
-\contentsline {section}{\numberline {3.4}Kinetics}{19}{section.3.4}% 
-\contentsline {subsection}{\numberline {3.4.1}Newton-Euler}{20}{subsection.3.4.1}% 
-\contentsline {subsection}{\numberline {3.4.2}Asymmetry}{21}{subsection.3.4.2}% 
-\contentsline {section}{\numberline {3.5}Actuator Dynamics}{22}{section.3.5}% 
-\contentsline {section}{\numberline {3.6}Non-Linear Model}{26}{section.3.6}% 
-\contentsline {section}{\numberline {3.7}Linearisation}{28}{section.3.7}% 
-\contentsline {subsection}{\numberline {3.7.1}Jacobian Method}{29}{subsection.3.7.1}% 
-\contentsline {section}{\numberline {3.8}Summary}{32}{section.3.8}% 
-\contentsline {chapter}{\numberline {4}Linear Quadratic Gaussian and Model Predictive Control}{34}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Introduction}{34}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}Discretization}{35}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}Model Analysis}{35}{section.4.3}% 
-\contentsline {subsection}{\numberline {4.3.1}Stability}{36}{subsection.4.3.1}% 
-\contentsline {subsection}{\numberline {4.3.2}Reachability}{37}{subsection.4.3.2}% 
-\contentsline {subsection}{\numberline {4.3.3}Observability}{37}{subsection.4.3.3}% 
-\contentsline {section}{\numberline {4.4}LQG}{39}{section.4.4}% 
-\contentsline {subsection}{\numberline {4.4.1}Full-State Feedback}{39}{subsection.4.4.1}% 
-\contentsline {subsection}{\numberline {4.4.2}LQR}{39}{subsection.4.4.2}% 
-\contentsline {subsection}{\numberline {4.4.3}Reference Tracking and Integral Action}{40}{subsection.4.4.3}% 
-\contentsline {subsection}{\numberline {4.4.4}State Estimation}{41}{subsection.4.4.4}% 
-\contentsline {subsection}{\numberline {4.4.5}Estimator Modification}{43}{subsection.4.4.5}% 
-\contentsline {subsection}{\numberline {4.4.6}Results}{45}{subsection.4.4.6}% 
-\contentsline {section}{\numberline {4.5}LQ-MPC}{48}{section.4.5}% 
-\contentsline {subsection}{\numberline {4.5.1}Limitations of LQG control}{48}{subsection.4.5.1}% 
-\contentsline {subsection}{\numberline {4.5.2}Derivation of LQ-MPC}{48}{subsection.4.5.2}% 
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Background}{1}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Aims and Objectives}{2}{section.1.2}% 
+\contentsline {subsection}{\numberline {1.2.1}Basic Objectives}{2}{subsection.1.2.1}% 
+\contentsline {subsection}{\numberline {1.2.2}Advanced Objectives}{3}{subsection.1.2.2}% 
+\contentsline {section}{\numberline {1.3}Project Management}{3}{section.1.3}% 
+\contentsline {chapter}{\numberline {2}Review Of Literature}{6}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Introduction}{6}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Mathematical Modelling and System Identification}{6}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}UAV}{6}{subsection.2.2.1}% 
+\contentsline {subsection}{\numberline {2.2.2}Dynamics}{6}{subsection.2.2.2}% 
+\contentsline {subsection}{\numberline {2.2.3}Actuator Dynamics}{8}{subsection.2.2.3}% 
+\contentsline {section}{\numberline {2.3}Control Systems Design, Simulation and Implementation}{9}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}LQG}{9}{subsection.2.3.1}% 
+\contentsline {subsection}{\numberline {2.3.2}LQ-MPC}{9}{subsection.2.3.2}% 
+\contentsline {section}{\numberline {2.4}summary}{10}{section.2.4}% 
+\contentsline {chapter}{\numberline {3}Mathematical Modelling}{11}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Introduction}{11}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}UAV}{12}{section.3.2}% 
+\contentsline {section}{\numberline {3.3}Kinematics}{13}{section.3.3}% 
+\contentsline {section}{\numberline {3.4}Kinetics}{16}{section.3.4}% 
+\contentsline {subsection}{\numberline {3.4.1}Newton-Euler}{17}{subsection.3.4.1}% 
+\contentsline {subsection}{\numberline {3.4.2}Asymmetry}{18}{subsection.3.4.2}% 
+\contentsline {section}{\numberline {3.5}Actuator Dynamics}{19}{section.3.5}% 
+\contentsline {section}{\numberline {3.6}Non-Linear Model}{23}{section.3.6}% 
+\contentsline {section}{\numberline {3.7}Linearisation}{25}{section.3.7}% 
+\contentsline {subsection}{\numberline {3.7.1}Jacobian Method}{26}{subsection.3.7.1}% 
+\contentsline {section}{\numberline {3.8}Summary}{29}{section.3.8}% 
+\contentsline {chapter}{\numberline {4}Linear Quadratic Gaussian and Model Predictive Control}{31}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Introduction}{31}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Discretization}{32}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Model Analysis}{32}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}Stability}{33}{subsection.4.3.1}% 
+\contentsline {subsection}{\numberline {4.3.2}Reachability}{34}{subsection.4.3.2}% 
+\contentsline {subsection}{\numberline {4.3.3}Observability}{34}{subsection.4.3.3}% 
+\contentsline {section}{\numberline {4.4}LQG}{36}{section.4.4}% 
+\contentsline {subsection}{\numberline {4.4.1}Full-State Feedback}{36}{subsection.4.4.1}% 
+\contentsline {subsection}{\numberline {4.4.2}LQR}{36}{subsection.4.4.2}% 
+\contentsline {subsection}{\numberline {4.4.3}Reference Tracking and Integral Action}{37}{subsection.4.4.3}% 
+\contentsline {subsection}{\numberline {4.4.4}State Estimation}{38}{subsection.4.4.4}% 
+\contentsline {subsection}{\numberline {4.4.5}Estimator Modification}{40}{subsection.4.4.5}% 
+\contentsline {subsection}{\numberline {4.4.6}Results}{42}{subsection.4.4.6}% 
+\contentsline {section}{\numberline {4.5}LQ-MPC}{45}{section.4.5}% 
+\contentsline {subsection}{\numberline {4.5.1}Limitations of LQG control}{45}{subsection.4.5.1}% 
+\contentsline {subsection}{\numberline {4.5.2}General Model Predictive Control (GPC)}{45}{subsection.4.5.2}% 
+\contentsline {subsection}{\numberline {4.5.3}LQ-MPC: Extending The LQR}{47}{subsection.4.5.3}% 
+\contentsline {subsection}{\numberline {4.5.4}Closed-loop predictions}{48}{subsection.4.5.4}% 
+\contentsline {subsection}{\numberline {4.5.5}Constraint Handling and Reference Tracking}{48}{subsection.4.5.5}% 
+\contentsline {subsection}{\numberline {4.5.6}Results}{48}{subsection.4.5.6}% 
 \contentsline {section}{\numberline {4.6}Summary}{48}{section.4.6}% 
 \contentsline {chapter}{\numberline {5}Embedded Control Systems Implementation}{49}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}Introduction}{49}{section.5.1}% 
 \contentsline {section}{\numberline {5.2}Hardware}{50}{section.5.2}% 
 \contentsline {subsection}{\numberline {5.2.1}MARG and Barometer}{51}{subsection.5.2.1}% 
-\contentsline {section}{\numberline {5.3}Software and UML}{51}{section.5.3}% 
-\contentsline {section}{\numberline {5.4}Summary}{52}{section.5.4}% 
-\contentsline {chapter}{\numberline {6}Conclusions}{54}{chapter.6}% 
+\contentsline {subsection}{\numberline {5.2.2}Actuator interfaces}{51}{subsection.5.2.2}% 
+\contentsline {section}{\numberline {5.3}Software and UML}{52}{section.5.3}% 
+\contentsline {subsection}{\numberline {5.3.1}The Robot Control Library (RCL)}{52}{subsection.5.3.1}% 
+\contentsline {subsection}{\numberline {5.3.2}Universal Modelling Language (UML)}{53}{subsection.5.3.2}% 
+\contentsline {section}{\numberline {5.4}Summary}{55}{section.5.4}% 
+\contentsline {chapter}{\numberline {6}Conclusion}{57}{chapter.6}% 

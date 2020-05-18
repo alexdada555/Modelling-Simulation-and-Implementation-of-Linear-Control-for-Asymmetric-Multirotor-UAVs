@@ -42,12 +42,19 @@
 \BOOKMARK [2][-]{subsection.4.4.6}{Results}{section.4.4}% 42
 \BOOKMARK [1][-]{section.4.5}{LQ-MPC}{chapter.4}% 43
 \BOOKMARK [2][-]{subsection.4.5.1}{Limitations of LQG control}{section.4.5}% 44
-\BOOKMARK [2][-]{subsection.4.5.2}{Derivation of LQ-MPC}{section.4.5}% 45
-\BOOKMARK [1][-]{section.4.6}{Summary}{chapter.4}% 46
-\BOOKMARK [0][-]{chapter.5}{Embedded Control Systems Implementation}{}% 47
-\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 48
-\BOOKMARK [1][-]{section.5.2}{Hardware}{chapter.5}% 49
-\BOOKMARK [2][-]{subsection.5.2.1}{MARG and Barometer}{section.5.2}% 50
-\BOOKMARK [1][-]{section.5.3}{Software and UML}{chapter.5}% 51
-\BOOKMARK [1][-]{section.5.4}{Summary}{chapter.5}% 52
-\BOOKMARK [0][-]{chapter.6}{Conclusions}{}% 53
+\BOOKMARK [2][-]{subsection.4.5.2}{General Model Predictive Control \(GPC\)}{section.4.5}% 45
+\BOOKMARK [2][-]{subsection.4.5.3}{LQ-MPC: Extending The LQR}{section.4.5}% 46
+\BOOKMARK [2][-]{subsection.4.5.4}{Closed-loop predictions}{section.4.5}% 47
+\BOOKMARK [2][-]{subsection.4.5.5}{Constraint Handling and Reference Tracking}{section.4.5}% 48
+\BOOKMARK [2][-]{subsection.4.5.6}{Results}{section.4.5}% 49
+\BOOKMARK [1][-]{section.4.6}{Summary}{chapter.4}% 50
+\BOOKMARK [0][-]{chapter.5}{Embedded Control Systems Implementation}{}% 51
+\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 52
+\BOOKMARK [1][-]{section.5.2}{Hardware}{chapter.5}% 53
+\BOOKMARK [2][-]{subsection.5.2.1}{MARG and Barometer}{section.5.2}% 54
+\BOOKMARK [2][-]{subsection.5.2.2}{Actuator interfaces}{section.5.2}% 55
+\BOOKMARK [1][-]{section.5.3}{Software and UML}{chapter.5}% 56
+\BOOKMARK [2][-]{subsection.5.3.1}{The Robot Control Library \(RCL\)}{section.5.3}% 57
+\BOOKMARK [2][-]{subsection.5.3.2}{Universal Modelling Language \(UML\)}{section.5.3}% 58
+\BOOKMARK [1][-]{section.5.4}{Summary}{chapter.5}% 59
+\BOOKMARK [0][-]{chapter.6}{Conclusion}{}% 60

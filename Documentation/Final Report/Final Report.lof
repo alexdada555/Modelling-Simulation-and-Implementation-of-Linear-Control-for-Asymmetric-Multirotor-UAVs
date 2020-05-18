@@ -1,27 +1,30 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Initial Timetable\relax }}{6}{figure.caption.5}% 
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Final Timetable\relax }}{7}{figure.caption.6}% 
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Initial Timetable\relax }}{4}{figure.caption.5}% 
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Final Timetable\relax }}{4}{figure.caption.6}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Y6 Hexarotor UAV\relax }}{15}{figure.caption.7}% 
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Coordinate Frames\relax }}{16}{figure.caption.8}% 
-\contentsline {figure}{\numberline {3.3}{\ignorespaces UAV with Body Frame\relax }}{22}{figure.caption.9}% 
-\contentsline {figure}{\numberline {3.4}{\ignorespaces A2212/13T 1000KV BLDC Motor\relax }}{23}{figure.caption.10}% 
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Motor Test Stand\relax }}{23}{figure.caption.11}% 
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Motor Input Step Data\relax }}{24}{figure.caption.12}% 
-\contentsline {figure}{\numberline {3.7}{\ignorespaces First Order Model Step Response\relax }}{25}{figure.caption.13}% 
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Thrust against RPM\relax }}{26}{figure.caption.14}% 
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Torque against RPM\relax }}{26}{figure.caption.15}% 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Y6 Hexarotor UAV\relax }}{12}{figure.caption.7}% 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Coordinate Frames\relax }}{13}{figure.caption.8}% 
+\contentsline {figure}{\numberline {3.3}{\ignorespaces UAV with Body Frame\relax }}{19}{figure.caption.9}% 
+\contentsline {figure}{\numberline {3.4}{\ignorespaces A2212/13T 1000KV BLDC Motor\relax }}{20}{figure.caption.10}% 
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Motor Test Stand\relax }}{20}{figure.caption.11}% 
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Motor Input Step Data\relax }}{21}{figure.caption.12}% 
+\contentsline {figure}{\numberline {3.7}{\ignorespaces First Order Model Step Response\relax }}{22}{figure.caption.13}% 
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Thrust against RPM\relax }}{23}{figure.caption.14}% 
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Torque against RPM\relax }}{23}{figure.caption.15}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Open-Loop Eigenvalues\relax }}{36}{figure.caption.17}% 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces LQR Simulink Implimentation\relax }}{41}{figure.caption.18}% 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces KF Error\relax }}{44}{figure.caption.20}% 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Limited EKF Error\relax }}{44}{figure.caption.20}% 
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Closed-Loop Eigenvalues\relax }}{46}{figure.caption.22}% 
-\contentsline {figure}{\numberline {4.6}{\ignorespaces System Input PWM Signal\relax }}{46}{figure.caption.22}% 
-\contentsline {figure}{\numberline {4.7}{\ignorespaces System Estimated Outputs\relax }}{47}{figure.caption.23}% 
-\contentsline {figure}{\numberline {4.8}{\ignorespaces System Measured Outputs\relax }}{47}{figure.caption.23}% 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Open-Loop Eigenvalues\relax }}{33}{figure.caption.17}% 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces LQR Simulink Implimentation\relax }}{39}{figure.caption.18}% 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces KF Error\relax }}{42}{figure.caption.20}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Limited EKF Error\relax }}{42}{figure.caption.20}% 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Closed-Loop Eigenvalues\relax }}{43}{figure.caption.22}% 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces System Input PWM Signal\relax }}{43}{figure.caption.22}% 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces System Estimated Outputs\relax }}{44}{figure.caption.23}% 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces System Measured Outputs\relax }}{44}{figure.caption.23}% 
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Input Constraint Violation\relax }}{45}{figure.caption.24}% 
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Output Constraint Violation\relax }}{45}{figure.caption.24}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces BeagleBone Blue SBC\relax }}{50}{figure.caption.24}% 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Embedded Component Structure\relax }}{52}{figure.caption.25}% 
+\contentsline {figure}{\numberline {5.1}{\ignorespaces BeagleBone Blue SBC\relax }}{50}{figure.caption.25}% 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Embedded Component Structure\relax }}{52}{figure.caption.26}% 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces UML Class diagram of Functions\relax }}{54}{figure.caption.27}% 
 \addvspace {10\p@ }

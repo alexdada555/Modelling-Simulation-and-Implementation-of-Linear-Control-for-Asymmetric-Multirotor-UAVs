@@ -108,6 +108,11 @@ poles = eig(Adt);
 Jpoles = jordan(Adt);
 % System Unstable
 
+figure(1)
+plot(poles,'*');
+grid on
+title('Discrete System Eigenvalues');
+
 cntr = rank(ctrb(Adt,Bdt));
 % Fully Reachable
 
@@ -138,7 +143,7 @@ Cdtaug = [C zeros(r,r)];
 % State feedback control design with integral control via state augmentation
 % Z Phi Theta Psi are controlled outputs
 
-Q = diag([200,500,1000,100,1000,150,1000,100,0,0,0,0,0,0,1,35,35,0.1]); % State penalty
+Q = diag([200,500,1000,10,1000,15,1000,10,0,0,0,0,0,0,1,35,35,0.1]); % State penalty
 R = (1*10^-3)*eye(6,6);  % Control penalty
 
 Kdtaug = dlqr(Adtaug,Bdtaug,Q,R,0); % DT State-Feedback Controller Gains
@@ -215,7 +220,7 @@ for k = 2:kT-1
         Ref(3) = 0;
     end
     if k == 40/T
-        Ref(4) = 45*pi/180;
+        Ref(4) = 90*pi/180;
     end
     
     %%Estimation
@@ -235,11 +240,13 @@ for k = 2:kT-1
 %     Xest(:,k) = Adt*Xest(:,k-1) + Bdt*(U(:,k-1)-U_e);   % Linear Prediction
 %     e(:,k) = [Y(:,k) - Xest([1,3,5,7],k); 0; 0];
 %     Xest(:,k) = Xest(:,k) + Ldt*e(:,k);
-    
+%     
     
     %%Control
-    Xe(:,k) = Xe(:,k-1) + (Ref - Xest([1,3,5,7],k));   % Integrator         
-    U(:,k) = min(800, max(0, U_e - [Kdt,Kidt]*[Xest(:,k) - [Ref(1);0;Ref(2);0;Ref(3);0;Ref(4);0;W_e]; Xe(:,k)]));
+    Xe(:,k) = Xe(:,k-1) + (Ref - Xest([1,3,5,7],k));   % Integrator 
+    %U(:,k) =  U_e - [Kdt,Kidt]*[Xest(:,k); Xe(:,k)];
+    U(:,k) = min(800, max(0, U_e - [Kdt,Kidt]*[Xest(:,k); Xe(:,k)]));
+    %- [Ref(1);0;Ref(2);0;Ref(3);0;Ref(4);0;W_e]
     
     %Simulation    
     t_span = [0,T];
@@ -256,47 +263,62 @@ Rad2Deg = [180/pi,180/pi,180/pi]';
 
 %Plots
 t = (0:kT-1)*T;
-figure(1);
+figure(2);
 subplot(2,1,1);
 plot(t,Xreal(5,:));
 legend('Alt');
 title('Real Altitude');
+xlabel('Time(s)');
 ylabel('Meters(m)');
 
 subplot(2,1,2);
 plot(t,Xreal([7,9,11],:).*Rad2Deg);
 legend('\phi','\theta','\psi');
 title('Real Attitude');
+xlabel('Time(s)');
 ylabel('Degrees(d)');
 
-figure(2);
+figure(3);
 subplot(2,1,1);
 plot(t,Xest(1,:));
 legend('Alt_e');
 title('Estimated Altitude');
+xlabel('Time(s)');
 ylabel('Meters(m)');
 
 subplot(2,1,2);
 plot(t,Xest([3,5,7],:).*Rad2Deg);
 legend('\phi_e','\theta_e','\psi_e');
 title('Estimated Attitude');
+xlabel('Time(s)');
 ylabel('Degrees(d)');
 
-figure(3);
+figure(4);
 subplot(2,1,1);
 plot(t,e(1,:));
 legend('e_z');
 title('Altitude prediction error');
+xlabel('Time(s)');
 ylabel('Error meters(m)');
 
 subplot(2,1,2);
 plot(t,e([2,3,4],:).*Rad2Deg);
 legend('e_\phi','e_\theta','e_\psi');
 title('Attitude prediction error');
+xlabel('Time(s)');
 ylabel('Error degrees(d)');
 
-figure(4);
+figure(5);
 plot(t,U);
 legend('U1','U2','U3','U4','U5','U6');
 title('Inputs PWM  Signal');
+xlabel('Time(s)');
 ylabel('Micro Seconds(ms)');
+
+Cpoles = eig(Adtaug - (Bdtaug*[Kdt,Kidt]));
+% System Unstable
+
+figure(6)
+plot(Cpoles(1:14),'*');
+grid on
+title('Closed-Loop Eigenvalues');

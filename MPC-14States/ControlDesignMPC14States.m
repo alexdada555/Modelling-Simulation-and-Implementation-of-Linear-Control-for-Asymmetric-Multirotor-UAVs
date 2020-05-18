@@ -66,7 +66,7 @@ A = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1/Mtau, 0, 0;
      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1/Mtau, 0;
      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1/Mtau];
- 
+
 % B = 14x6 matrix
 B = [0, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0;
@@ -88,7 +88,7 @@ C = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
      0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0];
-     
+
 % D = 4x6 matrix
 D = 0;
 
@@ -124,7 +124,7 @@ U = zeros(6,kT);
 X(:,1) = [0;0;0;0;0;0;0;0;0;0;0;0;0;0];
 
 for k = 1:kT-1
-
+    
     %Control 
     U(:,k) = -Kdt*X(:,k);
     
@@ -170,7 +170,7 @@ Cy = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0;
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0];
- 
+
 Dy = zeros(6,6);
 
 Gdt = 1e-1*eye(n);
@@ -212,10 +212,10 @@ N = 20;  % Prediction Horizon
 Kxmax = [eye(14); -1*eye(14)];
 xmax = [10;10;90*pi/180;10;90*pi/180;10;90*pi/180;10;16000;16000;16000;16000;16000;16000;
         0;0;90*pi/180;0;90*pi/180;0;90*pi/180;0;0;0;0;0;0;0]; % State Constraints
-     
+  
 umin = zeros(6,1);
 umax = 800*ones(6,1);
- 
+
 % 
 % [Pc, qc, Sc] = constraint_mats(F,G,Pu,qu,Px,qx,Pxf,qxf); % Constraints As Linear Inequality 
 
@@ -244,22 +244,22 @@ for k = 2:kT-1
     
     %%Reference Setting
     if k == 1/T
-        Ref(1) = 1;
+        Ref(1) = 0;
     end
     if k == 4/T
-        Ref(2) = 30*pi/180;
+        Ref(2) = 0*pi/180;
     end
     if k == 6/T
         Ref(2) = 0;
     end
     if k == 7/T
-        Ref(3) = 30*pi/180;
+        Ref(3) = 0*pi/180;
     end
     if k == 8/T
         Ref(3) = 0;
     end
     if k == 9/T
-        Ref(4) = 45*pi/180;
+        Ref(4) = 0*pi/180;
     end
     
     %%Estimation
@@ -279,7 +279,7 @@ for k = 2:kT-1
 %     Xest(:,k) = Adt*Xest(:,k-1) + Bdt*(U(:,k-1)-U_e);   % Linear Prediction
 %     e(:,k) = [Y(:,k) - Xest([1,3,5,7],k); 0; 0];
 %     Xest(:,k) = Xest(:,k) + Ldt*e(:,k);
-   
+
     %%Control 
     %[Cost(:,k),U(:,k),c(:,k)] = ompc_constraints(Adt,Bdt,Cdt,Ddt,N,Q,R,Q,R,(Xest(:,k) - [Ref(1);0;Ref(2);0;Ref(3);0;Ref(4);0;W_e]),umin,umax,Kxmax,xmax);
     
@@ -374,3 +374,7 @@ title('LQ-MPC Cost');
 figure(10);
 plot(t,J);
 title('LQ-MPC Cost2');
+
+figure(11);
+plot(t,Xest' * P * Xest);
+title('LQ-MPC Lyaponuv');
