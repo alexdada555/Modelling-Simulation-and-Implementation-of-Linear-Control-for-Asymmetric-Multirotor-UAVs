@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.27)  19 MAY 2020 00:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.27)  19 MAY 2020 14:18
 entering extended mode
 **"./Final Report.tex"
 ("Final Report.tex"
@@ -1485,8 +1485,8 @@ Chapter 6.
 r (name{page.i}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.66 \bibitem{6}
-                 [1
+l.59 \bibitem{17}
+                  [1
 
 ])pdfTeX warning (ext4): destination with the same identifier (name{page.ii}) h
 as been already used, duplicate ignored
@@ -1501,7 +1501,7 @@ l.2002 		\newpage
                   [3
 
 ]
-<Gantt.pdf, id=1040, 845.1575pt x 597.23125pt>
+<Gantt.pdf, id=1039, 845.1575pt x 597.23125pt>
 File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf>
 Package pdftex.def Info: Gantt.pdf  used on input line 2006.
@@ -1510,7 +1510,7 @@ File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf>
 Package pdftex.def Info: Gantt.pdf  used on input line 2006.
 (pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
-<Gantt.pdf, id=1043, page=1, 845.1575pt x 597.23125pt>
+<Gantt.pdf, id=1042, page=1, 845.1575pt x 597.23125pt>
 File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf, page 1>
 Package pdftex.def Info: Gantt.pdf , page1 used on input line 2006.
@@ -1545,7 +1545,7 @@ File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf>
 Package pdftex.def Info: Gantt.pdf  used on input line 2015.
 (pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
-<Gantt.pdf, id=1088, page=2, 845.1575pt x 597.23125pt>
+<Gantt.pdf, id=1087, page=2, 845.1575pt x 597.23125pt>
 File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf, page 2>
 Package pdftex.def Info: Gantt.pdf , page2 used on input line 2015.
@@ -1580,7 +1580,7 @@ File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf>
 Package pdftex.def Info: Gantt.pdf  used on input line 2024.
 (pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
-<Gantt.pdf, id=1095, page=3, 845.1575pt x 597.23125pt>
+<Gantt.pdf, id=1094, page=3, 845.1575pt x 597.23125pt>
 File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf, page 3>
 Package pdftex.def Info: Gantt.pdf , page3 used on input line 2024.
@@ -1615,7 +1615,7 @@ File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf>
 Package pdftex.def Info: Gantt.pdf  used on input line 2033.
 (pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
-<Gantt.pdf, id=1101, page=4, 845.1575pt x 597.23125pt>
+<Gantt.pdf, id=1100, page=4, 845.1575pt x 597.23125pt>
 File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf, page 4>
 Package pdftex.def Info: Gantt.pdf , page4 used on input line 2033.
@@ -1650,7 +1650,7 @@ File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf>
 Package pdftex.def Info: Gantt.pdf  used on input line 2042.
 (pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
-<Gantt.pdf, id=1107, page=5, 845.1575pt x 597.23125pt>
+<Gantt.pdf, id=1106, page=5, 845.1575pt x 597.23125pt>
 File: Gantt.pdf Graphic file (type pdf)
 <use Gantt.pdf, page 5>
 Package pdftex.def Info: Gantt.pdf , page5 used on input line 2042.
@@ -1700,11 +1700,11 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2070.
  ) 
 Here is how much of TeX's memory you used:
- 19923 strings out of 492895
- 350052 string characters out of 3133479
+ 19920 strings out of 492895
+ 350025 string characters out of 3133479
  524952 words of memory out of 3000000
- 23280 multiletter control sequences out of 15000+200000
- 588006 words of font info for 94 fonts, out of 3000000 for 9000
+ 23279 multiletter control sequences out of 15000+200000
+ 582790 words of font info for 92 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,18n,61p,1296b,448s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
@@ -1716,9 +1716,9 @@ ic/amsfonts/cm/cmsy10.pfb><C:/Users/alexd/AppData/Roaming/MiKTeX/2.9/fonts/type
 w/symbol/usyr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb
 ><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program File
 s/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Final Report.pdf" (79 pages, 3466843 bytes).
+Output written on "Final Report.pdf" (79 pages, 3466359 bytes).
 PDF statistics:
- 1224 PDF objects out of 1440 (max. 8388607)
+ 1223 PDF objects out of 1440 (max. 8388607)
  325 named destinations out of 1000 (max. 500000)
  711 words of extra memory for PDF output out of 10000 (max. 10000000)
 

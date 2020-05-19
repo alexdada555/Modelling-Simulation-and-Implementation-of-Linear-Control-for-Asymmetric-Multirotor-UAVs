@@ -1196,7 +1196,7 @@
 				\[
 					C_{dt} = C
 				\]
-				A system is said to observable if for all time, it is possible to, from a limited set of state measurements $Y(k)$, and knowledge of the inputs $\mu(k)$, to \emph{uniquely} obtain the full state, X(k) \cite{18}.
+				A system is said to observable if for all time, it is possible to, from a limited set of state measurements $Y(k)$, and knowledge of the inputs $\mu(k)$, \emph{uniquely} obtain the full state, X(k) \cite{18}.
 				\\
 				A system is said to be observable if the observability matrix:
 				\begin{equation}
@@ -1344,7 +1344,7 @@
 					\end{bmatrix}
 				\]
 				\\
-				This is implemented in the MATLAB-Simulink environment while taking into account the SBC dynamics such the effects of quantisation from digital to analog and visa-versa conversions which are always present when digital controllers that interface with real analogue continuous-time systems:
+				This is implemented in the MATLAB-Simulink environment while taking into account the SBC dynamics such the effects of quantisation from digital to analog and visa-versa conversions which are always present when digital controllers interface with real analog continuous-time systems.
 				\\
 				\begin{figure}[h!]
 					\centering
@@ -1434,7 +1434,7 @@
 				\\
 				The Kalman Filter problem is a corollary problem to the LQR, where optimisation is also performed over infinite horizon, requiring the application of DP, and is thus derived resulting in another DARE \cite{18},\cite{21}.
 				\\
-				There are 2 major implementations of the Kalman filter which are popularly employed.
+				There are 2 major implementations of the Kalman filter which are popularly employed:
 					
 				\begin{itemize}
 					\item 
@@ -1469,7 +1469,7 @@
 					
 			\subsection{Results}
 				
-				Figures 4.5 shows the closed-loop system eigenvalues, where after implementation of the designed LQG controller, all eiganvalues are now in within the unit circle, thus stabilising the system. Figures 4.6 to 4.8 show response plots of the system inputs, and both the estimated, with Limited EKF, and measured outputs respectively, as the simulation is run over an interval of 100 seconds. The system is subjected to reference step inputs where the results are displayed in Table 4.1:
+				Figures 4.5 shows the closed-loop system eigenvalues, where after implementation of the designed LQG controller, all eigenvalues are now within the unit circle, thus stabilising the system. Figures 4.6 to 4.8 show response plots of the system inputs, and both the estimated, with Limited EKF, and measured outputs respectively, as the simulation is run over an interval of 100 seconds. The system is subjected to reference step inputs where the results are displayed in Table 4.1:
 				\\ \\
 				
 				\begin{table}[h!]
@@ -1544,9 +1544,9 @@
 					\end{minipage}
 				\end{figure}
 				
-				The LQG is a powerful control mechanism, however, there is one major drowback the using LQG control and that is the inability to taking into account both physical and performance constraint placed on the system states and inputs. This is shown in Figures 4. and 4. where the controller demands and inputs in excess of 800 $\mu_s$ and below 0 $\mu_s$ when a  step change of 15 meters in z is demanded of the system, where 0 to 800 $\mu_s$ is the physical systems input operating range. This could potentially be hazardous if the application where safety critical and the controller were to violate a constraint.
+				The LQG is a powerful control mechanism, however, there is one major drawback to using LQG control and that is the inability of taking into account both physical and performance constraints placed on the system states and inputs. This is shown in Figures 4.9 and 4.10 where the controller demands an input in excess of 800 $\mu_s$ and below 0 $\mu_s$ when a  step change of 15 meters in z is demanded of the system, where 0 to 800 $\mu_s$ is the physical system's input operating range. This could potentially be hazardous if the application where safety critical and the controller were to violate a constraint.
 				\\
-				Like LQG, MPC techniques are also part of the of optimal control family, however, with MPC implementations, the possibility exists where control signals can be determined such that they implicitly taking into account and produce control action so as to meet system constraints. 
+				Like LQG, MPC techniques are also part of the optimal control family, however, with MPC implementations, the possibility exists where control signals can be determined such that they implicitly take into account and produce control actions so as to meet system constraints. 
 				
 			\subsection{General Model Predictive Control (GPC)}
 			
@@ -1560,7 +1560,7 @@
 						The Receding Horizon Principle
 				\end{itemize}
 				\space
-				The prediction stage of a GPC algorithm uses the model to predict the future system states of the system, if provided with some sequence of control actions. This is dervived by recursively implementing the systems model unto itself to produce a higher order prediction model over a specified horizon length \cite{25},\cite{26},\cite{27}. Given a system of the equation 4.10 form, a state prediction model for a horizon of length N, and evaluated at a time instance k, can be defined as:
+				The prediction stage of a GPC algorithm uses the model to predict the future states of the system, if provided with some sequence of control actions. This is derived by recursively implementing the systems model unto itself to produce a higher order prediction model over a specified horizon length \cite{25},\cite{26},\cite{27}. Given a system of the equation 4.10 form, a state prediction model for a horizon of length N, and evaluated at a time instance k, can be defined as:
 				\begin{equation}
 					\bar{X}(k) = F X(k) + G \bar{\mu}(k)
 				\end{equation}
@@ -1611,7 +1611,7 @@
 				\[
 					X(k+1+i|k) = A_{dt}X(k+i|k) + B_{dt} \mu(k+i|k) , i=1,2,3\dots,N-1
 				\]
-				Where $Q^{n \times n}$, and $R^{m \times m}$, are 2-norm weighing matrices on the states and inputs respectively. If equation 4.25, is substituted into 4.27, this puts 4.27 into the standard form of a quadratic programming problems where:
+				Where $Q^{n \times n}$, and $R^{m \times m}$, are 2-norm weighing matrices on the states and inputs respectively. If equation 4.25, is substituted into 4.27, this puts 4.27 into the standard form of a quadratic programming problem where:
 				\begin{equation}
 					V_N(X(0),\bar{\mu}) = min_\mu \frac{1}{2} \bar{\mu}^{T}(k) H \bar{\mu}(k) + C_q^{T}\bar{\mu}(k) + \alpha
 				\end{equation}
@@ -1627,13 +1627,13 @@
 				\begin{equation}
 					\bar{\mu }= -H^{-1} L X(k)
 				\end{equation}
-				where the optimal control gain, $K_N$, consists of the first $m \times n$ terms in the $-H^{-1} L$ due to the implementation of the receding horizon principle. 
+				where the optimal control gain, $K_N$, consists of the first $m \times n$ terms in $-H^{-1} L$ due to the implementation of the receding horizon principle. 
 				\\
-				This is the reason MPC implementations are also known as receding horizon control (RHC) as they only perform the first set of control actions in the sequence $\bar{\mu}$, before recalculating and performing this action at every time interval, k, the target is reached. This continual updating provides feedback into the system \cite{25},\cite{26},\cite{27}. 
+				This is the reason MPC implementations are also known as receding horizon control (RHC) as they only perform the first set of control actions in the sequence $\bar{\mu}$, before recalculating and performing this action at every time interval, k, until the target is reached. This continual updating provides feedback into the system \cite{25},\cite{26},\cite{27}. 
 				
 			\subsection{LQ-MPC: Extending The LQR}
 				
-				The control law derived,$K_N$ in the previous subsection as opposed to the LQR control law K, derived in the previous section, is not necessarily stabilising even under nominal conditions. This is due to the complex interaction between N,Q,R. \cite{25},\cite{26}. In order to mitigate this, the conditions at the terminal state, k+N, must be made to behave in a similar way as the infinite horizon LQR.
+				The control law,$K_N$, derived in the previous subsection as opposed to the LQR control law K, derived in the previous section, is not necessarily stabilising even under nominal conditions. This is due to the complex interaction between N,Q,R. \cite{25},\cite{26}. In order to mitigate this, the conditions at the terminal state, k+N, must be made to behave in a similar way as the infinite horizon LQR.
 				\\
 				The is accomplish through the addition of an optimal terminal cost, P, to the cost function \(P_N(X(0))\). This then becomes: 
 				\begin{equation}
@@ -1666,7 +1666,7 @@
 				
 			\subsection{Closed-Loop Predictions}
 				
-				The Closed-loop paradigm embeds the optimal stabilising controller gains, K, into the prediction model of the system, pre-stabilising and in doing to defines a new control variable, c, a perturbations about the embedded most desired performance  where:
+				The Closed-loop paradigm embeds the optimal stabilising controller gains, K, into the prediction model of the system, pre-stabilising and in doing to defines a new control variable, c, as perturbations about the embedded desired performance where:
 				\begin{equation}
 					\mu(k+i-1) = -K X(k+i-1) + c(k+i-1), i = 1,2,\dots,N
 				\end{equation}
@@ -1687,11 +1687,11 @@
 				\begin{equation}
 					\bar{c}(k) = - S_c^{-1}S_{cx}X(k)
 				\end{equation}
-				This provide the closed-loop paradigm control law in the unconstrained case:
+				This provides the closed-loop paradigm control law in the unconstrained case:
 				\begin{equation}
 					\mu(k) = - [K + S_c^{-1}S_{cx}]X(k)
 				\end{equation}
-				The implementation of the Closed-loop paradigm is especially important when dealing with unstable systems,such as multirotors, as large prediction horizons N, the prediction matrices, F and G, may become numerically ill-conditioned leading to control implementation issue especially in embedded systems with limited computational power. However, the incorporation of the stabilising feedback K, into the prediction matrices changes their conditioning\cite{26},\cite{27}.
+				The implementation of the Closed-loop paradigm is especially important when dealing with unstable systems,such as multirotors, as with large prediction horizons N, the prediction matrices, F and G, may become numerically ill-conditioned leading to control implementation issues especially in embedded systems with limited computational power. However, the incorporation of the stabilising feedback K, into the prediction matrices changes their conditioning\cite{26},\cite{27}.
 				
 			\subsection{Reference Tracking}
 				
@@ -1708,11 +1708,11 @@
 					\end{bmatrix}
 				\end{equation}
 				
-				A control law of form:
+				This produces a control law of form:
 				\begin{equation}
 					\mu(k) = - [K + S_c^{-1}S_{cx}]( X(k)- Xr) + \mu_e
 				\end{equation}
-				In the unconstrained case, $S_{cx}$ = 0, therefore the unconstrained Closed-Loop paradigm LQ-MPC, results in state feedback \cite{26}.
+				In the unconstrained case, $S_{cx}$ goes to 0, therefore the unconstrained Closed-Loop paradigm LQ-MPC, results in state feedback \cite{26}.
 				
 			\subsection{Results}
 				Figures 4.13 to 4.16 show response plots of the system inputs, system perturbations, and both the estimated, with Limited EKF, and measured outputs respectively, as the simulation is run over an interval of 50 seconds. The system is subjected to reference step inputs where the results are displayed in Table 4.2:
@@ -1774,7 +1774,7 @@
 			This Chapter:
 			\begin{itemize}
 				\item 
-					Converted the Linearised model into a for suitable for control analysis and design
+					Converted the Linearised model into a form suitable for control analysis and design
 				\item 
 					Analysed key system properties such as its stability in open loop, reachability and observability 
 				\item
@@ -1782,7 +1782,7 @@
 				\item
 					Discussed the necessity for state estimation and proposed a modified Kalman filter for state estimation thus producing an LQG controller whose performance was tested and results presented
 				\item
-					Discussed limitations of the LQG and presented and derived an LQ-MPC controller as a solution, whose performance was tested and results presented.
+					Discussed limitations of the LQG and presented and derived an LQ-MPC controller as a potential solution, whose performance was tested and results presented.
 			\end{itemize}
 		
 	\newpage
@@ -1791,7 +1791,7 @@
 		
 		\section{Introduction}
 			
-			Advanced control systems need to be implemented using digital computers. In an application such as with UAVs, this computation needs to occurs on a devices as physically small as possible, due to design consideration such as minimising total vehicle mass. One such class of applicably small computers are SBCs. These are usually fully capable computers in their own right running light weight operating systems, such as some version watered down Linux distributions. Many typically have smaller physical dimension comparable to that of debit cards. Such devices have become possible and previlent due to the advent of smartphone technology driving the trend towards cost effective minimisation of processing units. 
+			Advanced control systems need to be implemented using digital computers. In an application such as with UAVs, this computation needs to occurs on a devices as physically small as possible, due to design consideration such as minimising total vehicle mass. One such class of applicably small computers are SBCs. These are usually fully capable computers in their own right running light weight operating systems, such as some version watered down Linux distributions. Many typically have smaller physical dimension comparable to that of debit cards. Such devices have become possible and prevalent due to the advent of smartphone technology driving the trend towards cost effective minimisation of processing units. 
 			\\
 		 	This chapter will go through the considerations and processes involved in implementing control systems and propose an implementation, via a systems engineering framework, of a flight control system. These considerations are:
 			
@@ -1817,7 +1817,7 @@
 		
 			The SBC under consideration for the project is the Beagle Bone Blue (BBB) from the BeagleBoard group, shown in Figure 5.1, which, in addition to the computation provided by all SBCs, has been developed with many additional features that make is suitable for implementation in robotics.
 			\\
-			The BBB possesses a 1 Gigahertz ARM Cotrex-A8 mirco-processor unit, supported by 512 Megabytes of DDR3 random access memory (RAM). This SCB is also capable of wireless communication through various Bluetooth and Wi-Fi standards. However for the purposes of this investigation all communication to the SBC will occurs via a radio transmitter to a waiting receiver onboard the UAV. This transmitter will effectively be sending the reference commands, r, to the controller which will be read in as Pulse Position Modulated (PPM) values by the SBC. 
+			The BBB possesses a 1 Gigahertz ARM Cotrex-A8 mirco-processor unit, supported by 512 Megabytes of DDR3 random access memory (RAM). This SBC is also capable of wireless communication through various Bluetooth and Wi-Fi standards. However for the purposes of this investigation, all communication to the SBC will occur via a radio transmitter to a waiting receiver onboard the UAV. This transmitter will effectively be sending the reference commands, r, to the controller which will be read in as Pulse Position Modulated (PPM) values by the SBC. 
 			\\
 			The BBB comes equipped with multiple, peripheral communication interfaces such as:
 			\\
@@ -1825,9 +1825,9 @@
 				\item
 					Inter-Integrated Circuit ($I^{2}C$)
 				\item
-					Serial Periheral interface (SPI)
+					Serial Periheral Interface (SPI)
 				\item
-					 Genral Purpose Input-Outputs (GPIOs) at 3.3v Logic Level ($V_{op}$)
+					 General Purpose Input-Outputs (GPIOs) at 3.3v Logic Level ($V_{op}$)
 				\item
 					Universal Asynchronous receiver-Transmitter (UART) 
 			\end{itemize}  
@@ -1853,7 +1853,7 @@
 				
 			\subsection{Actuator interfaces}
 			
-				Broken out of the board through its GPIO pin header, are 8 serve motor controller port, as show in figure 5.1, which are able to generate PWM signals and interface with ECSs. These pins will be used to interface with the propulsion units.
+				Broken out of the board through its GPIO pin headers, are 8 servo motor controller ports, as show in figure 5.1, which are able to generate PWM signals and interface with ECSs. These pins will be used to interface with the propulsion units.
 				
 		\section{Software and UML}
 		
@@ -1866,7 +1866,7 @@
 					\label{fig:embeddedcomponentstructure}
 				\end{figure}
 			
-				The BBB is an embedded Linux SBC running a customised Linux distribution which comes included with the RCL. The RCL is the primary software package for interfacing with and developing robotics software for the BBB and other BeagleBoard group SBCs. This package contains libraries written in the C programming language that provide an application programming interface (API) for accessing the sensors and communication interfaces for the Robot Control projects \cite{31} The package also conveniently comes with examples and testing programs . 
+				The BBB is an embedded Linux SBC running a customised Linux distribution which comes included with the RCL. The RCL is the primary software package for interfacing with and developing robotics software for the BBB and other BeagleBoard group SBCs. This package contains libraries written in the C programming language that provide an application programming interface (API) for accessing the sensors and communication interfaces for Robot Control projects \cite{31} The package also conveniently comes with examples and testing programs . 
 				\\ \\
 				This package includes an extensive mathematics library for performing discrete-time feedback control such as including functions for:
 				
@@ -1887,7 +1887,7 @@
 					\item 
 						Raw sensor values are read in by the SBC
 					\item 
-						These value are passed through a sensor fusion stage which calculates $Z$ from raw pressure values and combines then converts the MARG value into $\phi,\theta\psi$ through a sensor fusion algorithm, the complementary filter \cite{20}, to make up the measured outputs Y.
+						These value are passed through a sensor fusion stage which calculates $Z$ from raw pressure values and combines then converts the MARG values into $\phi,\theta\psi$ through a sensor fusion algorithm, the complementary filter \cite{20}, to make up the measured outputs Y.
 					\item 
 						Y is then sent to the Limited EKF developed in Chapter 4, the Limited EKF then returns the full state, X
 					\item 
@@ -1898,24 +1898,24 @@
 			
 				UML is an Industry standard set of tools which consists of a set of different diagram types, which is used to model software system \cite{30}.
 				\\
-				The specific UML diagram implemented here is the UML class diagram. This diagram type is used to represent sections of software while showing the relationship between the different section. Class diagrams are typically utilised to represent system developed in an object-oriented manner with functionality separated into different classes, such as is possible with software developed in the C++ or the Java languages amongst many others \cite{30}. 
+				The specific UML diagram implemented here is the UML class diagram. This diagram type is used to represent sections of software while showing the relationship between the different sections. Class diagrams are typically utilised to represent systems developed in an object-oriented manner with functionality separated into different classes, such as is possible with software developed in the C++ or the Java languages amongst many others \cite{30}. 
 				\\
-				However, class diagrams can be adapted to represent systems developed in a non-object oriented programming environments, such as the C language, if the functionality is sufficiently encapsulated and atomised. This is presented in Figure 5.3
+				However, class diagrams can be adapted to represent systems developed in non-object oriented programming environments, such as the C language, if the functionality is sufficiently encapsulated and atomised. This is presented in Figure 5.3
 				\\
-				The Presented UML diagram show key functionality grouped into blocks, as shown in Figure 5.2. Each block contaits Function extracted from the RCL Library which perform the blocks desired function \cite{31}.
+				The Presented UML diagram shows key functionality grouped into blocks, as shown in Figure 5.2. Each block contains functions extracted from the RCL Library which perform the blocks desired function \cite{31}.
 				\\
 				\begin{itemize}
 					
 					\item 
 						The Sensor.h block shows the functions for reading in data from the MARG and Barometer
 					\item 
-						The SensorFusion.h block show functions from implementing a complementary and a built-in library script or calculating the altitude from pressure.
+						The SensorFusion.h block shows functions for implementing a complementary filter and a built-in library script for calculating the altitude from pressure.
 					\item
 						The LimitedEKF.h shows functions for implementing an extended Kalman filter.
 					\item
-						The Receive.h block show functions which read in and parse through data sent by a radio transmitter using PPM
+						The Receive.h block shows functions which read in and parse through data sent by a radio transmitter using PPM
 					\item
-						The MotorControl.h block show functions for calibrating the propulsion unit ESCs and sending commands to them.
+						The MotorControl.h block shows functions for calibrating the propulsion unit ESCs and sending commands to them.
 				\end{itemize}
 			
 				These blocks are then aggregated in the main.c block
@@ -1970,11 +1970,11 @@
 			\item
 				Develop a mathematical model representing the dynamics of the multirotor aircraft.
 			\item
-				Convert the model into formats which that could be used for, analysis and control systems design using linear analysis and design techniques, and implementation unto digital embedded systems. 
+				Convert the model into formats that could be used for, analysis and control systems design using linear analysis and design techniques, and implementation unto digital embedded systems. 
 			\item
 				Investigate, develop and implement model-based LQG and LQ-MPC feedback control schemes in simulation.
 			\item
-				Develop a proposal for implementing LQG based flight control software on an embedded microprocessor unit, conveyed using industry the standard UML software systems modelling tool.
+				Develop a proposal for implementing LQG based flight control software on an embedded microprocessor unit, conveyed using the industry  standard UML software systems modelling tool.
 		\end{enumerate}
 		Potential Future developments could include:
 		\begin{enumerate}
@@ -1985,7 +1985,7 @@
 			\item	
 				Investigate and develop non-linear control techniques capable of taking advantage of full motion range provide by a Quarternion based model 
 			\item	
-				Implementing full control over 3-D euclidean space by incorporating feedback control authority over x and y. \cite{1}
+				Implementing full control over 3-D euclidean space by incorporating feedback control authority over x and y.
 			\end{enumerate}
 	
 	\newpage
@@ -1993,8 +1993,8 @@
 	\pagenumbering{roman}
 				
 	\bibliography{ProjectResearchPapers}
-	\bibliographystyle{acm}
-	%\bibliographystyle{ieeetr}	
+	%\bibliographystyle{acm}
+	\bibliographystyle{ieeetr}	
 	
 	\newpage
 	\chapter*{Appendix A: Gantt Chart}

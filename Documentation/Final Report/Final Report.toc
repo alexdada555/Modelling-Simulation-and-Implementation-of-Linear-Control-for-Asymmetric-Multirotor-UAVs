@@ -56,5 +56,5 @@
 \contentsline {section}{\numberline {5.3}Software and UML}{56}{section.5.3}% 
 \contentsline {subsection}{\numberline {5.3.1}The Robot Control Library (RCL)}{56}{subsection.5.3.1}% 
 \contentsline {subsection}{\numberline {5.3.2}Universal Modelling Language (UML)}{57}{subsection.5.3.2}% 
-\contentsline {section}{\numberline {5.4}Summary}{59}{section.5.4}% 
+\contentsline {section}{\numberline {5.4}Summary}{58}{section.5.4}% 
 \contentsline {chapter}{\numberline {6}Conclusion}{61}{chapter.6}% 
