@@ -1,8 +1,47 @@
-[0] Config.pm:304> INFO - This is Biber 2.13
-[1] Config.pm:307> INFO - Logfile is 'Final Report.blg'
-[84] biber-MSWIN64:315> INFO - === 
-[133] Biber.pm:375> INFO - Reading 'Final Report.bcf'
-[401] Utils.pm:316> ERROR - Error: Found biblatex control file version 3.7, expected version 3.6.
-This means that your biber (2.13) and biblatex (3.14) versions are incompatible.
-See compat matrix in biblatex or biber PDF documentation.
-[401] Biber.pm:114> INFO - ERRORS: 1
+This is BibTeX, Version 0.99dThe top-level auxiliary file: Final Report.aux
+The style file: acm.bst
+Database file #1: ProjectResearchPapers.bib
+Warning--entry type for "28" isn't style-file defined
+--line 183 of file ProjectResearchPapers.bib
+Warning--entry type for "31" isn't style-file defined
+--line 202 of file ProjectResearchPapers.bib
+Warning--to sort, need author, organization, or key in 2
+Warning--to sort, need author or key in 8
+Warning--to sort, need author, organization, or key in 10
+Warning--to sort, need author, organization, or key in 14
+Warning--to sort, need author, organization, or key in 21
+Warning--to sort, need author, organization, or key in 22
+Warning--to sort, need author, organization, or key in 23
+Warning--to sort, need author, organization, or key in 24
+Warning--to sort, need author or key in 18
+Warning--to sort, need author or key in 25
+Warning--to sort, need author or key in 31
+Warning--empty author in 8
+Warning--empty note in 8
+Warning--empty journal in 16
+Warning--empty journal in 3
+Warning--empty journal in 15
+Warning--empty journal in 17
+Warning--empty publisher in 13
+Warning--empty year in 13
+Warning--empty journal in 4
+Warning--empty journal in 6
+Warning--empty publisher in 29
+Warning--empty year in 29
+Warning--empty journal in 7
+Warning--empty publisher in 11
+Warning--empty year in 11
+Warning--empty chapter and pages in 11
+Warning--empty publisher in 12
+Warning--empty year in 12
+Warning--empty journal in 20
+Warning--empty journal in 19
+Warning--empty journal in 9
+Warning--empty publisher in 26
+Warning--empty year in 26
+Warning--empty publisher in 27
+Warning--empty year in 27
+Warning--empty publisher in 30
+Warning--empty year in 30
+Warning--empty journal in 5
+(There were 41 warnings)

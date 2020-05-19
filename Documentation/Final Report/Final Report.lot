@@ -3,7 +3,8 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {3.1}{\ignorespaces Table of Model Parameters\relax }}{30}{table.caption.16}% 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Table of Step Response values\relax }}{42}{table.caption.21}% 
+\contentsline {table}{\numberline {4.1}{\ignorespaces Table of LQG Step Response values\relax }}{42}{table.caption.21}% 
+\contentsline {table}{\numberline {4.2}{\ignorespaces Table of LQ-MPC Step Response values\relax }}{50}{table.caption.27}% 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Table of Control and Implementation Parameters\relax }}{56}{table.caption.28}% 
+\contentsline {table}{\numberline {5.1}{\ignorespaces Table of Control and Implementation Parameters\relax }}{60}{table.caption.33}% 
 \addvspace {10\p@ }

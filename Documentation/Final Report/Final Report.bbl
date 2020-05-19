@@ -1,0 +1,122 @@
+\begin{thebibliography}{10}
+
+\bibitem{14}
+{\em A2212/13T Technical data}.
+
+\bibitem{18}
+Acs317: State-space design methods.
+
+\bibitem{25}
+Acs61161: Advanced control.
+
+\bibitem{8}
+Appendix f: Vtol modeling.
+
+\bibitem{21}
+{\em Discrete-time Kalman filter}.
+
+\bibitem{23}
+{\em Extended Kalman Filter Lecture re No}.
+
+\bibitem{2}
+{\em Fixed-Wing Dynamics and Control}.
+
+\bibitem{10}
+{\em Lecture L26 - 3D Rigid Body Dynamics: The Inertia Tensor}.
+
+\bibitem{31}
+Robot control library documentation.
+
+\bibitem{22}
+{\em Robot Mapping: Extended Kalman Filter}.
+
+\bibitem{24}
+{\em Understanding and Applying Kalman Filtering}.
+
+\bibitem{28}
+{\sc Bouffard, P.}
+\newblock On-board model predictive control of a quadrotor.
+
+\bibitem{16}
+{\sc Chevancova, A.}
+\newblock Mathematical modelling and parameter identification of quadrotor.
+
+\bibitem{3}
+{\sc Denis~Kotarski, Petar~Piljek, M.~K.}
+\newblock Mathematical modelling of multirotor uav.
+
+\bibitem{15}
+{\sc Denis~Kotarski, Matija~Krznar, P.~P.}
+\newblock Experimental identification and characterization of multirotor uav
+  propulsion.
+
+\bibitem{17}
+{\sc Immaneni, H.}
+\newblock Mathematical modelling and position control of brushless dc (bldc)
+  motor.
+
+\bibitem{13}
+{\sc Khalil, H.~K.}
+\newblock {\em Nonlinear Systems Third Edition}.
+
+\bibitem{4}
+{\sc Luukkonen, T.}
+\newblock Modelling and control of quadcopter.
+
+\bibitem{6}
+{\sc Mostafa~Moussid, Adil~Sayouti, H.~M.}
+\newblock Dynamic modeling and control of a hexarotor using linear and
+  nonlinear methods.
+
+\bibitem{29}
+{\sc Ng, T.~S.}
+\newblock {\em Flight Systems and Control}.
+
+\bibitem{7}
+{\sc Oguz~Kose, T.~O.}
+\newblock Dynamic modeling and simulation of quadrotor for different flight
+  conditions.
+
+\bibitem{11}
+{\sc Packard, Poola, H.}
+\newblock {\em Jacobian Linearizations, equilibrium points}.
+
+\bibitem{12}
+{\sc Prior, S.~D.}
+\newblock {\em Optimizing Small Multi-Rotor Unmanned Aircraft}.
+
+\bibitem{20}
+{\sc P.Tomas~Larsson, A.~U.}
+\newblock Scaling the speed of response using lqr design.
+
+\bibitem{19}
+{\sc Rafael~Guardeno, Manuel J.~Lopez, V. M.~S.}
+\newblock Mimo pid controller tuning method for quadrotor based on lqr/lqg
+  theory.
+
+\bibitem{9}
+{\sc Roman~Czyba, Grzegorz~Szafransk, M.~J.}
+\newblock Development of co-axial y6-rotor uav design, mathematical modeling,
+  rapid prototyping and experimental validation.
+
+\bibitem{26}
+{\sc Rossiter, J.~A.}
+\newblock {\em A First Course in Predictive Control}.
+
+\bibitem{27}
+{\sc Rossiter, J.~A.}
+\newblock {\em Model-Based Predictive Control: A Practical Approach}.
+
+\bibitem{30}
+{\sc Weilkiens, T.}
+\newblock {\em Systems Engineering with SysML and UML}.
+
+\bibitem{1}
+{\sc Whindborne, L.}
+\newblock {\em Axes Systems, Orientation and Motion Notation}.
+
+\bibitem{5}
+{\sc Zoran~Benic, Petar~Piljek, D.~K.}
+\newblock Mathematical modelling of unmanned aerial vehicles with four motors.
+
+\end{thebibliography}

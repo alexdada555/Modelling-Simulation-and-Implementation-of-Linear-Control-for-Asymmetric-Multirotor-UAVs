@@ -108,7 +108,7 @@ q = size(Cdt,1);                       % number of controlled outputs
 %% Discrete-Time Full State-Feedback Control
 % State feedback control, Z Phi Theta Psi are controlled outputs
 
-Q = diag([500,0,1000,0,1000,0,1000,100,0,0,0,0,0,0]); % State penalty
+Q = diag([500,0,1000,0,1000,0,1000,0,0,0,0,0,0,0]); % State penalty
 R = (1*10^-3)*eye(6,6);  % Control penalty
 
 Kdt = dlqr(Adt,Bdt,Q,R,0); % DT State-Feedback Controller Gains
@@ -191,10 +191,13 @@ P = dlyap(Phi',S);  % Terminal State Penalty from Lyapunov Function
 
 %%  Definition of MPC Prediction, Cost and Constaint Matrices
 
-N = 20;  % Prediction Horizon
+N = 100;  % Prediction Horizon
 
 %[Fxcl,Gxcl,Fycl,Gycl,Fucl,Gucl] = predict_mats_cl(Phi,Bdt,Cdt,Kdt,N); % Parameter Matrices
 %[Sc1,Scx] = cost_mats_cl(Fxcl,Gxcl,Fycl,Gycl,Fucl,Gucl,Q,R,P); % Cost Function Matricies
+
+% [F,G] = predict_mats(Adt,Bdt,N); % State Parameter Matrices
+% [H,L,M] = cost_mats(F,G,Q,R,P);  % State Cost Function Matricies
 
 [SX,SC,SXC,Spsi] = ompc_cost(Adt,Bdt,Cdt,Ddt,Q,R,N);
 
@@ -207,21 +210,21 @@ N = 20;  % Prediction Horizon
 % 
 % Pu = [eye(6); -1*eye(6)];
 % qu = [800*ones(6,1); zeros(6,1)]; % Input Constraints
-% 
 
-Kxmax = [eye(14); -1*eye(14)];
-xmax = [10;10;90*pi/180;10;90*pi/180;10;90*pi/180;10;16000;16000;16000;16000;16000;16000;
-        0;0;90*pi/180;0;90*pi/180;0;90*pi/180;0;0;0;0;0;0;0]; % State Constraints
-  
-umin = zeros(6,1);
-umax = 800*ones(6,1);
+
+% Kxmax = [eye(14); -1*eye(14)];
+% xmax = [10;10;90*pi/180;10;90*pi/180;10;90*pi/180;10;16000;16000;16000;16000;16000;16000;
+%         0;0;90*pi/180;0;90*pi/180;0;90*pi/180;0;0;0;0;0;0;0]; % State Constraints
+%   
+% umin = zeros(6,1);
+% umax = 800*ones(6,1);
 
 % 
 % [Pc, qc, Sc] = constraint_mats(F,G,Pu,qu,Px,qx,Pxf,qxf); % Constraints As Linear Inequality 
 
 %% LQ-MPC Dynamic Simulation
 
-Time = 15;
+Time = 50;
 kT = round(Time/T);
 
 Xreal = zeros(18,kT);
@@ -243,23 +246,23 @@ Xest = X;
 for k = 2:kT-1
     
     %%Reference Setting
-    if k == 1/T
-        Ref(1) = 0;
+    if k == 5/T
+        Ref(1) = 1;
     end
-    if k == 4/T
-        Ref(2) = 0*pi/180;
+    if k == 10/T
+        Ref(2) = 30*pi/180;
     end
-    if k == 6/T
+    if k == 15/T
         Ref(2) = 0;
     end
-    if k == 7/T
-        Ref(3) = 0*pi/180;
+    if k == 20/T
+        Ref(3) = 30*pi/180;
     end
-    if k == 8/T
+    if k == 25/T
         Ref(3) = 0;
     end
-    if k == 9/T
-        Ref(4) = 0*pi/180;
+    if k == 30/T
+        Ref(4) = 45*pi/180;
     end
     
     %%Estimation
@@ -283,9 +286,12 @@ for k = 2:kT-1
     %%Control 
     %[Cost(:,k),U(:,k),c(:,k)] = ompc_constraints(Adt,Bdt,Cdt,Ddt,N,Q,R,Q,R,(Xest(:,k) - [Ref(1);0;Ref(2);0;Ref(3);0;Ref(4);0;W_e]),umin,umax,Kxmax,xmax);
     
-    [c(:,k),Cost(:,k)] = quadprog(((SC+SC')/2),SXC'*(Xest(:,k) - [Ref(1);0;Ref(2);0;Ref(3);0;Ref(4);0;W_e])); % Pc,qc + Sc*X(:,k) Solve Quadratic program
+    [c(:,k),Cost(:,k)] = quadprog(((SC+SC')/2),SXC'*Xest(:,k)); % Pc,qc + Sc*X(:,k) Solve Quadratic program
     U(:,k) =  -Kdt*(Xest(:,k) - [Ref(1);0;Ref(2);0;Ref(3);0;Ref(4);0;W_e]) + c(1:6,k) + U_e;
     J(:,k) = Xest(:,k)'*SX*Xest(:,k) + 2*c(:,k)'*SXC'*Xest(:,k) + c(:,k)'*SC*c(:,k);
+    
+%     [Useq,Cost(:,k)] = quadprog(H,L*X(:,k)); % ,Pc,qc + Sc*X(:,k) Solve Quadratic program
+%     U(:,k) =  Useq(1:6);
     
     %%Simulation    
     t_span = [0,T];
@@ -362,7 +368,7 @@ title('LQ-MPC Inputs PWM Signal');
 ylabel('Micro Seconds(ms)');
 
 figure(8);
-plot(t,c);
+plot(t,c(1:6,:));
 legend('c1','c2','c3','c4','c5','c6');
 title('LQ-MPC Inputs PWM Signal peturbations');
 ylabel('Micro Seconds(ms)');

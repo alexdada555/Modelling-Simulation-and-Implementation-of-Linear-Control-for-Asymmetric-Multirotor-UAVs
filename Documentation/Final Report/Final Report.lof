@@ -23,8 +23,19 @@
 \contentsline {figure}{\numberline {4.8}{\ignorespaces System Measured Outputs\relax }}{44}{figure.caption.23}% 
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Input Constraint Violation\relax }}{45}{figure.caption.24}% 
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Output Constraint Violation\relax }}{45}{figure.caption.24}% 
+\contentsline {figure}{\numberline {4.11}{\ignorespaces OMPC Implementation Structure\relax }}{48}{figure.caption.25}% 
+\contentsline {figure}{\numberline {4.12}{\ignorespaces OMPC Implementation Structure\relax }}{49}{figure.caption.26}% 
+\contentsline {figure}{\numberline {4.13}{\ignorespaces LQ-MPC Unconstrained Inputs\relax }}{51}{figure.caption.28}% 
+\contentsline {figure}{\numberline {4.14}{\ignorespaces LQ-MPC Unconstrained Perturbations\relax }}{51}{figure.caption.28}% 
+\contentsline {figure}{\numberline {4.15}{\ignorespaces LQ-MPC Estimated Outputs\relax }}{51}{figure.caption.29}% 
+\contentsline {figure}{\numberline {4.16}{\ignorespaces LQ-MPC Model Outputs\relax }}{51}{figure.caption.29}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces BeagleBone Blue SBC\relax }}{50}{figure.caption.25}% 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Embedded Component Structure\relax }}{52}{figure.caption.26}% 
-\contentsline {figure}{\numberline {5.3}{\ignorespaces UML Class diagram of Functions\relax }}{54}{figure.caption.27}% 
+\contentsline {figure}{\numberline {5.1}{\ignorespaces BeagleBone Blue SBC\relax }}{54}{figure.caption.30}% 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Embedded Component Structure\relax }}{56}{figure.caption.31}% 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces UML Class diagram of Functions\relax }}{58}{figure.caption.32}% 
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Gantt Table of Project Objectives and Dates\relax }}{iv}{figure.caption.36}% 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Gantt Chart Page 1\relax }}{v}{figure.caption.37}% 
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Gantt Chart Page 2\relax }}{vi}{figure.caption.38}% 
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Gantt Chart Page 3\relax }}{vii}{figure.caption.39}% 
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Gantt Chart Page 4\relax }}{viii}{figure.caption.40}% 

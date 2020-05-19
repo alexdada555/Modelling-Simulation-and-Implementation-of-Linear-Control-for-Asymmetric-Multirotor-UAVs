@@ -44,17 +44,17 @@
 \contentsline {subsection}{\numberline {4.5.1}Limitations of LQG control}{45}{subsection.4.5.1}% 
 \contentsline {subsection}{\numberline {4.5.2}General Model Predictive Control (GPC)}{45}{subsection.4.5.2}% 
 \contentsline {subsection}{\numberline {4.5.3}LQ-MPC: Extending The LQR}{47}{subsection.4.5.3}% 
-\contentsline {subsection}{\numberline {4.5.4}Closed-loop predictions}{48}{subsection.4.5.4}% 
-\contentsline {subsection}{\numberline {4.5.5}Constraint Handling and Reference Tracking}{48}{subsection.4.5.5}% 
-\contentsline {subsection}{\numberline {4.5.6}Results}{48}{subsection.4.5.6}% 
-\contentsline {section}{\numberline {4.6}Summary}{48}{section.4.6}% 
-\contentsline {chapter}{\numberline {5}Embedded Control Systems Implementation}{49}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Introduction}{49}{section.5.1}% 
-\contentsline {section}{\numberline {5.2}Hardware}{50}{section.5.2}% 
-\contentsline {subsection}{\numberline {5.2.1}MARG and Barometer}{51}{subsection.5.2.1}% 
-\contentsline {subsection}{\numberline {5.2.2}Actuator interfaces}{51}{subsection.5.2.2}% 
-\contentsline {section}{\numberline {5.3}Software and UML}{52}{section.5.3}% 
-\contentsline {subsection}{\numberline {5.3.1}The Robot Control Library (RCL)}{52}{subsection.5.3.1}% 
-\contentsline {subsection}{\numberline {5.3.2}Universal Modelling Language (UML)}{53}{subsection.5.3.2}% 
-\contentsline {section}{\numberline {5.4}Summary}{55}{section.5.4}% 
-\contentsline {chapter}{\numberline {6}Conclusion}{57}{chapter.6}% 
+\contentsline {subsection}{\numberline {4.5.4}Closed-Loop Predictions}{48}{subsection.4.5.4}% 
+\contentsline {subsection}{\numberline {4.5.5}Reference Tracking}{49}{subsection.4.5.5}% 
+\contentsline {subsection}{\numberline {4.5.6}Results}{50}{subsection.4.5.6}% 
+\contentsline {section}{\numberline {4.6}Summary}{51}{section.4.6}% 
+\contentsline {chapter}{\numberline {5}Embedded Control Systems Implementation}{53}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Introduction}{53}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Hardware}{54}{section.5.2}% 
+\contentsline {subsection}{\numberline {5.2.1}MARG and Barometer}{55}{subsection.5.2.1}% 
+\contentsline {subsection}{\numberline {5.2.2}Actuator interfaces}{55}{subsection.5.2.2}% 
+\contentsline {section}{\numberline {5.3}Software and UML}{56}{section.5.3}% 
+\contentsline {subsection}{\numberline {5.3.1}The Robot Control Library (RCL)}{56}{subsection.5.3.1}% 
+\contentsline {subsection}{\numberline {5.3.2}Universal Modelling Language (UML)}{57}{subsection.5.3.2}% 
+\contentsline {section}{\numberline {5.4}Summary}{59}{section.5.4}% 
+\contentsline {chapter}{\numberline {6}Conclusion}{61}{chapter.6}% 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.27)  18 MAY 2020 11:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.27)  19 MAY 2020 00:15
 entering extended mode
 **"./Final Report.tex"
 ("Final Report.tex"
@@ -589,7 +589,11 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 28.
 
-("Final Report.aux")
+("Final Report.aux"
+
+LaTeX Warning: Label `fig:ompcimplementationstructure' multiply defined.
+
+)
 \openout1 = `"Final Report.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
@@ -701,76 +705,35 @@ LaTeX Info: Redefining \nameref on input line 46.
 \@outlinefile=\write3
 \openout3 = `"Final Report.out"'.
 
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 49
-.
-
-("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\ot1ztmcm.fd"
-File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
-)
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 49
-.
-
-("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omlztmcm.fd"
-File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
-)
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 49
-.
-
-("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omsztmcm.fd"
-File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
-)
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 49
-.
-
-("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omxztmcm.fd"
-File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
-)
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 49.
-
-("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\ot1ptm.fd"
-File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
-)
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 49.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 49.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 49.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 48.
  [1
 
 {C:/Users/alexd/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 52.
-pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.54 	\end{abstract}
-                     [1]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 57.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--70
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 59--70
+Underfull \hbox (badness 10000) in paragraph at lines 55--66
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--70
+Underfull \hbox (badness 10000) in paragraph at lines 55--66
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--70
+Underfull \hbox (badness 10000) in paragraph at lines 55--66
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--70
+Underfull \hbox (badness 10000) in paragraph at lines 55--66
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--66
 
  []
 
@@ -782,8 +745,37 @@ This may cause the page layout to be inconsistent, however.
 
 [2] [3]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 73.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 69.
  ("Final Report.toc"
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 2.
+
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\ot1ztmcm.fd"
+File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 2.
+
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omlztmcm.fd"
+File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 2.
+
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omsztmcm.fd"
+File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 2.
+
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omxztmcm.fd"
+File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 2.
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\ot1ptm.fd"
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
@@ -796,14 +788,14 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 \tf@toc=\write4
 \openout4 = `"Final Report.toc"'.
 
- [6] ("Final Report.lof")
+ [6]
+("Final Report.lof" [7
+
+])
 \tf@lof=\write5
 \openout5 = `"Final Report.lof"'.
 
- [7
-
-] [8]
-("Final Report.lot")
+ [8] ("Final Report.lot")
 \tf@lot=\write6
 \openout6 = `"Final Report.lot"'.
 
@@ -811,39 +803,39 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 
 ]
 Chapter 1.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 104.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 100.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 104.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 100.
  [1
 
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 125.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 121.
  [2]
-<ProjectInitialTimetable.png, id=417, 718.93594pt x 476.53032pt>
+<ProjectInitialTimetable.png, id=442, 718.93594pt x 476.53032pt>
 File: ProjectInitialTimetable.png Graphic file (type png)
 <use ProjectInitialTimetable.png>
-Package pdftex.def Info: ProjectInitialTimetable.png  used on input line 159.
+Package pdftex.def Info: ProjectInitialTimetable.png  used on input line 155.
 (pdftex.def)             Requested size: 498.26784pt x 330.27507pt.
 
-Overfull \hbox (45.29958pt too wide) in paragraph at lines 159--160
+Overfull \hbox (45.29958pt too wide) in paragraph at lines 155--156
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<ProjectFinalTimetable.png, id=418, 792.71156pt x 394.47375pt>
+<ProjectFinalTimetable.png, id=443, 792.71156pt x 394.47375pt>
 File: ProjectFinalTimetable.png Graphic file (type png)
 <use ProjectFinalTimetable.png>
-Package pdftex.def Info: ProjectFinalTimetable.png  used on input line 166.
+Package pdftex.def Info: ProjectFinalTimetable.png  used on input line 162.
 (pdftex.def)             Requested size: 498.26784pt x 247.95396pt.
 
-Overfull \hbox (45.29958pt too wide) in paragraph at lines 166--167
+Overfull \hbox (45.29958pt too wide) in paragraph at lines 162--163
  [][] 
  []
 
@@ -851,17 +843,17 @@ Overfull \hbox (45.29958pt too wide) in paragraph at lines 166--167
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--180
+Underfull \hbox (badness 10000) in paragraph at lines 167--176
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--180
+Underfull \hbox (badness 10000) in paragraph at lines 167--176
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--180
+Underfull \hbox (badness 10000) in paragraph at lines 167--176
 
  []
 
@@ -877,55 +869,49 @@ Chapter 2.
 [6
 
 ]
-Overfull \hbox (9.98639pt too wide) in paragraph at lines 216--217
-[]\T1/ptm/m/n/12 Sources [1],[8],[16] present rep-re-sen-ta-tions through Quate
-r-nions which solve is-sues present
- []
-
-
-Overfull \hbox (3.41087pt too wide) in paragraph at lines 223--225
+Overfull \hbox (3.41087pt too wide) in paragraph at lines 219--221
 []\T1/ptm/m/n/12 The Newton-Euler con-ven-tion which de-rives rep-re-sen-ta-tio
 ns of sys-tems dy-nam-ics through
  []
 
 
-Overfull \hbox (10.79094pt too wide) in paragraph at lines 225--227
+Overfull \hbox (10.79094pt too wide) in paragraph at lines 221--223
 []\T1/ptm/m/n/12 The Euler-Lagrange con-ven-tion which de-rives rep-re-sen-ta-t
 ions of sys-tems dy-nam-ics through
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 232--237
+Underfull \hbox (badness 10000) in paragraph at lines 228--233
 
  []
 
 [8]
-Overfull \hbox (0.16093pt too wide) in paragraph at lines 244--244
+Overfull \hbox (0.16093pt too wide) in paragraph at lines 240--240
 []\T1/ptm/b/n/17.28 Control Sys-tems De-sign, Sim-u-la-tion and Im-ple-men-ta-t
 ion 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 252--259
+Underfull \hbox (badness 10000) in paragraph at lines 248--255
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 252--259
+Underfull \hbox (badness 10000) in paragraph at lines 248--255
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 262--264
+Underfull \hbox (badness 10000) in paragraph at lines 258--260
 
  []
 
 [10]
 Chapter 3.
-<Y6UAV1-removebg-preview.png, id=463, 579.16376pt x 434.62375pt>
+<Y6UAV1-removebg-preview.png, id=569, 579.16376pt x 434.62375pt>
 File: Y6UAV1-removebg-preview.png Graphic file (type png)
 <use Y6UAV1-removebg-preview.png>
-Package pdftex.def Info: Y6UAV1-removebg-preview.png  used on input line 296.
+Package pdftex.def Info: Y6UAV1-removebg-preview.png  used on input line 292.
 (pdftex.def)             Requested size: 362.37598pt x 271.9376pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -933,165 +919,165 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [11
 
 ]
-<UAVwithFrames.png, id=474, 473.51906pt x 314.67563pt>
+<UAVwithFrames.png, id=584, 473.51906pt x 314.67563pt>
 File: UAVwithFrames.png Graphic file (type png)
 <use UAVwithFrames.png>
-Package pdftex.def Info: UAVwithFrames.png  used on input line 307.
+Package pdftex.def Info: UAVwithFrames.png  used on input line 303.
 (pdftex.def)             Requested size: 317.0764pt x 210.71632pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 312--317
+Underfull \hbox (badness 10000) in paragraph at lines 308--313
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 312--317
+Underfull \hbox (badness 10000) in paragraph at lines 308--313
 
  []
 
 [12 <./Y6UAV1-removebg-preview.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 329--333
+Underfull \hbox (badness 10000) in paragraph at lines 325--329
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--333
+Underfull \hbox (badness 10000) in paragraph at lines 325--329
 
  []
 
 [13 <./UAVwithFrames.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 340--343
+Underfull \hbox (badness 10000) in paragraph at lines 336--339
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 350--355
+Underfull \hbox (badness 10000) in paragraph at lines 346--351
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 362--365
+Underfull \hbox (badness 10000) in paragraph at lines 358--361
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--379
+Underfull \hbox (badness 10000) in paragraph at lines 368--375
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--379
+Underfull \hbox (badness 10000) in paragraph at lines 368--375
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 386--388
+Underfull \hbox (badness 10000) in paragraph at lines 382--384
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 395--397
+Underfull \hbox (badness 10000) in paragraph at lines 391--393
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 407--410
+Underfull \hbox (badness 10000) in paragraph at lines 403--406
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 420--426
+Underfull \hbox (badness 10000) in paragraph at lines 416--422
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 433--437
+Underfull \hbox (badness 10000) in paragraph at lines 429--433
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 443--445
+Underfull \hbox (badness 10000) in paragraph at lines 439--441
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 445--451
+Underfull \hbox (badness 10000) in paragraph at lines 441--447
 
  []
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 457--461
+Underfull \hbox (badness 10000) in paragraph at lines 453--457
 
  []
 
 
-Overfull \hbox (40.1922pt too wide) detected at line 497
+Overfull \hbox (40.1922pt too wide) detected at line 493
 []\OML/ztmcm/m/it/12 M [] \OT1/ztmcm/m/n/12 = \OML/ztmcm/m/it/12 M [] \OMS/ztmc
 m/m/n/12   [] []   [] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 498--503
+Underfull \hbox (badness 10000) in paragraph at lines 494--499
 
  []
 
 
-Overfull \hbox (52.75053pt too wide) detected at line 539
+Overfull \hbox (52.75053pt too wide) detected at line 535
 []\OML/ztmcm/m/it/12 M [] \OT1/ztmcm/m/n/12 = \OML/ztmcm/m/it/12 M [] \OMS/ztmc
 m/m/n/12   [] []   [] []
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 539--542
+Underfull \hbox (badness 10000) in paragraph at lines 535--538
 
  []
 
-<UAVBodyFrame.png, id=516, 382.42876pt x 305.64188pt>
+<UAVBodyFrame.png, id=654, 382.42876pt x 305.64188pt>
 File: UAVBodyFrame.png Graphic file (type png)
 <use UAVBodyFrame.png>
-Package pdftex.def Info: UAVBodyFrame.png  used on input line 607.
+Package pdftex.def Info: UAVBodyFrame.png  used on input line 603.
 (pdftex.def)             Requested size: 271.7837pt x 217.22177pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 612--614
+Underfull \hbox (badness 10000) in paragraph at lines 608--610
 
  []
 
 [18]
-<BLDC.png, id=526, 258.21469pt x 220.57407pt>
+<BLDC.png, id=667, 258.21469pt x 220.57407pt>
 File: BLDC.png Graphic file (type png)
 <use BLDC.png>
-Package pdftex.def Info: BLDC.png  used on input line 632.
+Package pdftex.def Info: BLDC.png  used on input line 628.
 (pdftex.def)             Requested size: 226.48413pt x 193.47638pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<TestStand1.jpg, id=527, 4149.5025pt x 2182.1525pt>
+<TestStand1.jpg, id=668, 4149.5025pt x 2182.1525pt>
 File: TestStand1.jpg Graphic file (type jpg)
 <use TestStand1.jpg>
-Package pdftex.def Info: TestStand1.jpg  used on input line 639.
+Package pdftex.def Info: TestStand1.jpg  used on input line 635.
 (pdftex.def)             Requested size: 317.0764pt x 166.71768pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<InputStepData.png, id=528, 421.575pt x 316.18124pt>
+<InputStepData.png, id=674, 421.575pt x 316.18124pt>
 File: InputStepData.png Graphic file (type png)
 <use InputStepData.png>
-Package pdftex.def Info: InputStepData.png  used on input line 650.
+Package pdftex.def Info: InputStepData.png  used on input line 646.
 (pdftex.def)             Requested size: 317.0764pt x 237.81078pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 644--657
+Underfull \hbox (badness 10000) in paragraph at lines 640--653
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 644--657
+Underfull \hbox (badness 10000) in paragraph at lines 640--653
 
  []
 
@@ -1099,40 +1085,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 644--657
 Underfull \vbox (badness 6252) has occurred while \output is active []
 
  [20 <./BLDC.png> <./TestStand1.jpg>]
-<ModelStep.png, id=538, 421.575pt x 316.18124pt>
+<ModelStep.png, id=684, 421.575pt x 316.18124pt>
 File: ModelStep.png Graphic file (type png)
 <use ModelStep.png>
-Package pdftex.def Info: ModelStep.png  used on input line 667.
+Package pdftex.def Info: ModelStep.png  used on input line 663.
 (pdftex.def)             Requested size: 317.0764pt x 237.81078pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [21 <./InputStepData.png (PNG copy)>]
-<ThrustData.png, id=545, 421.575pt x 316.18124pt>
+<ThrustData.png, id=691, 421.575pt x 316.18124pt>
 File: ThrustData.png Graphic file (type png)
 <use ThrustData.png>
-Package pdftex.def Info: ThrustData.png  used on input line 683.
+Package pdftex.def Info: ThrustData.png  used on input line 679.
 (pdftex.def)             Requested size: 317.0764pt x 237.81078pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<TorqueData.png, id=546, 421.575pt x 316.18124pt>
+<TorqueData.png, id=692, 421.575pt x 316.18124pt>
 File: TorqueData.png Graphic file (type png)
 <use TorqueData.png>
-Package pdftex.def Info: TorqueData.png  used on input line 690.
+Package pdftex.def Info: TorqueData.png  used on input line 686.
 (pdftex.def)             Requested size: 317.0764pt x 237.81078pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [22 <./ModelStep.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 699--703
+Underfull \hbox (badness 10000) in paragraph at lines 695--699
 
  []
 
 
-Overfull \hbox (54.74863pt too wide) detected at line 739
+Overfull \hbox (54.74863pt too wide) detected at line 735
 \OML/ztmcm/m/it/12 M [] \OT1/ztmcm/m/n/12 = \OML/ztmcm/m/it/12 M [] \OMS/ztmcm/
 m/n/12   [] []   [] []
  []
@@ -1141,37 +1127,37 @@ m/n/12   [] []   [] []
 Underfull \vbox (badness 2828) has occurred while \output is active []
 
  [23 <./ThrustData.png (PNG copy)> <./TorqueData.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 739--743
+Underfull \hbox (badness 10000) in paragraph at lines 735--739
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 797--801
+Underfull \hbox (badness 10000) in paragraph at lines 793--797
 
  []
 
 [24]
-Underfull \hbox (badness 10000) in paragraph at lines 896--900
+Underfull \hbox (badness 10000) in paragraph at lines 892--896
 
  []
 
 [25] [26]
-Underfull \hbox (badness 10000) in paragraph at lines 961--966
+Underfull \hbox (badness 10000) in paragraph at lines 957--962
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 968--970
+Underfull \hbox (badness 10000) in paragraph at lines 964--966
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 972--979
+Underfull \hbox (badness 10000) in paragraph at lines 968--975
 
  []
 
 
-Overfull \hbox (47.44379pt too wide) detected at line 996
+Overfull \hbox (47.44379pt too wide) detected at line 992
 [] []
  []
 
@@ -1180,12 +1166,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [27]
 [28] [29]
-Overfull \hbox (3.96428pt too wide) in paragraph at lines 1041--1041
+Overfull \hbox (3.96428pt too wide) in paragraph at lines 1037--1037
 []\T1/ptm/m/n/12 Character| 
  []
 
 
-Overfull \hbox (40.27582pt too wide) in paragraph at lines 1037--1068
+Overfull \hbox (40.27582pt too wide) in paragraph at lines 1033--1061
  [][] 
  []
 
@@ -1197,67 +1183,67 @@ Underfull \vbox (badness 1946) has occurred while \output is active []
  [31
 
 ]
-<DiscreteSystemPoles.png, id=614, 421.575pt x 316.18124pt>
+<DiscreteSystemPoles.png, id=766, 421.575pt x 316.18124pt>
 File: DiscreteSystemPoles.png Graphic file (type png)
 <use DiscreteSystemPoles.png>
-Package pdftex.def Info: DiscreteSystemPoles.png  used on input line 1132.
+Package pdftex.def Info: DiscreteSystemPoles.png  used on input line 1125.
 (pdftex.def)             Requested size: 362.37598pt x 271.78513pt.
 
 [32] [33 <./DiscreteSystemPoles.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 1177--1180
+Underfull \hbox (badness 10000) in paragraph at lines 1170--1173
 
  []
 
 [34]
-Underfull \hbox (badness 10000) in paragraph at lines 1217--1223
+Underfull \hbox (badness 10000) in paragraph at lines 1210--1216
 
  []
 
 [35] [36] [37]
-Underfull \hbox (badness 10000) in paragraph at lines 1313--1315
+Underfull \hbox (badness 10000) in paragraph at lines 1306--1308
 
  []
 
-<LQRSimulink.png, id=656, 830.35219pt x 312.41719pt>
+<LQRSimulink.png, id=829, 830.35219pt x 312.41719pt>
 File: LQRSimulink.png Graphic file (type png)
 <use LQRSimulink.png>
-Package pdftex.def Info: LQRSimulink.png  used on input line 1358.
+Package pdftex.def Info: LQRSimulink.png  used on input line 1351.
 (pdftex.def)             Requested size: 452.96826pt x 170.42845pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1365--1368
+Underfull \hbox (badness 10000) in paragraph at lines 1358--1361
 
  []
 
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 1391--1395
+Underfull \hbox (badness 10000) in paragraph at lines 1384--1388
 
  []
 
 [39 <./LQRSimulink.png>] [40]
-<ModKFerror.png, id=680, 421.575pt x 316.18124pt>
+<ModKFerror.png, id=864, 421.575pt x 316.18124pt>
 File: ModKFerror.png Graphic file (type png)
 <use ModKFerror.png>
-Package pdftex.def Info: ModKFerror.png  used on input line 1465.
+Package pdftex.def Info: ModKFerror.png  used on input line 1458.
 (pdftex.def)             Requested size: 226.48413pt x 169.86691pt.
-<ModEKFerror.png, id=681, 421.575pt x 316.18124pt>
+<ModEKFerror.png, id=865, 421.575pt x 316.18124pt>
 File: ModEKFerror.png Graphic file (type png)
 <use ModEKFerror.png>
-Package pdftex.def Info: ModEKFerror.png  used on input line 1471.
+Package pdftex.def Info: ModEKFerror.png  used on input line 1464.
 (pdftex.def)             Requested size: 226.48413pt x 169.86691pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1479--1481
+Underfull \hbox (badness 10000) in paragraph at lines 1472--1474
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1479--1481
+Underfull \hbox (badness 10000) in paragraph at lines 1472--1474
 
  []
 
@@ -1265,47 +1251,47 @@ Underfull \hbox (badness 10000) in paragraph at lines 1479--1481
 Underfull \vbox (badness 4144) has occurred while \output is active []
 
  [41]
-Underfull \hbox (badness 10000) in paragraph at lines 1488--1488
+Underfull \hbox (badness 10000) in paragraph at lines 1481--1481
 []\T1/ptm/m/n/12 Overshoot
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1488--1488
+Underfull \hbox (badness 10000) in paragraph at lines 1481--1481
 []\T1/ptm/m/n/12 Settling
  []
 
 
-Underfull \hbox (badness 7685) in paragraph at lines 1488--1488
+Underfull \hbox (badness 7685) in paragraph at lines 1481--1481
 []\T1/ptm/m/n/12 Rise Time
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1488--1489
+Underfull \hbox (badness 10000) in paragraph at lines 1481--1482
 []\T1/ptm/m/n/12 Steady
  []
 
-<DiscreteSystemPoles2.png, id=686, 421.575pt x 316.18124pt>
+<DiscreteSystemPoles2.png, id=870, 421.575pt x 316.18124pt>
 File: DiscreteSystemPoles2.png Graphic file (type png)
 <use DiscreteSystemPoles2.png>
-Package pdftex.def Info: DiscreteSystemPoles2.png  used on input line 1504.
+Package pdftex.def Info: DiscreteSystemPoles2.png  used on input line 1497.
 (pdftex.def)             Requested size: 407.66867pt x 305.75948pt.
-<LQGEKFInputs.png, id=687, 421.575pt x 316.18124pt>
+<LQGEKFInputs.png, id=871, 421.575pt x 316.18124pt>
 File: LQGEKFInputs.png Graphic file (type png)
 <use LQGEKFInputs.png>
-Package pdftex.def Info: LQGEKFInputs.png  used on input line 1510.
+Package pdftex.def Info: LQGEKFInputs.png  used on input line 1503.
 (pdftex.def)             Requested size: 407.66867pt x 305.75948pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<ModEKFestOutputs.png, id=688, 421.575pt x 316.18124pt>
+<ModEKFestOutputs.png, id=872, 421.575pt x 316.18124pt>
 File: ModEKFestOutputs.png Graphic file (type png)
 <use ModEKFestOutputs.png>
-Package pdftex.def Info: ModEKFestOutputs.png  used on input line 1520.
+Package pdftex.def Info: ModEKFestOutputs.png  used on input line 1513.
 (pdftex.def)             Requested size: 407.66867pt x 305.75948pt.
-<ModEKFrealOutputs.png, id=689, 421.575pt x 316.18124pt>
+<ModEKFrealOutputs.png, id=873, 421.575pt x 316.18124pt>
 File: ModEKFrealOutputs.png Graphic file (type png)
 <use ModEKFrealOutputs.png>
-Package pdftex.def Info: ModEKFrealOutputs.png  used on input line 1526.
+Package pdftex.def Info: ModEKFrealOutputs.png  used on input line 1519.
 (pdftex.def)             Requested size: 407.66867pt x 305.75948pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1327,22 +1313,22 @@ Overfull \vbox (2.94295pt too high) has occurred while \output is active []
 
 
 [44 <./ModEKFestOutputs.png (PNG copy)> <./ModEKFrealOutputs.png (PNG copy)>]
-<LQGInputConstraintViolation.png, id=702, 421.575pt x 316.18124pt>
+<LQGInputConstraintViolation.png, id=886, 421.575pt x 316.18124pt>
 File: LQGInputConstraintViolation.png Graphic file (type png)
 <use LQGInputConstraintViolation.png>
 Package pdftex.def Info: LQGInputConstraintViolation.png  used on input line 15
-42.
+35.
 (pdftex.def)             Requested size: 226.48413pt x 169.86691pt.
-<LQGOutputConstraintViolation.png, id=703, 421.575pt x 316.18124pt>
+<LQGOutputConstraintViolation.png, id=887, 421.575pt x 316.18124pt>
 File: LQGOutputConstraintViolation.png Graphic file (type png)
 <use LQGOutputConstraintViolation.png>
 Package pdftex.def Info: LQGOutputConstraintViolation.png  used on input line 1
-548.
+541.
 (pdftex.def)             Requested size: 226.48413pt x 169.86691pt.
 
 [45 <./LQGInputConstraintViolation.png (PNG copy)> <./LQGOutputConstraintViolat
 ion.png (PNG copy)>]
-Overfull \hbox (29.53952pt too wide) detected at line 1607
+Overfull \hbox (29.53952pt too wide) detected at line 1600
 [][]\OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 k\OT1/ztmcm/m/n/12 ) = [] \OML/ztmcm/
 m/it/12 ; []\OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 k\OT1/ztmcm/m/n/12 ) = [] \OM
 L/ztmcm/m/it/12 ; F \OT1/ztmcm/m/n/12 = [] \OML/ztmcm/m/it/12 ; G \OT1/ztmcm/m/
@@ -1350,15 +1336,15 @@ n/12 = []
  []
 
 [46]
-Overfull \hbox (35.41359pt too wide) detected at line 1648
+Overfull \hbox (35.41359pt too wide) detected at line 1641
 []\OML/ztmcm/m/it/12 min[]V[]\OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 X\OT1/ztmcm/
 m/n/12 (0)\OML/ztmcm/m/it/12 ; []\OT1/ztmcm/m/n/12 ) = [][\OML/ztmcm/m/it/12 X[
 ]\OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 k \OT1/ztmcm/m/n/12 + \OML/ztmcm/m/it/12
  i\OMS/ztmcm/m/n/12 j\OML/ztmcm/m/it/12 k\OT1/ztmcm/m/n/12 )\OML/ztmcm/m/it/12 
 QX\OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 k \OT1/ztmcm/m/n/12 + \OML/ztmcm/m/it/1
 2 i\OMS/ztmcm/m/n/12 j\OML/ztmcm/m/it/12 k\OT1/ztmcm/m/n/12 ) + \OML/ztmcm/m/it
-/12 \OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 k \OT1/ztmcm/m/n/12 + \OML/ztmcm/m/i
-t/12 i\OMS/ztmcm/m/n/12 j\OML/ztmcm/m/it/12 k\OT1/ztmcm/m/n/12 )[]\OML/ztmcm/m/
+/12 []\OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 k \OT1/ztmcm/m/n/12 + \OML/ztmcm/m
+/it/12 i\OMS/ztmcm/m/n/12 j\OML/ztmcm/m/it/12 k\OT1/ztmcm/m/n/12 )\OML/ztmcm/m/
 it/12 R\OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 k \OT1/ztmcm/m/n/12 + \OML/ztmcm/
 m/it/12 i\OMS/ztmcm/m/n/12 j\OML/ztmcm/m/it/12 k\OT1/ztmcm/m/n/12 )] + \OML/ztm
 cm/m/it/12 X[]\OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 k \OT1/ztmcm/m/n/12 + \OML/
@@ -1368,93 +1354,359 @@ tmcm/m/it/12 PX\OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 k \OT1/ztmcm/m/n/12 + \OML
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1655--1659
+Underfull \hbox (badness 10000) in paragraph at lines 1648--1652
 
  []
 
-[47] [48]
+[47]
+<OMPC.png, id=923, 367.3725pt x 204.01219pt>
+File: OMPC.png Graphic file (type png)
+<use OMPC.png>
+Package pdftex.def Info: OMPC.png  used on input line 1677.
+(pdftex.def)             Requested size: 362.37598pt x 201.25047pt.
+ [48 <./OMPC.png>]
+<OMPC2.png, id=931, 377.91188pt x 231.86626pt>
+File: OMPC2.png Graphic file (type png)
+<use OMPC2.png>
+Package pdftex.def Info: OMPC2.png  used on input line 1700.
+(pdftex.def)             Requested size: 362.37598pt x 222.33432pt.
+ [49 <./OMPC2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1726--1726
+[]\T1/ptm/m/n/12 Overshoot
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1726--1726
+[]\T1/ptm/m/n/12 Settling
+ []
+
+
+Underfull \hbox (badness 7685) in paragraph at lines 1726--1726
+[]\T1/ptm/m/n/12 Rise Time
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1726--1727
+[]\T1/ptm/m/n/12 Steady
+ []
+
+<LQMPCInputs.png, id=941, 421.575pt x 316.18124pt>
+File: LQMPCInputs.png Graphic file (type png)
+<use LQMPCInputs.png>
+Package pdftex.def Info: LQMPCInputs.png  used on input line 1742.
+(pdftex.def)             Requested size: 226.48413pt x 169.86691pt.
+<LQMPCPerturbations.png, id=942, 421.575pt x 316.18124pt>
+File: LQMPCPerturbations.png Graphic file (type png)
+<use LQMPCPerturbations.png>
+Package pdftex.def Info: LQMPCPerturbations.png  used on input line 1748.
+(pdftex.def)             Requested size: 226.48413pt x 169.86691pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<LQMPCestOutputs.png, id=943, 421.575pt x 316.18124pt>
+File: LQMPCestOutputs.png Graphic file (type png)
+<use LQMPCestOutputs.png>
+Package pdftex.def Info: LQMPCestOutputs.png  used on input line 1758.
+(pdftex.def)             Requested size: 226.48413pt x 169.86691pt.
+<LQMPCrealOutputs.png, id=944, 421.575pt x 316.18124pt>
+File: LQMPCrealOutputs.png Graphic file (type png)
+<use LQMPCrealOutputs.png>
+Package pdftex.def Info: LQMPCrealOutputs.png  used on input line 1764.
+(pdftex.def)             Requested size: 226.48413pt x 169.86691pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[50] [51 <./LQMPCInputs.png (PNG copy)> <./LQMPCPerturbations.png (PNG copy)> <
+./LQMPCestOutputs.png (PNG copy)> <./LQMPCrealOutputs.png (PNG copy)>] [52]
 Chapter 5.
-<beagle-bone-blue-annotated.png, id=729, 642.4pt x 481.8pt>
+<beagle-bone-blue-annotated.png, id=960, 642.4pt x 481.8pt>
 File: beagle-bone-blue-annotated.png Graphic file (type png)
 <use beagle-bone-blue-annotated.png>
-Package pdftex.def Info: beagle-bone-blue-annotated.png  used on input line 172
-0.
+Package pdftex.def Info: beagle-bone-blue-annotated.png  used on input line 181
+3.
 (pdftex.def)             Requested size: 452.96826pt x 339.7352pt.
-[49
+[53
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1725--1731
+Underfull \hbox (badness 10000) in paragraph at lines 1818--1824
 
  []
 
-[50 <./beagle-bone-blue-annotated.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 1742--1744
+[54 <./beagle-bone-blue-annotated.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 1835--1837
 
  []
 
-<ImplementationStructure.png, id=742, 728.7225pt x 385.44pt>
+<ImplementationStructure.png, id=978, 728.7225pt x 385.44pt>
 File: ImplementationStructure.png Graphic file (type png)
 <use ImplementationStructure.png>
-Package pdftex.def Info: ImplementationStructure.png  used on input line 1771.
+Package pdftex.def Info: ImplementationStructure.png  used on input line 1864.
 (pdftex.def)             Requested size: 452.96826pt x 239.58199pt.
-[51]
-Underfull \hbox (badness 10000) in paragraph at lines 1776--1779
+[55]
+Underfull \hbox (badness 10000) in paragraph at lines 1869--1872
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1789--1793
+Underfull \hbox (badness 10000) in paragraph at lines 1882--1886
 
  []
 
-[52 <./ImplementationStructure.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1806--1814
+[56 <./ImplementationStructure.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1899--1907
 
  []
 
-[53]
-Underfull \hbox (badness 10000) in paragraph at lines 1828--1830
+[57]
+Underfull \hbox (badness 10000) in paragraph at lines 1921--1923
 
  []
 
-<LQG-UML-Implementation.png, id=760, 3518.14375pt x 2489.3pt>
+<LQG-UML-Implementation.png, id=1000, 3518.14375pt x 2489.3pt>
 File: LQG-UML-Implementation.png Graphic file (type png)
 <use LQG-UML-Implementation.png>
-Package pdftex.def Info: LQG-UML-Implementation.png  used on input line 1833.
+Package pdftex.def Info: LQG-UML-Implementation.png  used on input line 1926.
 (pdftex.def)             Requested size: 452.96826pt x 320.46773pt.
-[54 <./LQG-UML-Implementation.png>] [55]
-Overfull \hbox (3.96428pt too wide) in paragraph at lines 1859--1859
+[58 <./LQG-UML-Implementation.png>] [59]
+Overfull \hbox (3.96428pt too wide) in paragraph at lines 1952--1952
 []\T1/ptm/m/n/12 Character| 
  []
 
 
-Overfull \hbox (38.27582pt too wide) in paragraph at lines 1855--1867
+Overfull \hbox (38.27582pt too wide) in paragraph at lines 1948--1960
  [][] 
  []
 
-[56]
+[60]
 Chapter 6.
-[57
+[61
 
-] [58] ("Final Report.bbl")
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1903.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1903.
+] ("Final Report.bbl"pdfTeX warning (ext4): destination with the same identifie
+r (name{page.i}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.66 \bibitem{6}
+                 [1
+
+])pdfTeX warning (ext4): destination with the same identifier (name{page.ii}) h
+as been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1999 	\newpage
+                 [2]pdfTeX warning (ext4): destination with the same identifier
+ (name{page.iii}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2002 		\newpage
+                  [3
+
+]
+<Gantt.pdf, id=1040, 845.1575pt x 597.23125pt>
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf>
+Package pdftex.def Info: Gantt.pdf  used on input line 2006.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf>
+Package pdftex.def Info: Gantt.pdf  used on input line 2006.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+<Gantt.pdf, id=1043, page=1, 845.1575pt x 597.23125pt>
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 1>
+Package pdftex.def Info: Gantt.pdf , page1 used on input line 2006.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 1>
+Package pdftex.def Info: Gantt.pdf , page1 used on input line 2006.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 1>
+Package pdftex.def Info: Gantt.pdf , page1 used on input line 2006.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 1>
+Package pdftex.def Info: Gantt.pdf , page1 used on input line 2006.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 1>
+Package pdftex.def Info: Gantt.pdf , page1 used on input line 2011.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+pdfTeX warning (ext4): destination with the same identifier (name{page.iv}) has
+ been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2011 			\newpage
+                   [4 <./Gantt.pdf>]
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf>
+Package pdftex.def Info: Gantt.pdf  used on input line 2015.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf>
+Package pdftex.def Info: Gantt.pdf  used on input line 2015.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+<Gantt.pdf, id=1088, page=2, 845.1575pt x 597.23125pt>
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 2>
+Package pdftex.def Info: Gantt.pdf , page2 used on input line 2015.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 2>
+Package pdftex.def Info: Gantt.pdf , page2 used on input line 2015.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 2>
+Package pdftex.def Info: Gantt.pdf , page2 used on input line 2015.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 2>
+Package pdftex.def Info: Gantt.pdf , page2 used on input line 2015.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 2>
+Package pdftex.def Info: Gantt.pdf , page2 used on input line 2020.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+pdfTeX warning (ext4): destination with the same identifier (name{page.v}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2020 			\newpage
+                   [5 <./Gantt.pdf>]
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf>
+Package pdftex.def Info: Gantt.pdf  used on input line 2024.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf>
+Package pdftex.def Info: Gantt.pdf  used on input line 2024.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+<Gantt.pdf, id=1095, page=3, 845.1575pt x 597.23125pt>
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 3>
+Package pdftex.def Info: Gantt.pdf , page3 used on input line 2024.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 3>
+Package pdftex.def Info: Gantt.pdf , page3 used on input line 2024.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 3>
+Package pdftex.def Info: Gantt.pdf , page3 used on input line 2024.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 3>
+Package pdftex.def Info: Gantt.pdf , page3 used on input line 2024.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 3>
+Package pdftex.def Info: Gantt.pdf , page3 used on input line 2029.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+pdfTeX warning (ext4): destination with the same identifier (name{page.vi}) has
+ been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2029 			\newpage
+                   [6 <./Gantt.pdf>]
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf>
+Package pdftex.def Info: Gantt.pdf  used on input line 2033.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf>
+Package pdftex.def Info: Gantt.pdf  used on input line 2033.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+<Gantt.pdf, id=1101, page=4, 845.1575pt x 597.23125pt>
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 4>
+Package pdftex.def Info: Gantt.pdf , page4 used on input line 2033.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 4>
+Package pdftex.def Info: Gantt.pdf , page4 used on input line 2033.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 4>
+Package pdftex.def Info: Gantt.pdf , page4 used on input line 2033.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 4>
+Package pdftex.def Info: Gantt.pdf , page4 used on input line 2033.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 4>
+Package pdftex.def Info: Gantt.pdf , page4 used on input line 2038.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+pdfTeX warning (ext4): destination with the same identifier (name{page.vii}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2038 			\newpage
+                   [7 <./Gantt.pdf>]
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf>
+Package pdftex.def Info: Gantt.pdf  used on input line 2042.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf>
+Package pdftex.def Info: Gantt.pdf  used on input line 2042.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+<Gantt.pdf, id=1107, page=5, 845.1575pt x 597.23125pt>
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 5>
+Package pdftex.def Info: Gantt.pdf , page5 used on input line 2042.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 5>
+Package pdftex.def Info: Gantt.pdf , page5 used on input line 2042.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 5>
+Package pdftex.def Info: Gantt.pdf , page5 used on input line 2042.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 5>
+Package pdftex.def Info: Gantt.pdf , page5 used on input line 2042.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+File: Gantt.pdf Graphic file (type pdf)
+<use Gantt.pdf, page 5>
+Package pdftex.def Info: Gantt.pdf , page5 used on input line 2047.
+(pdftex.def)             Requested size: 597.61578pt x 422.30568pt.
+pdfTeX warning (ext4): destination with the same identifier (name{page.viii}) h
+as been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2047 	\chapter
+                *{Appendix B: Control Design Parameters} [8 <./Gantt.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2070.
+pdfTeX warning (ext4): destination with the same identifier (name{page.ix}) has
+ been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2070 \end{document}
+                      [9
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2070.
  ("Final Report.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1903.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1903.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2070.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2070.
 
 Package rerunfilecheck Info: File `"Final Report".out' has not changed.
-(rerunfilecheck)             Checksum: B676E07A9F46FE5AEE8759192F8F68ED;4033.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1903.
+(rerunfilecheck)             Checksum: 62113609BD6C2150BA443B0C8A93EB70;4009.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2070.
  ) 
 Here is how much of TeX's memory you used:
- 19799 strings out of 492895
- 348361 string characters out of 3133479
- 523476 words of memory out of 3000000
- 23216 multiletter control sequences out of 15000+200000
- 597214 words of font info for 118 fonts, out of 3000000 for 9000
+ 19923 strings out of 492895
+ 350052 string characters out of 3133479
+ 524952 words of memory out of 3000000
+ 23280 multiletter control sequences out of 15000+200000
+ 588006 words of font info for 94 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,12n,61p,1258b,423s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,18n,61p,1296b,448s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
@@ -1464,9 +1716,9 @@ ic/amsfonts/cm/cmsy10.pfb><C:/Users/alexd/AppData/Roaming/MiKTeX/2.9/fonts/type
 w/symbol/usyr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb
 ><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program File
 s/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Final Report.pdf" (68 pages, 3252914 bytes).
+Output written on "Final Report.pdf" (79 pages, 3466843 bytes).
 PDF statistics:
- 881 PDF objects out of 1000 (max. 8388607)
- 267 named destinations out of 1000 (max. 500000)
- 601 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1224 PDF objects out of 1440 (max. 8388607)
+ 325 named destinations out of 1000 (max. 500000)
+ 711 words of extra memory for PDF output out of 10000 (max. 10000000)
 
