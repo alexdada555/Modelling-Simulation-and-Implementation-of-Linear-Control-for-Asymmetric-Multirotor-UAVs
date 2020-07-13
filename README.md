@@ -1,4 +1,4 @@
-# Dynamic-Modelling-Simulation-and-Control-of-Asymmetrical-VTOL-Multi-Rotor-UAVs
+# Modelling, Simulation, and Implementation of Linear Control for Asymmetric Multirotor Unmanned Aerial Vehicles
 The basic framework of this investigative project is set around the design and development of control software for Vertical/Short Take-off and Landing (VSTOL) model aircraft. From this theme, the aims of modelling and simulating the non-linear dynamics of an asymmetrical VTOL multi-rotor platform and the development of multiple control schemes, such as Proportional Integral Derivative, Linear Quadratic Gaussian and Model Predictive control algorithms, were derived. These control schemes will then be implemented on the modelled multi-rotor platform via an embedded microprocessor unit. 
 
 These aims break down into multiple objective and milestones which must each be achieved to fulfil the full scope of that the aims outlined. These objectives can be broadly classified into 2 categories: 
